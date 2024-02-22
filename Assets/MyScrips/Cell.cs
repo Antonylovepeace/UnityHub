@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Cell : MonoBehaviour
 {
-    
+    public GameObject Director;
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.Director = GameObject.Find("Director");
     }
 
     // Update is called once per frame
@@ -21,21 +21,34 @@ public class Cell : MonoBehaviour
     public void Fill()
     {
         GameObject Grid = transform.GetChild(0).gameObject;
-        GameObject text = Grid.transform.GetChild(0).gameObject;
-        text.GetComponent<Text>().text = "X";
-    }
-    public  void ChecktFilled()
-    {
-        for(int i = 0; i <= 8; i++)
+        if (CheckFilled() == 9)
         {
-            GameObject Grid = transform.GetChild(0).gameObject;
-            GameObject text = Grid.transform.GetChild(i).gameObject;
-            Text content = text.GetComponent<Text>();
-            if (content == null)
-            {
-               
-            }
+            transform.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
+            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
+            Director.GetComponent<Director>().SwitchPlayer();
         }
         
+        
     }
+    private int CheckFilled()
+    {
+        int i;
+        for ( i = 0; i <= 8; i++)
+        {
+            
+            GameObject Grid = transform.GetChild(0).gameObject;
+            GameObject text = Grid.transform.GetChild(i).gameObject;
+            string content = text.GetComponent<Text>().text;
+            if ( content == "")
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
 }
