@@ -21,10 +21,10 @@ public class Cell : MonoBehaviour
     public void Fill()
     {
         GameObject Grid = transform.GetChild(0).gameObject;
-        GameObject text = Grid.transform.GetChild(ChecktFilled()).gameObject;
+        GameObject text = Grid.transform.GetChild(0).gameObject;
         text.GetComponent<Text>().text = "X";
     }
-    public  ChecktFilled()
+    public  void ChecktFilled()
     {
         for(int i = 0; i <= 8; i++)
         {
@@ -33,7 +33,7 @@ public class Cell : MonoBehaviour
             Text content = text.GetComponent<Text>();
             if (content == null)
             {
-                return i;
+               
             }
         }
         
