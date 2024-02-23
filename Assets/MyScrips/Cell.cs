@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Cell : MonoBehaviour
 {
     public GameObject Director;
+    public int x;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,14 @@ public class Cell : MonoBehaviour
         
     }
 
-    public void Fill()
+    void Fill()
     {
         GameObject Grid = transform.GetChild(0).gameObject;
-        if (CheckFilled() == 9)
+        if (CheckFilled() == 8)
         {
+            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
+            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
+            Director.GetComponent<Director>().SwitchPlayer();
             transform.GetComponent<Button>().interactable = false;
         }
         else
@@ -30,6 +34,10 @@ public class Cell : MonoBehaviour
             GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
             text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
             Director.GetComponent<Director>().SwitchPlayer();
+            transform.GetComponent<Button>().interactable = false;
+            Round.twoRound++;
+            playerRound(Round.twoRound);
+            
         }
         
         
@@ -50,5 +58,16 @@ public class Cell : MonoBehaviour
         }
         return 0;
     }
+
+    private void playerRound(int x)
+    {
+        
+        if(x == 2)
+        {
+            Round.twoRound = 0;
+            this.Director.GetComponent<Director>().ButtonReset();
+        }
+    }
+
 
 }
