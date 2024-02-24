@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Cell : MonoBehaviour
 {
     public GameObject Director;
-    public int x;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +34,7 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            
+            Director.GetComponent<Director>().CellsInformation();
         }
         
         
