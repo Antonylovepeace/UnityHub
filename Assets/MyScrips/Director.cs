@@ -7,7 +7,12 @@ public class Director : MonoBehaviour
 {
     public bool Xturn = true;
     public int TurnCount = 0;
-    public int twoRound = 0;
+    
+    public string[] charO = new string[] { "O\u2081" , "O\u2082" , "O\u2083" , "O\u2084" , "O\u2085" ,
+                                                            "O\u2086" ,"O\u2087","O\u2088","O\u2089"};
+    public string[] charX = new string[] { "X\u2081" , "X\u2082" , "X\u2083" , "X\u2084" , "X\u2085" ,
+                                                            "X\u2086" ,"X\u2087","X\u2088","X\u2089"};
+
     GameObject Cells;
     void Start()
     {
@@ -23,14 +28,17 @@ public class Director : MonoBehaviour
 
     public string GetCharacter()
     {
-        twoRound++;
+        
         if (Xturn == true)
         {
-            return "X";
+            
+            return charX[Round.charX_num];
+            
         }
         else
         {
-            return "O";
+            
+            return charO[Round.charO_num]; 
         }
 
     }
@@ -40,6 +48,14 @@ public class Director : MonoBehaviour
         TurnCount++;
         if (TurnCount == 2)
         {
+            if (Xturn)
+            {
+                Round.charX_num++;
+            }
+            else
+            {
+                Round.charO_num++;
+            }
             Xturn = ! Xturn;
             TurnCount = 0;
         }        

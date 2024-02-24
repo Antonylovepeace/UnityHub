@@ -24,9 +24,6 @@ public class Cell : MonoBehaviour
         GameObject Grid = transform.GetChild(0).gameObject;
         if (CheckFilled() == 8)
         {
-            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
-            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
-            Director.GetComponent<Director>().SwitchPlayer();
             transform.GetComponent<Button>().interactable = false;
         }
         else
