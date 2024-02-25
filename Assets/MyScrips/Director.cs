@@ -92,26 +92,7 @@ public class Director : MonoBehaviour
         return false;
     }
 
-    public void CellsInformation()
-    {
-        
-        Cell cell = this.Cells.GetComponent<CellGenerator>().cells[0];
-        GameObject Grid = cell.transform.GetChild(0).gameObject;
-        for (int j = 0; j <= 8; j++)
-        {
-                
-            GameObject text = Grid.transform.GetChild(j).gameObject;
-            string content = text.GetComponent<Text>().text;
-            var lsts = Round.array1.ToList();
-            Round.array1 = lsts.Append(content).ToArray();
-        }
-        
-        foreach (string x in Round.array1)
-        {
-            print(x);
-        }
-
-    }
+    
 
 
 }

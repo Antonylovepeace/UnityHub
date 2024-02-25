@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Cell : MonoBehaviour
 {
     public GameObject Director;
-    
+    GameObject CheckLoop;
     // Start is called before the first frame update
     void Start()
     {
         this.Director = GameObject.Find("Director");
+        this.CheckLoop = GameObject.Find("CheckLoop");
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class Cell : MonoBehaviour
     void Fill()
     {
         GameObject Grid = transform.GetChild(0).gameObject;
-        if (CheckFilled() == 8)
+        if (CheckFilled() == 9)
         {
             transform.GetComponent<Button>().interactable = false;
         }
@@ -34,7 +35,9 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            Director.GetComponent<Director>().CellsInformation();
+            CheckLoop.GetComponent<CheckLoop>().CellsInformation(0,1);
+            
+                
         }
         
         
