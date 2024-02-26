@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CheckLoop : MonoBehaviour
 {
     GameObject Cells;
-    
+    private string[] temp = new string[] {};
     void Start()
     {
         this.Cells = GameObject.Find("CellGenerator");
@@ -17,7 +17,36 @@ public class CheckLoop : MonoBehaviour
   
     
 
-
+    public void putIntoList()
+    {
+        Array.Clear(Round.jag,0,Round.jag.Length);
+        for (int i = 0; i < 9; i++)
+        {
+            
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+            GameObject Grid_base = cell.transform.GetChild(0).gameObject;
+            Round.jag[i] = new string[0];
+            for (int j = 0; j < 9; j++)
+            {
+                GameObject text = Grid_base.transform.GetChild(j).gameObject;
+                string content = text.GetComponent<Text>().text;
+                if (content != "")
+                {
+                    var lsts = Round.jag[i].ToList();
+                    Round.jag[i] = lsts.Append(content).ToArray();                   
+                }
+            }         
+        }
+        for (int i = 0;i < 9;i++)
+        {
+            foreach (string x in Round.jag[i])
+            {
+                print(x);
+            }
+        }
+        
+        
+    }
 
 
 

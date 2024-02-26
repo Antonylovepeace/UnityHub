@@ -35,7 +35,7 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            CheckLoop.GetComponent<CheckLoop>().CellsInformation(0,1);
+            CheckLoop.GetComponent<CheckLoop>().putIntoList();
             
                 
         }
@@ -60,8 +60,7 @@ public class Cell : MonoBehaviour
     }
 
     private void playerRound(int x)
-    {
-        
+    {  
         if(x == 2)
         {
             Round.twoRound = 0;
