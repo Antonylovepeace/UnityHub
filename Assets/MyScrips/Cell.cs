@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,12 +36,12 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            CheckLoop.GetComponent<CheckLoop>().putIntoList();
+            CheckLoop.GetComponent<CheckLoop>().checkLoop();
             
-                
-        }
-        
-        
+
+
+
+        }            
     }
     private int CheckFilled()
     {
