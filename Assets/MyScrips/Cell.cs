@@ -8,11 +8,13 @@ public class Cell : MonoBehaviour
 {
     public GameObject Director;
     GameObject CheckLoop;
+    GameObject Cells;
     // Start is called before the first frame update
     void Start()
     {
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
+        this.Cells = GameObject.Find("CellGenerator");
     }
 
     // Update is called once per frame
@@ -36,10 +38,34 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            CheckLoop.GetComponent<CheckLoop>().checkLoop();
-            
+            if(CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
+            {
+                for(int i = 0;i < 9; i++)
+                {
+                    Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+                    cell.GetComponent<Button>().interactable = false;
+                }
+            }
 
 
+
+            foreach(string x in Round.LoopCheck)
+            {
+                print("arrayNameList = "+x);
+            }
+
+
+
+
+            //for(int i = 0;i < Round.array_list_backup.Length; i++)
+            {
+                //foreach (string x in Round.array_list_backup[i])
+                {
+                    //print("array_list_backup = " + x);
+                }
+            }
+                
+       
 
         }            
     }
