@@ -15,11 +15,12 @@ public class Director : MonoBehaviour
     public string[] charX = new string[] { "X\u2081" , "X\u2082" , "X\u2083" , "X\u2084" , "X\u2085" ,
                                                             "X\u2086" ,"X\u2087","X\u2088","X\u2089"};
     GameObject Cells;
+    GameObject CheckLoop;
 
     void Start()
     {
         this.Cells = GameObject.Find("CellGenerator");
-        
+        this.CheckLoop = GameObject.Find("CheckLoop");
     }
 
     // Update is called once per frame
@@ -69,8 +70,8 @@ public class Director : MonoBehaviour
         for(int i = 0;i<=8; i++)
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
-            if (CheckEmpty(cell))
-            {
+            if (CheckEmpty(cell) == true && this.CheckLoop.GetComponent<CheckLoop>().checkInteractable(i) == false)
+            {            
                 cell.GetComponent<Button>().interactable = true;
             }
         }

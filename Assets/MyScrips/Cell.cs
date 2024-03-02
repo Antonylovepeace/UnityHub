@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Cell : MonoBehaviour
 {
     public GameObject Director;
     GameObject CheckLoop;
+    GameObject collapse;
     GameObject Cells;
     // Start is called before the first frame update
     void Start()
     {
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
+        this.collapse = GameObject.Find("collapse");
         this.Cells = GameObject.Find("CellGenerator");
     }
 
@@ -38,36 +41,30 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            if(CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
+            //this.CheckLoop.GetComponent<CheckLoop>().putIntoList();
+            
+            //print("¨Ì¦¸");
+            if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
-                for(int i = 0;i < 9; i++)
+                this.collapse.GetComponent<collapse>().CellsCollapse();
+                foreach (string x in Round.LoopCheck)
                 {
-                    Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
-                    cell.GetComponent<Button>().interactable = false;
+                    print("LoopCheck = " + x);
+                }
+                var lst1 = Round.LoopCheck.ToList();
+                lst1.Clear();
+                Round.LoopCheck = lst1.ToArray();
+                for (int z = 0; z < 9; z++)
+                {
+                    print("°}¦C");
+                    foreach (string s in Round.jag[z])
+                    {
+                        //print("jag = " + s);
+                    }
                 }
             }
-
-
-
-            foreach(string x in Round.LoopCheck)
-            {
-                print("arrayNameList = "+x);
-            }
-
-
-
-
-            //for(int i = 0;i < Round.array_list_backup.Length; i++)
-            {
-                //foreach (string x in Round.array_list_backup[i])
-                {
-                    //print("array_list_backup = " + x);
-                }
-            }
-                
-       
-
-        }            
+        }   
+        
     }
     private int CheckFilled()
     {

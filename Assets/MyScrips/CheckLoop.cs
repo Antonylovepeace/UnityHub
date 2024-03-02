@@ -23,7 +23,6 @@ public class CheckLoop : MonoBehaviour
         Array.Clear(Round.jag, 0, Round.jag.Length);
         for (int i = 0; i < 9; i++)
         {
-
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
             GameObject Grid_base = cell.transform.GetChild(0).gameObject;
             Round.jag[i] = new string[0];
@@ -34,11 +33,11 @@ public class CheckLoop : MonoBehaviour
                 if (content != "")
                 {
                     var lsts = Round.jag[i].ToList();
-                    Round.jag[i] = lsts.Append(content).ToArray();
+                    lsts.Add(content);
+                    Round.jag[i] = lsts.ToArray();
                 }
             }
         }
- 
     }
 
 
@@ -50,72 +49,119 @@ public class CheckLoop : MonoBehaviour
         var temp1 = Round.Base.ToList();
         temp1.Clear();
         Round.Base = temp1.ToArray();
-        for (int k = 0; k < Round.array_list_backup[BaseNum].Length; k++)
+        for (int k = 0; k < Round.jag[BaseNum].Length; k++)
         {
             var lsts = Round.Base.ToList();
-            Round.Base = lsts.Append(Round.array_list_backup[BaseNum][k]).ToArray();
+            lsts.Add(Round.jag[BaseNum][k]);
+            Round.Base = lsts.ToArray();
         }
-
         
+
+
     }
     public void GetCompare(int CompareNum)
     {
         var temp1 = Round.Compare.ToList();
         temp1.Clear();
         Round.Compare = temp1.ToArray();
-        for (int k = 0; k < Round.array_list_backup[CompareNum].Length; k++)
+        for (int k = 0; k < Round.jag[CompareNum].Length; k++)
         {
             var lsts = Round.Compare.ToList();
-            Round.Compare = lsts.Append(Round.array_list_backup[CompareNum][k]).ToArray();
+            lsts.Add(Round.jag[CompareNum][k]);
+            Round.Compare = lsts.ToArray();
         }
+    }
+
+    public bool checkInteractable(int i)
+    {
+        foreach(int x in Round.InteractableFalseCells_num)
+        {
+            if(x == i)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 
 
 
-
-
     public bool checkLoop()
-    {
+    {     
         putIntoList();
-        arrayBackUp();
+        //arrayBackUp();
         for (int i = 0; i < 9; i++)                  // 取Base
         {
             GetBase(i);
-            if(Round.Base.Length == 0)
+            if (checkInteractable(i) == true || Round.Base.Length == 0)
             {
                 continue;
-            }
-            foreach (string x in Round.Base)
-            {
-                Debug.Log("Base = "+x);
-            }
+            }       
             for (int j = 0; j < 9; j++)               // 取Compare
             {
-                if (i != j)
+                if (i != j )
                 {
+                    print("i = " + i);
+                    print("j = " + j);
                     GetCompare(j);
-                    if (Round.Compare.Length == 0)
+                    if (checkInteractable(j) == true || Round.Compare.Length == 0)
                     {
                         continue;
+                    }
+                    foreach (string x in Round.Base)
+                    {
+                        print("Base = " + x);
                     }
                     foreach (string x in Round.Compare)
                     {
                         Debug.Log("Compare = " + x);
                     }
                     int t = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare)).Length;
+                    
                     if (t == 1)
                     {
                         secondCheck(i);
-                        if (Round.LoopCheck[0] == Round.LoopCheck[Round.LoopCheck.Length - 1] && Round.LoopCheck.Length > 4)
-                        {
+                        if(Round.LoopCheck.Length > 4 && Round.LoopCheck[0] == Round.LoopCheck[Round.LoopCheck.Length - 1])
+                        {                        
+                            foreach (int x in Round.collapseCells)
+                            {
+                                var lst4 = Round.InteractableFalseCells_num.ToList();
+                                lst4.Add(x);
+                                Round.InteractableFalseCells_num = lst4.ToArray();
+                            }
                             print("迴圈形成");
-                            return true;
+                            return true;             
+                        }
+                        else
+                        {
+                            GetBase(i);
                         }
                     }
+
                     else if (t == 2)
                     {
+                        string a = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[0];
+                        string b = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[1];
+                        print("x = "+a);
+                        print("y = " + b);
+                        var lst1 = Round.LoopCheck.ToList();
+                        var lst2 = Round.collapseCells.ToList();
+                        var lst3 = Round.InteractableFalseCells_num.ToList();
+                        lst1.Clear();
+                        lst2.Clear();
+                        Round.collapseCells = lst2.ToArray();
+                        GetCollapseCells(i, j);
+                        lst3.Add(i);
+                        lst3.Add(j);
+                        lst1.Add(Round.arrayNameList[i]);
+                        lst1.Add(Round.arrayNameList[j]);
+                        Round.LoopCheck = lst1.ToArray();
+                        Round.InteractableFalseCells_num = lst3.ToArray();
+                        removeRepeatNum(i, j, a);
+                        removeRepeatNum(i, j, b);
                         print("迴圈形成,兩格");
+                        
                         return true;
                     }
                 }
@@ -131,8 +177,11 @@ public class CheckLoop : MonoBehaviour
     private string[] secondCheck(int i)
     {
         var lst1 = Round.LoopCheck.ToList();
+        var lst2 = Round.collapseCells.ToList();
         lst1.Clear();
+        lst2.Clear();
         Round.LoopCheck = lst1.ToArray();
+        Round.collapseCells = lst2.ToArray();
         GetBase(i);
         int[] n = Route(0);
         while (z < 9)
@@ -140,36 +189,35 @@ public class CheckLoop : MonoBehaviour
             z++;
             foreach (int j in n)               // 取Compare
             {
-                
 
+                foreach (string x in Round.Base)
+                {
+                    //print("Base = " + x);
+                }
                 if (i != j)
                 {
+                    
                     GetCompare(j);
-                    if (Round.Compare.Length == 0)
+                    if (checkInteractable(j) == true || Round.Compare.Length == 0)
                     {
                         continue;
                     }
-                    foreach (string x in CopyAndAddArray(Round.Base, Round.Compare))
+                    foreach (string x in Round.Compare)
                     {
-                        print("list = " + x);
+                        //print("Compare = " + x);
                     }
-                    print("once");
                     if (FindRepeat(CopyAndAddArray(Round.Base, Round.Compare)).Length == 1)
                     {
-                        print("once");
                         string r = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[0];
-                        
-                        Console.WriteLine("once");
+                        GetCollapseCells(i, j);
                         var lst = Round.LoopCheck.ToList();
                         lst.Add(Round.arrayNameList[i]);
                         lst.Add(Round.arrayNameList[j]);
                         Round.LoopCheck = lst.ToArray();
                         removeRepeatNum(i, j, r);
-
                         i = j;
                         n = Route(i);
                         GetBase(i);
-
                     }
                 }
             }
@@ -178,15 +226,21 @@ public class CheckLoop : MonoBehaviour
         return Round.LoopCheck;
     }
 
-
+    private void GetCollapseCells(int i, int j)
+    {
+        var lst = Round.collapseCells.ToList();
+        lst.Add(i);
+        lst.Add(j);
+        Round.collapseCells = lst.ToArray();
+    }
     private void removeRepeatNum(int i, int j, string c)
     {
-        var bas = Round.array_list_backup[i].ToList();
+        var bas = Round.jag[i].ToList();
         bas.Remove(c);
-        Round.array_list_backup[i] = bas.ToArray();
-        var com = Round.array_list_backup[j].ToList();
+        Round.jag[i] = bas.ToArray();
+        var com = Round.jag[j].ToList();
         com.Remove(c);
-        Round.array_list_backup[j] = com.ToArray();
+        Round.jag[j] = com.ToArray();
 
     }
     public string[] CopyAndAddArray(string[] Ba, string[] Com)
@@ -212,7 +266,6 @@ public class CheckLoop : MonoBehaviour
                     string cha = list[i];
                     var lsts = Round.repeat_num.ToList();
                     Round.repeat_num = lsts.Append(cha).ToArray();
-
                 }
             }
         }
@@ -245,8 +298,8 @@ public class CheckLoop : MonoBehaviour
 
     public void arrayBackUp()
     {
-        Array.Clear(Round.array_list_backup, 0, Round.array_list_backup.Length);  
-        Array.Copy(Round.jag, Round.array_list_backup, Round.jag.Length);
+        Array.Clear(Round.jag, 0, Round.jag.Length);  
+        Array.Copy(Round.jag, Round.jag, Round.jag.Length);
         var temp1 = Round.num.ToList();
         temp1.Clear();
         Round.num = temp1.ToArray();
@@ -260,8 +313,8 @@ public class CheckLoop : MonoBehaviour
         }
         foreach (int i in Round.num)
         {
-            Array.Clear(Round.array_list_backup, i, 1);
-            Round.array_list_backup[i] = new string[0];
+            Array.Clear(Round.jag, i, 1);
+            Round.jag[i] = new string[0];
         }
     }
 }
