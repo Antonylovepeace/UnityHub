@@ -19,6 +19,7 @@ public static class Round
     public static string[][] jag = new string[9][];
     public static int[] num = new int[] { };
     public static int[] collapseCells = new int[] { };
+    public static string[] collapseTexts = new string[] { };
     public static int[] InteractableFalseCells_num = new int[] { };
 
 }

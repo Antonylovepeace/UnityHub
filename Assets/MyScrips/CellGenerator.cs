@@ -8,8 +8,10 @@ public class CellGenerator : MonoBehaviour
     // Start is called before the first frame update
     public GameObject CellPrefab;
     public Cell[] cells = new Cell[9];
+    public GameObject Cell;
     void Start()
     {
+        this.Cell = GameObject.Find("Cell");
         Build();
     }
 
@@ -27,7 +29,7 @@ public class CellGenerator : MonoBehaviour
             
             cells[i] = newCell.GetComponent<Cell>();            // button
 
-
+            cells[i].GetComponent<Button>().onClick.AddListener(cells[i].GetComponent<Cell>().Fill);
         }
     }
 }

@@ -26,8 +26,11 @@ public class Cell : MonoBehaviour
         
     }
 
-    void Fill()
+    public void Fill()
     {
+        print("buttondown");
+        int z = transform.childCount;
+        print("z = "+z);
         GameObject Grid = transform.GetChild(0).gameObject;
         if (CheckFilled() == 9)
         {
@@ -41,9 +44,6 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
-            //this.CheckLoop.GetComponent<CheckLoop>().putIntoList();
-            
-            //print("¨Ì¦¸");
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
                 this.collapse.GetComponent<collapse>().CellsCollapse();
@@ -53,15 +53,7 @@ public class Cell : MonoBehaviour
                 }
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
-                Round.LoopCheck = lst1.ToArray();
-                for (int z = 0; z < 9; z++)
-                {
-                    print("°}¦C");
-                    foreach (string s in Round.jag[z])
-                    {
-                        //print("jag = " + s);
-                    }
-                }
+                Round.LoopCheck = lst1.ToArray();            
             }
         }   
         

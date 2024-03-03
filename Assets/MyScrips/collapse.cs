@@ -8,23 +8,23 @@ using UnityEngine.UI;
 
 public class collapse : MonoBehaviour
 {
+    GameObject CellGenerator;
     GameObject Cells;
     // Start is called before the first frame update
     void Start()
     {
-        this.Cells = GameObject.Find("CellGenerator");
-
+        this.CellGenerator = GameObject.Find("CellGenerator");
+        this.Cells = GameObject.Find("BigCell");
     }
 
     public void CellsCollapse()
     {
-        
         foreach (int i in Round.collapseCells)
         {
             ChangeColor(i);
-            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+            Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             cell.GetComponent<Button>().interactable = false;
-            print("ถiจำ");
+            //cell.GetComponent<Button>().onClick.RemoveAllListeners();
         }
         var lst = Round.collapseCells.ToList();
         lst.Clear();
@@ -33,11 +33,27 @@ public class collapse : MonoBehaviour
     
     private void ChangeColor(int i)
     {    
-        Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+        Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];                  //Button Color
         ColorBlock cb = cell.GetComponent<Button>().colors;
-        //cb.disabledColor = new Color(2, 250, 152, 1);
         cb.disabledColor = Color.cyan;
         cell.GetComponent<Button>().colors = cb;
+
+        GameObject Grid = cell.transform.GetChild(0).gameObject;                        //Text Color
+        for (int j = 0; j < 9; j++)
+        {
+            GameObject text = Grid.transform.GetChild(j).gameObject;
+            string content = text.GetComponent<Text>().text;
+            foreach (string c in Round.collapseTexts)
+            {
+                if(content == c)
+                {
+                    Color color = text.GetComponent<Text>().color;
+                    color = Color.red;
+                    text.GetComponent<Text>().color = color;
+                }
+            }
+        }
+
     }
     
 }
