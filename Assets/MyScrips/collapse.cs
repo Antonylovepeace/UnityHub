@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -19,14 +20,17 @@ public class collapse : MonoBehaviour
 
     public void CellsCollapse()
     {
-        InteractableFalse();
-        foreach (int i in Round.collapseCells)
+        InteractableFalse();                                                        // 先把產生迴圈以外的cell取消回應
+        foreach (int i in Round.collapseCells)                                      // 再把產生迴圈的cell, RemoveAllListeners(),且用顏色標記
         {
-            print(i);
             ChangeColor(i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
-            //cell.GetComponent<Button>().interactable = false;
             cell.GetComponent<Button>().onClick.RemoveAllListeners();
+            EventTrigger trigger = cell.GetComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.Select;
+            //entry.callback.AddListener();
+            trigger.triggers.Add(entry);
         }
         var lst = Round.collapseCells.ToList();
         lst.Clear();
