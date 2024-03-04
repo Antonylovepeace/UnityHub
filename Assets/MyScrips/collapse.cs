@@ -19,18 +19,42 @@ public class collapse : MonoBehaviour
 
     public void CellsCollapse()
     {
+        InteractableFalse();
         foreach (int i in Round.collapseCells)
         {
+            print(i);
             ChangeColor(i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
-            cell.GetComponent<Button>().interactable = false;
-            //cell.GetComponent<Button>().onClick.RemoveAllListeners();
+            //cell.GetComponent<Button>().interactable = false;
+            cell.GetComponent<Button>().onClick.RemoveAllListeners();
         }
         var lst = Round.collapseCells.ToList();
         lst.Clear();
         Round.collapseCells = lst.ToArray();
     }
     
+    private void InteractableFalse()
+    {
+        int[] list = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+        var lst = list.ToList();
+        foreach (int i in list)
+        {
+            foreach (int j in Round.collapseCells)
+            {
+                if (i == j)
+                {
+                    lst.Remove(i);
+                }
+            }
+        }
+        list = lst.ToArray();
+        foreach(int i in list)
+        {
+            print("i = "+i);
+            Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
+            cell.GetComponent<Button>().interactable = false;
+        }
+    }
     private void ChangeColor(int i)
     {    
         Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];                  //Button Color
