@@ -102,8 +102,6 @@ public class CheckLoop : MonoBehaviour
             {
                 if (i != j )
                 {
-                    print("i = " + i);
-                    print("j = " + j);
                     GetCompare(j);
                     if (checkInteractable(j) == true || Round.Compare.Length == 0)
                     {

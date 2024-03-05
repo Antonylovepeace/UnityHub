@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class Cell : MonoBehaviour
 {
@@ -44,13 +45,11 @@ public class Cell : MonoBehaviour
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
+
+            // °j°é«á¶òÁY
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
                 this.collapse.GetComponent<collapse>().CellsCollapse();
-                foreach (string x in Round.LoopCheck)
-                {
-                    print("LoopCheck = " + x);
-                }
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();            
@@ -84,5 +83,8 @@ public class Cell : MonoBehaviour
         }
     }
 
+    
+
+    
 
 }
