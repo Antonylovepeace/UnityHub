@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CellGenerator : MonoBehaviour
@@ -8,10 +9,8 @@ public class CellGenerator : MonoBehaviour
     // Start is called before the first frame update
     public GameObject CellPrefab;
     public Cell[] cells = new Cell[9];
-    public GameObject Cell;
     void Start()
     {
-        this.Cell = GameObject.Find("Cell");
         Build();
     }
 
@@ -30,6 +29,7 @@ public class CellGenerator : MonoBehaviour
             cells[i] = newCell.GetComponent<Cell>();            // button
 
             cells[i].GetComponent<Button>().onClick.AddListener(cells[i].GetComponent<Cell>().Fill);
+            cells[i].GetComponent<EventTrigger>().enabled = false;
         }
     }
 }

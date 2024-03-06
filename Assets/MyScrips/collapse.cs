@@ -32,6 +32,7 @@ public class collapse : MonoBehaviour
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             cell.GetComponent<Button>().onClick.RemoveAllListeners();
             ButtonSelect(i);
+            cell.GetComponent<EventTrigger>().enabled = true;
         }
         for (int i = 0; i < 2; i++)
         {
@@ -45,11 +46,12 @@ public class collapse : MonoBehaviour
     private void ButtonSelect(int i)
     {
         Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
-        UnityEngine.Events.UnityAction<BaseEventData> call = new UnityEngine.Events.UnityAction<BaseEventData>(this.Cell.GetComponent<Cell>().ButtonSelected);
+        //UnityEngine.Events.UnityAction<BaseEventData> call = new UnityEngine.Events.UnityAction<BaseEventData>(this.Cell.GetComponent<Cell>().ButtonSelected);
         EventTrigger trigger = cell.GetComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.Select;
-        entry.callback.AddListener(this.Cell.GetComponent<Cell>().ButtonSelected);
+        //entry.callback.AddListener( this.Cell.GetComponent<Cell>().OnSelect);
+        //entry.callback.AddListener((data) => { this.Cell.GetComponent<Cell>().OnSelect((PointerEventData)data); });
         trigger.triggers.Add(entry);
     }
     

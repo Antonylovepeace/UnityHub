@@ -8,18 +8,19 @@ using UnityEngine.EventSystems;
 
 public class Cell : MonoBehaviour
 {
-    public GameObject Director;
+    GameObject Director;
     GameObject CheckLoop;
     GameObject collapse;
-    GameObject Cells;
+    GameObject CellGenerator;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.CellGenerator = GameObject.Find("CellGenerator");
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.collapse = GameObject.Find("collapse");
-        this.Cells = GameObject.Find("CellGenerator");
+        //this.CellGenerator.GetComponent<CellGenerator>().cells[1].GetComponent<Button>().interactable = false;
     }
 
     // Update is called once per frame
@@ -30,7 +31,6 @@ public class Cell : MonoBehaviour
 
     public void Fill()
     {
-        print("buttondown");
         int z = transform.childCount;
         print("z = "+z);
         GameObject Grid = transform.GetChild(0).gameObject;
@@ -58,16 +58,15 @@ public class Cell : MonoBehaviour
         }   
         
     }
-    public void ButtonSelected(UnityEngine.EventSystems.BaseEventData baseEvent)
+    public void OnSelect()
     {
         
         int x = 0;
         print("once");
         int n = transform.GetSiblingIndex();
         print("n ="+ n);
-        Cell mCell = Cells.GetComponent<CellGenerator>().cells[0];
-        print("twice");
-        GameObject Grid = mCell.transform.GetChild(0).gameObject;
+        this.CellGenerator = GameObject.Find("CellGenerator");
+        GameObject Grid = this.CellGenerator.GetComponent<CellGenerator>().cells[n].transform.GetChild(0).gameObject;
         for (int j = 0; j < 9; j++)
         {
             GameObject text = Grid.transform.GetChild(j).gameObject;
