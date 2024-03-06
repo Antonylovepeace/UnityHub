@@ -13,13 +13,13 @@ public class collapse : MonoBehaviour
     GameObject CellGenerator;
     GameObject Cells;
     GameObject CheckLoop;
+    public GameObject Cell;
     public GameObject PrefabButton;
     public GameObject[] Buttons = new GameObject[2];
     // Start is called before the first frame update
     void Start()
     {
         this.CellGenerator = GameObject.Find("CellGenerator");
-        this.Cells = GameObject.Find("BigCell");
         this.CheckLoop = GameObject.Find("CheckLoop");
     }
 
@@ -45,37 +45,14 @@ public class collapse : MonoBehaviour
     private void ButtonSelect(int i)
     {
         Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
-        UnityEngine.Events.UnityAction<BaseEventData> call = new UnityEngine.Events.UnityAction<BaseEventData>(ButtonSelected);
+        UnityEngine.Events.UnityAction<BaseEventData> call = new UnityEngine.Events.UnityAction<BaseEventData>(this.Cell.GetComponent<Cell>().ButtonSelected);
         EventTrigger trigger = cell.GetComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.Select;
-        entry.callback.AddListener(ButtonSelected);
+        entry.callback.AddListener(this.Cell.GetComponent<Cell>().ButtonSelected);
         trigger.triggers.Add(entry);
     }
-    public void ButtonSelected(UnityEngine.EventSystems.BaseEventData baseEvent)
-    {
-        int x = 0;
-        //Buttons[x].transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "C";
-        print("once");
-        GameObject Grid = transform.GetChild(0).gameObject;
-        for (int j = 0; j < 9; j++)
-        {
-            GameObject text = Grid.transform.GetChild(j).gameObject;
-            string c = text.GetComponent<Text>().text;
-            foreach (string s in Round.collapseTexts)
-            {
-                print("collapseTexts = " + s);
-                if (s == c)
-                {
-                    Buttons[x].transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = s;
-                    x++;
-                    if (x == 2)
-                        break;
-                }
-            }
-        }   
-
-    }
+    
 
     private void InteractableFalse()
     {

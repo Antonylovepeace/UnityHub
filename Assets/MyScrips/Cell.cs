@@ -12,6 +12,7 @@ public class Cell : MonoBehaviour
     GameObject CheckLoop;
     GameObject collapse;
     GameObject Cells;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +57,35 @@ public class Cell : MonoBehaviour
             }
         }   
         
+    }
+    public void ButtonSelected(UnityEngine.EventSystems.BaseEventData baseEvent)
+    {
+        
+        int x = 0;
+        print("once");
+        int n = transform.GetSiblingIndex();
+        print("n ="+ n);
+        Cell mCell = Cells.GetComponent<CellGenerator>().cells[0];
+        print("twice");
+        GameObject Grid = mCell.transform.GetChild(0).gameObject;
+        for (int j = 0; j < 9; j++)
+        {
+            GameObject text = Grid.transform.GetChild(j).gameObject;
+            string c = text.GetComponent<Text>().text;
+            print("c = " + c);
+            foreach (string s in Round.collapseTexts)
+            {
+                print("s = " + s);
+                if (s == c)
+                {
+                    this.collapse.GetComponent<collapse>().Buttons[x].transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = s;
+                    x++;
+                    if (x == 2)
+                        break;
+                }
+            }
+        }
+
     }
     private int CheckFilled()
     {
