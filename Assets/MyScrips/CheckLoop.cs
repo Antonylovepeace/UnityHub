@@ -89,10 +89,11 @@ public class CheckLoop : MonoBehaviour
 
     public bool checkLoop()
     {     
-        putIntoList();
+        
         //arrayBackUp();
         for (int i = 0; i < 9; i++)                  // ¨úBase
         {
+            putIntoList();
             GetBase(i);
             if (checkInteractable(i) == true || Round.Base.Length == 0)
             {

@@ -13,6 +13,7 @@ public class Cell : MonoBehaviour
     GameObject collapse;
     GameObject CellGenerator;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class Cell : MonoBehaviour
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.collapse = GameObject.Find("collapse");
-        //this.CellGenerator.GetComponent<CellGenerator>().cells[1].GetComponent<Button>().interactable = false;
+
     }
 
     // Update is called once per frame
@@ -50,31 +51,51 @@ public class Cell : MonoBehaviour
             // °j°é«á¶òÁY
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
-                this.collapse.GetComponent<collapse>().CellsCollapse();
+                RemoveDouble(Round.collapseCells);
+                this.collapse.GetComponent<collapse>().LoopConfirm();
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();            
             }
         }   
+        foreach(string x in Round.LoopCheck)
+        {
+            print("LoopCheck = "+x);
+        }
         
     }
-    public void OnSelect()
+    public void RemoveDouble(int[] list)
     {
-        
+        var lst = Round.collapseCells.ToList();
+        lst.Clear();
+
+        foreach (int Data in list)
+        {
+            if (!lst.Contains(Data))
+            {
+                lst.Add(Data);
+            }
+        }
+        Round.collapseCells = lst.ToArray();
+        foreach (int Data in Round.collapseCells)
+        {
+            print("collapseCells = " + Data);
+        }
+    }
+    public void CellOnSelect()
+    {  
         int x = 0;
-        print("once");
         int n = transform.GetSiblingIndex();
-        print("n ="+ n);
-        this.CellGenerator = GameObject.Find("CellGenerator");
+        Round.selectedCell = n;
         GameObject Grid = this.CellGenerator.GetComponent<CellGenerator>().cells[n].transform.GetChild(0).gameObject;
         for (int j = 0; j < 9; j++)
         {
             GameObject text = Grid.transform.GetChild(j).gameObject;
             string c = text.GetComponent<Text>().text;
-            print("c = " + c);
+            //print("c = " + c);
             foreach (string s in Round.collapseTexts)
             {
-                print("s = " + s);
+                //print("s = " + s);
                 if (s == c)
                 {
                     this.collapse.GetComponent<collapse>().Buttons[x].transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = s;
@@ -84,7 +105,32 @@ public class Cell : MonoBehaviour
                 }
             }
         }
+        for(int j = 0;j < 2; j++)
+        {
+            ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[j].GetComponent<Button>().colors;
+            cb.normalColor = Color.white;
+            this.collapse.GetComponent<collapse>().Buttons[j].GetComponent<Button>().colors = cb;
+        }
 
+    }
+    int x = 0;
+    public void MeasureButtonOnSelected()
+    {
+        int n = transform.GetSiblingIndex();
+        if (n == 0)
+        {
+            x = 1;
+        }
+        else
+        {
+            x = 0;
+        }
+        ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors;
+        cb.normalColor = cb.selectedColor;
+        this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors = cb;
+        ColorBlock cb2 = this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors;
+        cb2.normalColor = Color.white;
+        this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors = cb2;
     }
     private int CheckFilled()
     {

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,19 +8,18 @@ using UnityEngine.UI;
 public class collapse : MonoBehaviour
 {
     GameObject CellGenerator;
-    GameObject Cells;
-    GameObject CheckLoop;
-    public GameObject Cell;
+    GameObject Measure;
     public GameObject PrefabButton;
     public GameObject[] Buttons = new GameObject[2];
+    string refer;
     // Start is called before the first frame update
     void Start()
     {
         this.CellGenerator = GameObject.Find("CellGenerator");
-        this.CheckLoop = GameObject.Find("CheckLoop");
+        this.Measure = GameObject.Find("measure");
     }
 
-    public void CellsCollapse()
+    public void LoopConfirm()
     {
         InteractableFalse();                                                        // 先把產生迴圈以外的cell取消回應
         foreach (int i in Round.collapseCells)                                      // 再把產生迴圈的cell, RemoveAllListeners(),且用顏色標記
@@ -31,7 +27,6 @@ public class collapse : MonoBehaviour
             ChangeColor(i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             cell.GetComponent<Button>().onClick.RemoveAllListeners();
-            ButtonSelect(i);
             cell.GetComponent<EventTrigger>().enabled = true;
         }
         for (int i = 0; i < 2; i++)
@@ -39,23 +34,88 @@ public class collapse : MonoBehaviour
             GameObject newButton = Instantiate(PrefabButton, transform);
             Buttons[i] = newButton;
         }
+        this.Measure.GetComponent<Measure>().BuildButton();
+        print("Measure");
         //var lst = Round.collapseCells.ToList();
         //lst.Clear();
         //Round.collapseCells = lst.ToArray();
     }
-    private void ButtonSelect(int i)
-    {
-        Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
-        //UnityEngine.Events.UnityAction<BaseEventData> call = new UnityEngine.Events.UnityAction<BaseEventData>(this.Cell.GetComponent<Cell>().ButtonSelected);
-        EventTrigger trigger = cell.GetComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.Select;
-        //entry.callback.AddListener( this.Cell.GetComponent<Cell>().OnSelect);
-        //entry.callback.AddListener((data) => { this.Cell.GetComponent<Cell>().OnSelect((PointerEventData)data); });
-        trigger.triggers.Add(entry);
-    }
     
+    public void Collapse(string c)
+    {
+        int n = Round.selectedCell;
+        string refer = FindReferText(c, n);
+        int m = FindReferNum(refer);
+        print("firstRefer = " + refer);
+        print("firstReferText = " + m);
+        print("Round.collapseCells.Length = " + Round.collapseCells.Length);
+        int times = Round.collapseCells.Length + 1;
+        for (int i = 0; i < times; i++)
+        {
+            string newRefer = FindReferText(refer, m);
+            print("newRefer = " + newRefer);
+            m = FindReferNum(newRefer);
+            print("newReferText = " + m);
+            refer = newRefer;
+        }
+    }
+    private string FindReferText(string c,int n)
+    {
+        
+        Cell SelectedCell = this.CellGenerator.GetComponent<CellGenerator>().cells[n];
+        GameObject Grid = SelectedCell.transform.GetChild(0).gameObject;
+        foreach (string ch in Round.collapseTexts)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                string content = Grid.transform.GetChild(j).GetComponent<Text>().text;
+                if (ch == content && ch != c)
+                {
+                    var lst = Round.collapseCells.ToList();
+                    lst.Remove(n);
+                    Round.collapseCells = lst.ToArray();
+                    foreach (int Data in Round.collapseCells)
+                    {
+                        print("collapseCells = " + Data);
+                    }
+                    SelectedCell.transform.GetChild(1).GetComponent<Text>().text = c;
+                    return content;
+                }
+            }  
+        }
+        return null;
+    }
+    private int FindReferNum(string c)
+    {
+        foreach (int num in Round.collapseCells)
+        {          
+            Cell SelectedCell = this.CellGenerator.GetComponent<CellGenerator>().cells[num];
+            GameObject Grid = SelectedCell.transform.GetChild(0).gameObject;
+            for (int i = 0; i < 9; i++)
+            {
+                string content = Grid.transform.GetChild(i).GetComponent<Text>().text;
+                if (c == content)
+                {
+                    print("cells = " + num);
+                    SelectedCell.transform.GetChild(1).GetComponent<Text>().text = c;
+                    return num;
+                }
+            }
+        }
+        return 0;
+        //print("keep");
+        
+    }
 
+    private void CleanCellText(int i)
+    {
+        Cell Cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
+        GameObject Grid = Cell.transform.GetChild(0).gameObject;
+        for (int j = 0; j < 9; j++)
+        {
+            Grid.transform.GetChild(j).GetComponent<Text>().text = "";
+        }
+    }
     private void InteractableFalse()
     {
         int[] list = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
