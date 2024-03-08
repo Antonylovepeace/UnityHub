@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +14,7 @@ public class collapse : MonoBehaviour
     public GameObject PrefabButton;
     public GameObject[] Buttons = new GameObject[2];
     string refer;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,40 @@ public class collapse : MonoBehaviour
             refer = newRefer;
         }
     }
+
+
+    private string[] OddElements()
+    {
+        string[] strings = new string[] { };
+        var lst = strings.ToList();
+        for(int i = 0;i < 9;i++)
+        {
+            Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
+            GameObject Grid = cell.transform.GetChild(0).gameObject;
+            for(int j = 1; j < 9; j++)
+            {
+                string content = Grid.transform.GetChild(j).GetComponent<Text>().text;
+                if(content != "")
+                {
+                    lst.Add(content);
+                }
+            }
+        }
+        strings = lst.ToArray();
+        for (int m = 0; m < strings.Length; m++)
+        {
+            for (int n = m + 1; n < strings.Length; n++)
+            {
+                if (strings[m] == strings[n] && strings[m] != "")
+                {
+                    var temp = strings.ToList();
+                    temp.Remove(strings[m]);
+                    strings = temp.ToArray();
+                }
+            }
+        }
+        return strings;
+    }
     private string FindReferText(string c,int n)
     {
         
@@ -72,6 +109,7 @@ public class collapse : MonoBehaviour
                 if (ch == content && ch != c)
                 {
                     var lst = Round.collapseCells.ToList();
+                    CleanCellText(n);
                     lst.Remove(n);
                     Round.collapseCells = lst.ToArray();
                     foreach (int Data in Round.collapseCells)

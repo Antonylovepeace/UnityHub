@@ -39,7 +39,7 @@ public class Measure : MonoBehaviour
                 c = newBt.transform.GetChild(0).GetComponent<Text>().text;
             }
         }
-        if(c != null)
+        if(c != null && c != "")
         {
             this.collapse.GetComponent<collapse>().Collapse(c);
             for (int i = 0; i < 2; i++)
