@@ -33,7 +33,6 @@ public class Cell : MonoBehaviour
     public void Fill()
     {
         int z = transform.childCount;
-        print("z = "+z);
         GameObject Grid = transform.GetChild(0).gameObject;
         if (CheckFilled() == 9)
         {
@@ -55,7 +54,7 @@ public class Cell : MonoBehaviour
                 this.collapse.GetComponent<collapse>().LoopConfirm();
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
-                Round.LoopCheck = lst1.ToArray();            
+                Round.LoopCheck = lst1.ToArray();
             }
         }   
         foreach(string x in Round.LoopCheck)
@@ -77,10 +76,6 @@ public class Cell : MonoBehaviour
             }
         }
         Round.collapseCells = lst.ToArray();
-        foreach (int Data in Round.collapseCells)
-        {
-            print("collapseCells = " + Data);
-        }
     }
     public void CellOnSelect()
     {  
@@ -92,7 +87,6 @@ public class Cell : MonoBehaviour
         {
             GameObject text = Grid.transform.GetChild(j).gameObject;
             string c = text.GetComponent<Text>().text;
-            //print("c = " + c);
             foreach (string s in Round.collapseTexts)
             {
                 //print("s = " + s);

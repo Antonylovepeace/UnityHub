@@ -39,9 +39,6 @@ public class collapse : MonoBehaviour
         }
         this.Measure.GetComponent<Measure>().BuildButton();
         print("Measure");
-        //var lst = Round.collapseCells.ToList();
-        //lst.Clear();
-        //Round.collapseCells = lst.ToArray();
     }
     
     public void Collapse(string c)
@@ -49,30 +46,50 @@ public class collapse : MonoBehaviour
         int n = Round.selectedCell;
         string refer = FindReferText(c, n);
         int m = FindReferNum(refer);
-        print("firstRefer = " + refer);
-        print("firstReferText = " + m);
-        print("Round.collapseCells.Length = " + Round.collapseCells.Length);
         int times = Round.collapseCells.Length + 1;
         for (int i = 0; i < times; i++)
         {
             string newRefer = FindReferText(refer, m);
-            print("newRefer = " + newRefer);
             m = FindReferNum(newRefer);
-            print("newReferText = " + m);
             refer = newRefer;
+        }
+        
+        while(OddElements().Length != 0)
+        {
+            foreach(string ch in OddElements())
+            {
+                print("OddElements = " + ch);
+                print("once");
+                for (int a = 0; a < 9; a++)
+                {
+                    Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[a];
+                    GameObject Grid = cell.transform.GetChild(0).gameObject;
+                    for (int b = 0; b < 9; b++)
+                    {
+                        string content = Grid.transform.GetChild(b).GetComponent<Text>().text;
+                        if (content == ch)
+                        {
+                            CleanCellText(a);
+                            cell.transform.GetChild(1).GetComponent<Text>().text = ch;
+                            continue;
+                        }
+                    }
+                }
+            }
         }
     }
 
 
-    private string[] OddElements()
+    public string[] OddElements()
     {
         string[] strings = new string[] { };
+        string[] stringsRepeat = new string[] { };
         var lst = strings.ToList();
         for(int i = 0;i < 9;i++)
         {
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             GameObject Grid = cell.transform.GetChild(0).gameObject;
-            for(int j = 1; j < 9; j++)
+            for(int j = 0; j < 9; j++)
             {
                 string content = Grid.transform.GetChild(j).GetComponent<Text>().text;
                 if(content != "")
@@ -81,18 +98,33 @@ public class collapse : MonoBehaviour
                 }
             }
         }
+        
         strings = lst.ToArray();
+        
         for (int m = 0; m < strings.Length; m++)
         {
             for (int n = m + 1; n < strings.Length; n++)
             {
                 if (strings[m] == strings[n] && strings[m] != "")
-                {
-                    var temp = strings.ToList();
-                    temp.Remove(strings[m]);
-                    strings = temp.ToArray();
+                { 
+                    var temp = stringsRepeat.ToList();
+                    string c = strings[m];
+                    print("repeat = " + c);
+                    temp.Add(c);
+                    stringsRepeat = temp.ToArray();
                 }
             }
+        }
+        foreach (string x in stringsRepeat)
+        {
+            print("stringsRepeat = " + x);
+        }
+        foreach (string x in stringsRepeat)
+        {
+            var temp = strings.ToList();
+            temp.Remove(x);
+            temp.Remove(x);
+            strings = temp.ToArray();
         }
         return strings;
     }
@@ -114,7 +146,7 @@ public class collapse : MonoBehaviour
                     Round.collapseCells = lst.ToArray();
                     foreach (int Data in Round.collapseCells)
                     {
-                        print("collapseCells = " + Data);
+                        //print("collapseCells = " + Data);
                     }
                     SelectedCell.transform.GetChild(1).GetComponent<Text>().text = c;
                     return content;
@@ -158,18 +190,21 @@ public class collapse : MonoBehaviour
     {
         int[] list = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
         var lst = list.ToList();
+        var lst1 = Round.InteractableFalseCells_num.ToList();
         foreach (int i in list)
         {
             foreach (int j in Round.collapseCells)
             {
                 if (i == j)
                 {
+                    //lst1.Add(i);
                     lst.Remove(i);
                 }
             }
         }
         list = lst.ToArray();
-        foreach(int i in list)
+        Round.InteractableFalseCells_num = lst1.ToArray();
+        foreach (int i in list)
         {
             print("i = "+i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];

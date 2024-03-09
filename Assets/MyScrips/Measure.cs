@@ -8,12 +8,13 @@ public class Measure : MonoBehaviour
     public GameObject measureButton;
     GameObject collapse;
     GameObject newButton;
+    GameObject Director;
     string c;
     // Start is called before the first frame update
     void Start()
     {
         this.collapse = GameObject.Find("collapse");
-
+        this.Director = GameObject.Find("Director");
     }
 
     // Update is called once per frame
@@ -46,10 +47,14 @@ public class Measure : MonoBehaviour
             {
                 Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
             }
-            Destroy(GameObject.Find("measureButton(Clone)"));
+            //Destroy(GameObject.Find("measureButton(Clone)"));
         }
-        
-        print("selectedText = "+c);
+        this.Director.GetComponent<Director>().ButtonReset();
+        foreach(int x in Round.InteractableFalseCells_num)
+        {
+            print("InteractableFalseCells_num = "+x);
+        }
+        Director.GetComponent<Director>().checkWinning();
     }
 
 }

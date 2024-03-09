@@ -38,8 +38,46 @@ public class CheckLoop : MonoBehaviour
                 }
             }
         }
-    }
 
+        while (jagLength() == true)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (Round.jag[i].Length == 1)
+                {
+                    var lst = Round.jag[i].ToList();
+                    string c = Round.jag[i][0];
+                    lst.Clear();
+                    Round.jag[i] = lst.ToArray();
+                    for (int j = 0; j < 9; j++)
+                    {
+                        var lst1 = Round.jag[j].ToList();
+                        lst1.Remove(c);
+                        Round.jag[j] = lst1.ToArray();
+                    }
+                    continue;
+                }
+            }
+        }
+        for (int i = 0; i < 9; i++)
+        {
+            foreach(string c in Round.jag[i])
+            {
+                print("jag = "+c);
+            }
+        }
+    }
+    private bool jagLength()
+    {
+        for (int i = 0;i < 9; i++)
+        {
+            if (Round.jag[i].Length == 1)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     
@@ -95,7 +133,7 @@ public class CheckLoop : MonoBehaviour
         {
             putIntoList();
             GetBase(i);
-            if (checkInteractable(i) == true || Round.Base.Length == 0)
+            if (checkInteractable(i) == true || Round.Base.Length == 0 )
             {
                 continue;
             }       
@@ -104,7 +142,7 @@ public class CheckLoop : MonoBehaviour
                 if (i != j )
                 {
                     GetCompare(j);
-                    if (checkInteractable(j) == true || Round.Compare.Length == 0)
+                    if (checkInteractable(j) == true || Round.Compare.Length == 0 )
                     {
                         continue;
                     }
@@ -196,7 +234,6 @@ public class CheckLoop : MonoBehaviour
             z++;
             foreach (int j in n)               // ¨úCompare
             {
-
                 foreach (string x in Round.Base)
                 {
                     //print("Base = " + x);
@@ -204,7 +241,7 @@ public class CheckLoop : MonoBehaviour
                 if (i != j)
                 {                   
                     GetCompare(j);
-                    if (checkInteractable(j) == true || Round.Compare.Length == 0)
+                    if (checkInteractable(j) == true || Round.Compare.Length == 0 )
                     {
                         continue;
                     }
