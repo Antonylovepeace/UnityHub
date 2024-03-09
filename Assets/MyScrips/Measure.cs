@@ -5,16 +5,19 @@ using UnityEngine.UI;
 
 public class Measure : MonoBehaviour
 {
+    public Text Winner;
     public GameObject measureButton;
     GameObject collapse;
     GameObject newButton;
     GameObject Director;
+    GameObject Canvas;
     string c;
     // Start is called before the first frame update
     void Start()
     {
         this.collapse = GameObject.Find("collapse");
         this.Director = GameObject.Find("Director");
+        //this.Canvas = GameObject.Find("Canvas");
     }
 
     // Update is called once per frame
@@ -47,14 +50,21 @@ public class Measure : MonoBehaviour
             {
                 Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
             }
-            //Destroy(GameObject.Find("measureButton(Clone)"));
+            Destroy(GameObject.Find("measureButton(Clone)"));
         }
         this.Director.GetComponent<Director>().ButtonReset();
         foreach(int x in Round.InteractableFalseCells_num)
         {
             print("InteractableFalseCells_num = "+x);
         }
-        Director.GetComponent<Director>().checkWinning();
+        if (this.Director.GetComponent<Director>().checkWinning())
+        {
+
+            
+            //Text text = Instantiate(Winner, transform, false) as Text;
+           // Winner.transform.SetParent(Canvas.transform, false);
+            //Winner.GetComponent<Text>().text = Round.Winner;
+        }
     }
 
 }

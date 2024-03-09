@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Cell : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Cell : MonoBehaviour
     GameObject collapse;
     GameObject CellGenerator;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,14 +41,16 @@ public class Cell : MonoBehaviour
         }
         else
         {
-            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
-            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
+            //GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
+            TextMeshProUGUI text = Grid.transform.GetChild(CheckFilled()).GetComponent<TextMeshProUGUI>();
+            text.text = Director.GetComponent<Director>().GetCharacter();
             Director.GetComponent<Director>().SwitchPlayer();
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
 
             // °j°é«á¶òÁY
+            /*
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
                 RemoveDouble(Round.collapseCells);
@@ -55,7 +58,7 @@ public class Cell : MonoBehaviour
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
-            }
+            }*/
         }   
         foreach(string x in Round.LoopCheck)
         {
@@ -133,8 +136,8 @@ public class Cell : MonoBehaviour
         {
             
             GameObject Grid = transform.GetChild(0).gameObject;
-            GameObject text = Grid.transform.GetChild(i).gameObject;
-            string content = text.GetComponent<Text>().text;
+            TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            string content = text.text;
             if ( content == "")
             {
                 return i;
