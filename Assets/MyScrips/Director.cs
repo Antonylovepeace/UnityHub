@@ -10,9 +10,9 @@ public class Director : MonoBehaviour
     
     public bool Xturn = true;
     public int TurnCount = 0;
-    public string[] charO = new string[] { "O\u2081" , "O\u2082" , "O\u2083" , "O\u2084" , "O\u2085" ,
+    public string[] charO = new string[] { "H<sub>2</sub>" ,"H<sub>2</sub>" ,"H<sub>2</sub>" , "O\u2084" , "O\u2085" ,
                                                             "O\u2086" ,"O\u2087","O\u2088","O\u2089"};
-    public string[] charX = new string[] { "X\u2081" , "X\u2082" , "X\u2083" , "X\u2084" , "X\u2085" ,
+    public string[] charX = new string[] { "Z<sub>2</sub>" , "H<sub>2</sub>" , "H<sub>2</sub>" , "X\u2084" , "X\u2085" ,
                                                             "X\u2086" ,"X\u2087","X\u2088","X\u2089"};
     GameObject Cells;
     GameObject CheckLoop;
@@ -69,6 +69,7 @@ public class Director : MonoBehaviour
         {
             if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
             {
+                DrawLine(i, i + 3, i + 6);
                 print(Data[i]+" is winner !");
                 Round.Winner = Data[i] + " is winner !";
                 return true;
@@ -79,6 +80,7 @@ public class Director : MonoBehaviour
         {
             if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
             {
+                DrawLine(i, i + 1, i + 2);
                 print(Data[i] + " is winner !");
                 Round.Winner = Data[i] + " is winner !";
                 return true;
@@ -87,17 +89,37 @@ public class Director : MonoBehaviour
         //Diagonal
         if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
         {
+            DrawLine(0, 4, 8);
             print(Data[0] + " is winner !");
             Round.Winner = Data[0] + " is winner !";
             return true;
         }
         else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
         {
-            //print(Data[0] + " is winner !");
+            DrawLine(2, 4, 6);
+            print(Data[2] + " is winner !");
             Round.Winner = Data[0] + " is winner !";
             return true;
         }
         return false;
+    }
+
+    private void DrawLine(int a, int b, int c)
+    {
+        int[] ints = new int[] {};
+        var lst = ints.ToList();
+        lst.Add(a);
+        lst.Add(b);
+        lst.Add(c);
+        ints = lst.ToArray();
+        foreach( int i in ints )
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];                  //Button Color
+            ColorBlock cb = cell.GetComponent<Button>().colors;
+            cb.disabledColor = Color.cyan;
+            cell.GetComponent<Button>().colors = cb;
+        }
+        
     }
     public string GetCharacter()
     {

@@ -69,6 +69,10 @@ public class collapse : MonoBehaviour
                         string content = Grid.transform.GetChild(b).GetComponent<Text>().text;
                         if (content == ch)
                         {
+                            var lst = Round.InteractableFalseCells_num.ToList();
+                            lst.Add(a);
+                            Round.InteractableFalseCells_num = lst.ToArray();
+
                             CleanCellText(a);
                             cell.transform.GetChild(1).GetComponent<Text>().text = ch;
                             continue;
@@ -214,9 +218,9 @@ public class collapse : MonoBehaviour
     private void ChangeColor(int i)
     {    
         Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];                  //Button Color
-        ColorBlock cb = cell.GetComponent<Button>().colors;
-        cb.disabledColor = Color.cyan;
-        cell.GetComponent<Button>().colors = cb;
+        //ColorBlock cb = cell.GetComponent<Button>().colors;
+        //cb.disabledColor = Color.cyan;
+        //cell.GetComponent<Button>().colors = cb;
 
         GameObject Grid = cell.transform.GetChild(0).gameObject;                        //Text Color
         for (int j = 0; j < 9; j++)

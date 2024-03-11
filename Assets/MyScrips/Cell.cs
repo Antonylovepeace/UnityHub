@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Cell : MonoBehaviour
 {
@@ -40,14 +41,16 @@ public class Cell : MonoBehaviour
         }
         else
         {
-            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
-            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
+            TextMeshProUGUI text = Grid.transform.GetChild(CheckFilled()).GetComponent<TextMeshProUGUI>();
+            text.text = Director.GetComponent<Director>().GetCharacter();
+            //text.GetComponent<TextMeshPro>().text = Director.GetComponent<Director>().GetCharacter();
             Director.GetComponent<Director>().SwitchPlayer();
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
 
             // °j°é«á¶òÁY
+            /*
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
                 RemoveDouble(Round.collapseCells);
@@ -56,6 +59,7 @@ public class Cell : MonoBehaviour
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
             }
+            */
         }   
         foreach(string x in Round.LoopCheck)
         {
@@ -133,8 +137,9 @@ public class Cell : MonoBehaviour
         {
             
             GameObject Grid = transform.GetChild(0).gameObject;
-            GameObject text = Grid.transform.GetChild(i).gameObject;
-            string content = text.GetComponent<Text>().text;
+            //GameObject text = Grid.transform.GetChild(i).gameObject;;
+            TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            string content = text.text;
             if ( content == "")
             {
                 return i;
