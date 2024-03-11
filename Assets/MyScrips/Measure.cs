@@ -28,13 +28,9 @@ public class Measure : MonoBehaviour
         newButton = Instantiate(measureButton,transform);
     }
 
-    public void measureButtonDown()
-    {
-        for (int j = 0; j < 2; j++)
-        {
-            GameObject newBt = this.collapse.GetComponent<collapse>().Buttons[j];
-            ColorBlock cb = newBt.GetComponent<Button>().colors;
 
+<<<<<<< HEAD
+=======
             if(cb.normalColor == cb.selectedColor)
             {
                 c = newBt.transform.GetChild(0).GetComponent<Text>().text;
@@ -54,7 +50,8 @@ public class Measure : MonoBehaviour
         {
             print("InteractableFalseCells_num = "+x);
         }
-        //Director.GetComponent<Director>().checkWinning();
+        Director.GetComponent<Director>().checkWinning();
     }
+>>>>>>> parent of f2f2345 (WinnerText)
 
 }

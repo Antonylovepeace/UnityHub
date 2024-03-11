@@ -61,25 +61,46 @@ public class Director : MonoBehaviour
         }
         return Data;
     }
+<<<<<<< HEAD
     
 
-    private void DrawLine(int a, int b, int c)
+
+=======
+    public bool checkWinning()
     {
-        int[] ints = new int[] {};
-        var lst = ints.ToList();
-        lst.Add(a);
-        lst.Add(b);
-        lst.Add(c);
-        ints = lst.ToArray();
-        foreach( int i in ints )
+        string[] Data = GetBoardData();
+        //vertical
+        for (int i = 0; i < 3; i++)                     
         {
-            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];                  //Button Color
-            ColorBlock cb = cell.GetComponent<Button>().colors;
-            cb.disabledColor = Color.cyan;
-            cell.GetComponent<Button>().colors = cb;
+            if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
+            {
+                print(Data[i]+" is winner !");
+                return true;
+            }
         }
-        
+        //horizon
+        for (int i = 0; i < 7; i=+3)
+        {
+            if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
+            {
+                print(Data[i] + " is winner !");
+                return true;
+            }
+        }
+        //Diagonal
+        if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
+        {
+            print(Data[0] + " is winner !");
+            return true;
+        }
+        if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
+        {
+            print(Data[0] + " is winner !");
+            return true;
+        }
+        return false;
     }
+>>>>>>> parent of f2f2345 (WinnerText)
     public string GetCharacter()
     {
         
