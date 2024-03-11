@@ -61,48 +61,7 @@ public class Director : MonoBehaviour
         }
         return Data;
     }
-    public bool checkWinning()
-    {
-        string[] Data = GetBoardData();
-        //vertical
-        for (int i = 0; i < 3; i++)                     
-        {
-            if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
-            {
-                DrawLine(i, i + 3, i + 6);
-                print(Data[i]+" is winner !");
-                Round.Winner = Data[i] + " is winner !";
-                return true;
-            }
-        }
-        //horizon
-        for (int i = 0; i < 7; i+=3)
-        {
-            if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
-            {
-                DrawLine(i, i + 1, i + 2);
-                print(Data[i] + " is winner !");
-                Round.Winner = Data[i] + " is winner !";
-                return true;
-            }
-        }
-        //Diagonal
-        if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
-        {
-            DrawLine(0, 4, 8);
-            print(Data[0] + " is winner !");
-            Round.Winner = Data[0] + " is winner !";
-            return true;
-        }
-        else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
-        {
-            DrawLine(2, 4, 6);
-            print(Data[2] + " is winner !");
-            Round.Winner = Data[0] + " is winner !";
-            return true;
-        }
-        return false;
-    }
+    
 
     private void DrawLine(int a, int b, int c)
     {

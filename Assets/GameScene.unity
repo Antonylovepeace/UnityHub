@@ -676,7 +676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c898cd0c04813ad40a9ca65817587422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Winner: {fileID: 3986310288999506038, guid: 58780f563a1047045ab57c07e0d6fb2e, type: 3}
   measureButton: {fileID: 1262209218099793996, guid: 8894f2fe708676c4d9f48f110ab8e994, type: 3}
 --- !u!114 &947327632
 MonoBehaviour:
