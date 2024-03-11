@@ -70,6 +70,7 @@ public class Director : MonoBehaviour
             if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
             {
                 print(Data[i]+" is winner !");
+                DrawLine(i, i + 3, i + 6);
                 Round.Winner = Data[i] + " is winner !";
                 return true;
             }
@@ -80,6 +81,7 @@ public class Director : MonoBehaviour
             if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
             {
                 print(Data[i] + " is winner !");
+                DrawLine(i, i + 1, i + 2);
                 Round.Winner = Data[i] + " is winner !";
                 return true;
             }
@@ -88,16 +90,35 @@ public class Director : MonoBehaviour
         if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
         {
             print(Data[0] + " is winner !");
+            DrawLine(0, 4, 8);
             Round.Winner = Data[0] + " is winner !";
             return true;
         }
         else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
         {
             //print(Data[0] + " is winner !");
+            DrawLine(2, 4, 6);
             Round.Winner = Data[0] + " is winner !";
             return true;
         }
         return false;
+    }
+    private void DrawLine(int a, int b, int c)
+    {
+        int[] ints = new int[3];
+        var lst = ints.ToList();
+        lst.Clear();
+        lst.Add(a);
+        lst.Add(b);
+        lst.Add(c);
+        ints = lst.ToArray();
+        foreach (int i in ints)
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+            ColorBlock cb = cell.GetComponent<Button>().colors;
+            cb.disabledColor = Color.cyan;
+            cell.GetComponent<Button>().colors = cb;
+        }
     }
     public string GetCharacter()
     {
