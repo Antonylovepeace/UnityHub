@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,7 @@ public class Director : MonoBehaviour
     
     public bool Xturn = true;
     public int TurnCount = 0;
-    public string[] charO = new string[] { "O\u2081" , "O\u2082" , "O\u2083" , "O\u2084" , "O\u2085" ,
-                                                            "O\u2086" ,"O\u2087","O\u2088","O\u2089"};
-    public string[] charX = new string[] { "X\u2081" , "X\u2082" , "X\u2083" , "X\u2084" , "X\u2085" ,
-                                                            "X\u2086" ,"X\u2087","X\u2088","X\u2089"};
+    
     GameObject Cells;
     GameObject CheckLoop;
 
@@ -30,6 +28,10 @@ public class Director : MonoBehaviour
     }
     public string[] GetBoardData()
     {
+        string[] charO = new string[] { "O<sub>1</sub>" , "O<sub>2</sub>" , "O<sub>3</sub>" ,"O<sub>4</sub>" ,"O<sub>5</sub>" ,
+                                                            "O<sub>6</sub>" ,"O<sub>7</sub>","O<sub>8</sub>","O<sub>9</sub>"};
+        string[] charX = new string[] { "X<sub>1</sub>" , "X<sub>2</sub>" , "X<sub>3</sub>" ,"X<sub>4</sub>" ,"X<sub>5</sub>" ,
+                                                            "X<sub>6</sub>" ,"X<sub>7</sub>","X<sub>8</sub>","X<sub>9</sub>"};
         string[] Data = new string[] {};
         var lstO = charO.ToList();
         var lstX = charX.ToList();
@@ -38,7 +40,8 @@ public class Director : MonoBehaviour
         for (int i = 0; i < 9; i++)
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
-            string Text = cell.transform.GetChild(1).GetComponent<Text>().text;
+            TextMeshProUGUI text = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            string Text = text.text;
             if (lstO.Contains(Text))
             {
                 lst.Add("O");
@@ -61,7 +64,7 @@ public class Director : MonoBehaviour
         }
         return Data;
     }
-    public bool checkWinning()
+    public void checkWinning()
     {
         string[] Data = GetBoardData();
         //vertical
@@ -72,7 +75,6 @@ public class Director : MonoBehaviour
                 print(Data[i]+" is winner !");
                 DrawLine(i, i + 3, i + 6);
                 Round.Winner = Data[i] + " is winner !";
-                return true;
             }
         }
         //horizon
@@ -83,7 +85,6 @@ public class Director : MonoBehaviour
                 print(Data[i] + " is winner !");
                 DrawLine(i, i + 1, i + 2);
                 Round.Winner = Data[i] + " is winner !";
-                return true;
             }
         }
         //Diagonal
@@ -92,16 +93,13 @@ public class Director : MonoBehaviour
             print(Data[0] + " is winner !");
             DrawLine(0, 4, 8);
             Round.Winner = Data[0] + " is winner !";
-            return true;
         }
         else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
         {
             //print(Data[0] + " is winner !");
             DrawLine(2, 4, 6);
             Round.Winner = Data[0] + " is winner !";
-            return true;
         }
-        return false;
     }
     private void DrawLine(int a, int b, int c)
     {
@@ -122,7 +120,10 @@ public class Director : MonoBehaviour
     }
     public string GetCharacter()
     {
-        
+        string[] charO = new string[] { "O<sub>1</sub>" , "O<sub>2</sub>" , "O<sub>3</sub>" ,"O<sub>4</sub>" ,"O<sub>5</sub>" ,
+                                                            "O<sub>6</sub>" ,"O<sub>7</sub>","O<sub>8</sub>","O<sub>9</sub>"};
+        string[] charX = new string[] { "X<sub>1</sub>" , "X<sub>2</sub>" , "X<sub>3</sub>" ,"X<sub>4</sub>" ,"X<sub>5</sub>" ,
+                                                            "X<sub>6</sub>" ,"X<sub>7</sub>","X<sub>8</sub>","X<sub>9</sub>"};
         if (Xturn == true)
         {
             
@@ -178,8 +179,9 @@ public class Director : MonoBehaviour
         {
 
             GameObject Grid = cell.transform.GetChild(0).gameObject;
-            GameObject text = Grid.transform.GetChild(i).gameObject;
-            string content = text.GetComponent<Text>().text;
+            TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            //GameObject text = Grid.transform.GetChild(i).gameObject;
+            string content = text.text;
             if (content == "")
             {
                 return true;

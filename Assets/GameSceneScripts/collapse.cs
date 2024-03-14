@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -66,14 +67,16 @@ public class collapse : MonoBehaviour
                     GameObject Grid = cell.transform.GetChild(0).gameObject;
                     for (int b = 0; b < 9; b++)
                     {
-                        string content = Grid.transform.GetChild(b).GetComponent<Text>().text;
+                        TextMeshProUGUI text = Grid.transform.GetChild(b).GetComponent<TextMeshProUGUI>();
+                        string content =text.text;
                         if (content == ch)
                         {
                             var lst = Round.InteractableFalseCells_num.ToList();
                             lst.Add(a);
                             Round.InteractableFalseCells_num = lst.ToArray();
                             CleanCellText(a);
-                            cell.transform.GetChild(1).GetComponent<Text>().text = ch;
+                            TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                            text1.text = ch;
                             continue;
                         }
                     }
@@ -94,7 +97,8 @@ public class collapse : MonoBehaviour
             GameObject Grid = cell.transform.GetChild(0).gameObject;
             for(int j = 0; j < 9; j++)
             {
-                string content = Grid.transform.GetChild(j).GetComponent<Text>().text;
+                TextMeshProUGUI text = Grid.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+                string content = text.text;
                 if(content != "")
                 {
                     lst.Add(content);
@@ -140,7 +144,8 @@ public class collapse : MonoBehaviour
         {
             for (int j = 0; j < 9; j++)
             {
-                string content = Grid.transform.GetChild(j).GetComponent<Text>().text;
+                TextMeshProUGUI text = Grid.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+                string content = text.text;
                 if (ch == content && ch != c)
                 {
                     var lst = Round.collapseCells.ToList();
@@ -151,7 +156,8 @@ public class collapse : MonoBehaviour
                     {
                         //print("collapseCells = " + Data);
                     }
-                    SelectedCell.transform.GetChild(1).GetComponent<Text>().text = c;
+                    TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                    text1.text = c;
                     return content;
                 }
             }  
@@ -166,11 +172,13 @@ public class collapse : MonoBehaviour
             GameObject Grid = SelectedCell.transform.GetChild(0).gameObject;
             for (int i = 0; i < 9; i++)
             {
-                string content = Grid.transform.GetChild(i).GetComponent<Text>().text;
+                TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+                string content = text.text;
                 if (c == content)
                 {
                     print("cells = " + num);
-                    SelectedCell.transform.GetChild(1).GetComponent<Text>().text = c;
+                    TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                    text1.text = c;
                     return num;
                 }
             }
@@ -186,7 +194,8 @@ public class collapse : MonoBehaviour
         GameObject Grid = Cell.transform.GetChild(0).gameObject;
         for (int j = 0; j < 9; j++)
         {
-            Grid.transform.GetChild(j).GetComponent<Text>().text = "";
+            TextMeshProUGUI text = Grid.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+            text.text = "";
         }
     }
     private void InteractableFalse()
@@ -222,15 +231,17 @@ public class collapse : MonoBehaviour
         GameObject Grid = cell.transform.GetChild(0).gameObject;                        //Text Color
         for (int j = 0; j < 9; j++)
         {
-            GameObject text = Grid.transform.GetChild(j).gameObject;
-            string content = text.GetComponent<Text>().text;
+            TextMeshProUGUI text = Grid.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+            
+            string content = text.text;
             foreach (string c in Round.collapseTexts)
             {
                 if(content == c)
                 {
-                    Color color = text.GetComponent<Text>().color;
-                    color = Color.red;
-                    text.GetComponent<Text>().color = color;
+                    text.color = Color.red;
+                    //Color color = text.GetComponent<Text>().color;
+                    //color = Color.red;
+                    //text.GetComponent<Text>().color = color;
                 }
             }
         }

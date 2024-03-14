@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Cell : MonoBehaviour
 {
@@ -40,14 +41,16 @@ public class Cell : MonoBehaviour
         }
         else
         {
-            GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
-            text.GetComponent<Text>().text = Director.GetComponent<Director>().GetCharacter();
+            //GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
+            TextMeshProUGUI text = Grid.transform.GetChild(CheckFilled()).GetComponent<TextMeshProUGUI>();
+            text.text = Director.GetComponent<Director>().GetCharacter();
             Director.GetComponent<Director>().SwitchPlayer();
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
 
             // °j°é«á¶òÁY
+            
             if (CheckLoop.GetComponent<CheckLoop>().checkLoop() == true)
             {
                 RemoveDouble(Round.collapseCells);
@@ -56,8 +59,9 @@ public class Cell : MonoBehaviour
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
             }
-        }   
-        foreach(string x in Round.LoopCheck)
+            
+        }
+        foreach (string x in Round.LoopCheck)
         {
             print("LoopCheck = "+x);
         }
@@ -85,14 +89,16 @@ public class Cell : MonoBehaviour
         GameObject Grid = this.CellGenerator.GetComponent<CellGenerator>().cells[n].transform.GetChild(0).gameObject;
         for (int j = 0; j < 9; j++)
         {
-            GameObject text = Grid.transform.GetChild(j).gameObject;
-            string c = text.GetComponent<Text>().text;
+            TextMeshProUGUI text = Grid.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+            //GameObject text = Grid.transform.GetChild(j).gameObject;
+            string c = text.text;
             foreach (string s in Round.collapseTexts)
             {
                 //print("s = " + s);
                 if (s == c)
                 {
-                    this.collapse.GetComponent<collapse>().Buttons[x].transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = s;
+                    TextMeshProUGUI label = this.collapse.GetComponent<collapse>().Buttons[x].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                    label.text = s;
                     x++;
                     if (x == 2)
                         break;
@@ -133,8 +139,9 @@ public class Cell : MonoBehaviour
         {
             
             GameObject Grid = transform.GetChild(0).gameObject;
-            GameObject text = Grid.transform.GetChild(i).gameObject;
-            string content = text.GetComponent<Text>().text;
+            TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            //GameObject text = Grid.transform.GetChild(i).gameObject;
+            string content = text.text;
             if ( content == "")
             {
                 return i;

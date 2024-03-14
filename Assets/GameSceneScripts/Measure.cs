@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +41,9 @@ public class Measure : MonoBehaviour
 
             if(cb.normalColor == cb.selectedColor)
             {
-                c = newBt.transform.GetChild(0).GetComponent<Text>().text;
+                TextMeshProUGUI text = newBt.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                c = text.text;
+                //c = newBt.transform.GetChild(0).GetComponent<Text>().text;
             }
         }
         if(c != null && c != "")
@@ -51,20 +54,15 @@ public class Measure : MonoBehaviour
                 Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
             }
             Destroy(GameObject.Find("measureButton(Clone)"));
+            this.Director.GetComponent<Director>().ButtonReset();
+            this.Director.GetComponent<Director>().checkWinning();
         }
-        this.Director.GetComponent<Director>().ButtonReset();
+        
         foreach(int x in Round.InteractableFalseCells_num)
         {
             print("InteractableFalseCells_num = "+x);
         }
-        if (this.Director.GetComponent<Director>().checkWinning())
-        {
-
-            
-            //Text text = Instantiate(Winner, transform, false) as Text;
-           // Winner.transform.SetParent(Canvas.transform, false);
-            //Winner.GetComponent<Text>().text = Round.Winner;
-        }
+        
     }
 
 }

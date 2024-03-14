@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,8 +29,9 @@ public class CheckLoop : MonoBehaviour
             Round.jag[i] = new string[0];
             for (int j = 0; j < 9; j++)
             {
-                GameObject text = Grid_base.transform.GetChild(j).gameObject;
-                string content = text.GetComponent<Text>().text;
+                TextMeshProUGUI text = Grid_base.transform.GetChild(j).GetComponent<TextMeshProUGUI>();
+                //GameObject text = Grid_base.transform.GetChild(j).gameObject;
+                string content = text.text;
                 if (content != "")
                 {
                     var lsts = Round.jag[i].ToList();
