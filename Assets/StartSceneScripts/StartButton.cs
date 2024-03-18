@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
@@ -25,5 +26,9 @@ public class StartButton : MonoBehaviour
     {
         TextMeshProUGUI text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.color = Color.white;
+    }
+    public void onClick()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
