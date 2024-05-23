@@ -113,9 +113,9 @@ public class Director : MonoBehaviour
         foreach (int i in ints)
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
-            ColorBlock cb = cell.GetComponent<Button>().colors;
-            cb.disabledColor = Color.cyan;
-            cell.GetComponent<Button>().colors = cb;
+            //ColorBlock cb = cell.GetComponent<Button>().colors;
+            //cb.disabledColor = Color.cyan;
+            //cell.GetComponent<Button>().colors = cb;
         }
     }
     public string GetCharacter()
