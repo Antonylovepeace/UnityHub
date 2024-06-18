@@ -10,8 +10,9 @@ public class Director : MonoBehaviour
 {
     
     public bool Xturn = true;
+    public bool NextTurn = true;
     public int TurnCount = 0;
-    
+    public GameObject Round_Board;
     GameObject Cells;
     GameObject CheckLoop;
 
@@ -19,6 +20,8 @@ public class Director : MonoBehaviour
     {
         this.Cells = GameObject.Find("CellGenerator");
         this.CheckLoop = GameObject.Find("CheckLoop");
+        TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = "X Turn";
     }
 
     // Update is called once per frame
@@ -137,24 +140,26 @@ public class Director : MonoBehaviour
         }
 
     }
-
+ 
     public void SwitchPlayer()
     {
+        TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         TurnCount++;
         if (TurnCount == 2)
         {
             if (Xturn)
             {
+                text.text = "O Turn";
                 Round.charX_num++;
             }
             else
             {
+                text.text = "X Turn";
                 Round.charO_num++;
             }
             Xturn = ! Xturn;
             TurnCount = 0;
-        }        
-        
+        }
     }
     public void ButtonReset()
     {
