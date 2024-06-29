@@ -19,6 +19,7 @@ public class collapse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         this.CellGenerator = GameObject.Find("CellGenerator");
         this.Measure = GameObject.Find("measure");
     }
@@ -30,6 +31,7 @@ public class collapse : MonoBehaviour
         {
             ChangeColor(i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
+ 
             cell.GetComponent<Button>().onClick.RemoveAllListeners();
             cell.GetComponent<EventTrigger>().enabled = true;
         }

@@ -25,9 +25,7 @@ public class CellGenerator : MonoBehaviour
         for (int i = 0; i<=8; i++)
         {
             GameObject newCell = Instantiate(CellPrefab,transform);
-            
             cells[i] = newCell.GetComponent<Cell>();            // button
-
             cells[i].GetComponent<Button>().onClick.AddListener(cells[i].GetComponent<Cell>().Fill);
             cells[i].GetComponent<EventTrigger>().enabled = false;
         }

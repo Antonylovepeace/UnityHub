@@ -33,7 +33,6 @@ public class Cell : MonoBehaviour
 
     public void Fill()
     {
-        int z = transform.childCount;
         GameObject Grid = transform.GetChild(0).gameObject;
         if (CheckFilled() == 9)
         {

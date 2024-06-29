@@ -69,13 +69,17 @@ public class Director : MonoBehaviour
     }
     public void checkWinning()
     {
+        TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         string[] Data = GetBoardData();
+
         //vertical
         for (int i = 0; i < 3; i++)                     
         {
             if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
             {
-                print(Data[i]+" is winner !");
+                checkDoubleLine(i, i + 3, i + 6);
+                text.text = Data[i] + " is winner !";
+                DisableAllButtons();
                 DrawLine(i, i + 3, i + 6);
                 Round.Winner = Data[i] + " is winner !";
             }
@@ -85,7 +89,9 @@ public class Director : MonoBehaviour
         {
             if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
             {
-                print(Data[i] + " is winner !");
+                checkDoubleLine(i, i + 1, i + 2);
+                text.text = Data[i] + " is winner !";
+                DisableAllButtons();
                 DrawLine(i, i + 1, i + 2);
                 Round.Winner = Data[i] + " is winner !";
             }
@@ -93,16 +99,38 @@ public class Director : MonoBehaviour
         //Diagonal
         if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
         {
-            print(Data[0] + " is winner !");
+            checkDoubleLine(0, 4, 8);
+            text.text = Data[0] + " is winner !";
+            DisableAllButtons();
             DrawLine(0, 4, 8);
             Round.Winner = Data[0] + " is winner !";
         }
-        else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[0] != "")
+        else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[2] != "")
         {
-            //print(Data[0] + " is winner !");
+            checkDoubleLine(2, 4, 6);
+            text.text = Data[2] + " is winner !";
+            DisableAllButtons();
             DrawLine(2, 4, 6);
-            Round.Winner = Data[0] + " is winner !";
+            Round.Winner = Data[2] + " is winner !";
         }
+    }
+    private int checkDoubleLine(int a, int b, int c)
+    {
+        int[] DoubleLineChecking = new int[] { };
+        var lst = DoubleLineChecking.ToList();
+        lst.Add(a);
+        lst.Add(b);
+        lst.Add(c);
+        DoubleLineChecking = lst.ToArray();
+        if(DoubleLineChecking.Length == 3)
+        {
+            return DoubleLineChecking[a];
+        }
+        else if(DoubleLineChecking.Length == 6)
+        {
+            return 0;
+        }
+        return 0;
     }
     private void DrawLine(int a, int b, int c)
     {
@@ -116,9 +144,9 @@ public class Director : MonoBehaviour
         foreach (int i in ints)
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
-            //ColorBlock cb = cell.GetComponent<Button>().colors;
-            //cb.disabledColor = Color.cyan;
-            //cell.GetComponent<Button>().colors = cb;
+            ColorBlock cb = cell.GetComponent<Button>().colors;
+            cb.disabledColor = Color.blue;
+            cell.GetComponent<Button>().colors = cb;
         }
     }
     public string GetCharacter()
@@ -163,7 +191,6 @@ public class Director : MonoBehaviour
     }
     public void ButtonReset()
     {
-
         for(int i = 0;i<=8; i++)
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
@@ -175,6 +202,14 @@ public class Director : MonoBehaviour
             {
                 cell.GetComponent<Button>().interactable = false;
             }
+        }
+    }
+    public void DisableAllButtons()
+    {
+        for (int i = 0; i <= 8; i++)
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+              cell.GetComponent<Button>().interactable = false;
         }
     }
     private bool CheckEmpty(Cell cell)
