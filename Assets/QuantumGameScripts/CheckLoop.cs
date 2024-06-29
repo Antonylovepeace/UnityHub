@@ -61,13 +61,6 @@ public class CheckLoop : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < 9; i++)
-        {
-            foreach(string c in Round.jag[i])
-            {
-                print("jag = "+c);
-            }
-        }
     }
     private bool jagLength()
     {
@@ -148,10 +141,7 @@ public class CheckLoop : MonoBehaviour
                     {
                         continue;
                     }
-                    foreach (string x in Round.Base)
-                    {
-                        print("Base = " + x);
-                    }
+
                     foreach (string x in Round.Compare)
                     {
                         Debug.Log("Compare = " + x);
@@ -169,7 +159,7 @@ public class CheckLoop : MonoBehaviour
                                 lst4.Add(x);
                                 Round.InteractableFalseCells_num = lst4.ToArray();
                             }
-                            print("迴圈形成");
+                            //print("迴圈形成");
                             return true;             
                         }
                         else
@@ -182,8 +172,8 @@ public class CheckLoop : MonoBehaviour
                     {
                         string a = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[0];
                         string b = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[1];
-                        print("x = "+a);
-                        print("y = " + b);
+                        //print("x = "+a);
+                        //print("y = " + b);
                         var lst1 = Round.LoopCheck.ToList();
                         var lst2 = Round.collapseCells.ToList();
                         var lst3 = Round.InteractableFalseCells_num.ToList();
@@ -204,7 +194,6 @@ public class CheckLoop : MonoBehaviour
                         Round.collapseTexts = lst4.ToArray();
                         removeRepeatNum(i, j, a);
                         removeRepeatNum(i, j, b);
-                        print("迴圈形成,兩格");
                         
                         return true;
                     }
@@ -213,7 +202,6 @@ public class CheckLoop : MonoBehaviour
             }
 
         }
-        print("迴圈未形成");
         return false;
     }
 
@@ -249,7 +237,7 @@ public class CheckLoop : MonoBehaviour
                     }
                     foreach (string x in Round.Compare)
                     {
-                        //print("Compare = " + x);
+                        print("Compare = " + x);
                     }
                     if (FindRepeat(CopyAndAddArray(Round.Base, Round.Compare)).Length == 1)
                     {

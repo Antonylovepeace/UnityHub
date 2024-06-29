@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Director : MonoBehaviour
 {
@@ -77,8 +78,7 @@ public class Director : MonoBehaviour
         {
             if (Data[i] == Data[i+3] && Data[i] == Data[i+6] && Data[i] != "")
             {
-                checkDoubleLine(i, i + 3, i + 6);
-                text.text = Data[i] + " is winner !";
+                text.text = checkDoubleLine(i, i + 3, i + 6, Data) + " is winner !";
                 DisableAllButtons();
                 DrawLine(i, i + 3, i + 6);
                 Round.Winner = Data[i] + " is winner !";
@@ -89,8 +89,7 @@ public class Director : MonoBehaviour
         {
             if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
             {
-                checkDoubleLine(i, i + 1, i + 2);
-                text.text = Data[i] + " is winner !";
+                text.text = checkDoubleLine(i, i + 1, i + 2, Data) + " is winner !";
                 DisableAllButtons();
                 DrawLine(i, i + 1, i + 2);
                 Round.Winner = Data[i] + " is winner !";
@@ -99,38 +98,114 @@ public class Director : MonoBehaviour
         //Diagonal
         if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
         {
-            checkDoubleLine(0, 4, 8);
-            text.text = Data[0] + " is winner !";
+            text.text = checkDoubleLine(0, 4, 8, Data) + " is winner !";
             DisableAllButtons();
             DrawLine(0, 4, 8);
             Round.Winner = Data[0] + " is winner !";
         }
         else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[2] != "")
         {
-            checkDoubleLine(2, 4, 6);
-            text.text = Data[2] + " is winner !";
+            text.text = checkDoubleLine(2, 4, 6, Data) + " is winner !";
             DisableAllButtons();
             DrawLine(2, 4, 6);
             Round.Winner = Data[2] + " is winner !";
         }
     }
-    private int checkDoubleLine(int a, int b, int c)
+    private string checkDoubleLine(int a, int b, int c, string[] Data)
     {
-        int[] DoubleLineChecking = new int[] { };
-        var lst = DoubleLineChecking.ToList();
+        var lst = Round.Cells.ToList();
         lst.Add(a);
         lst.Add(b);
         lst.Add(c);
-        DoubleLineChecking = lst.ToArray();
-        if(DoubleLineChecking.Length == 3)
+        Round.Cells = lst.ToArray();
+        if (Round.Cells.Length == 3)
         {
-            return DoubleLineChecking[a];
+            print("長度為三");
+            return Data[a];
         }
-        else if(DoubleLineChecking.Length == 6)
+        else
         {
-            return 0;
+            print("長度為六");
+            return GetLowerNum(Round.Cells);
         }
-        return 0;
+    }
+    private string GetLowerNum(int[] Cells)
+    {
+        string[] charO = new string[] { "O<sub>1</sub>" , "O<sub>2</sub>" , "O<sub>3</sub>" ,"O<sub>4</sub>" ,"O<sub>5</sub>" ,
+                                                            "O<sub>6</sub>" ,"O<sub>7</sub>","O<sub>8</sub>","O<sub>9</sub>"};
+        string[] charX = new string[] { "X<sub>1</sub>" , "X<sub>2</sub>" , "X<sub>3</sub>" ,"X<sub>4</sub>" ,"X<sub>5</sub>" ,
+                                                            "X<sub>6</sub>" ,"X<sub>7</sub>","X<sub>8</sub>","X<sub>9</sub>"};
+
+        string[] Line1 = new string[] { };
+        string[] Line2 = new string[] { };
+        int[] Compare_O = new int[] { };
+        int[] Compare_X = new int[] { };
+        for (int i = 0; i < 3; i++)
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[Cells[i]];
+            TextMeshProUGUI text = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            string Text = text.text;
+            var temp = Line1.ToList();
+            temp.Add(Text);
+            Line1 = temp.ToArray();
+        }
+        for (int i = 3; i < 6; i++)
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[Cells[i]];
+            TextMeshProUGUI text = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            string Text = text.text;
+            var temp = Line2.ToList();
+            temp.Add(Text);
+            Line2 = temp.ToArray();
+        }
+        for (int x = 0; x < 9; x++)
+        {
+            string O = charO[x];
+            string X = charX[x];
+            var lst1 = Compare_O.ToList();
+            var lst2 = Compare_X.ToList();
+            foreach (string L1 in Line1)
+            {
+                if (L1 == O)
+                {
+                    lst1.Add(x);
+                }
+                else if (L1 == X)
+                {
+                    lst2.Add(x);
+                }
+            }
+            foreach (string L2 in Line2)
+            {
+                if (L2 == O)
+                {
+                    lst1.Add(x);
+                }
+                else if (L2 == X)
+                {
+                    lst2.Add(x);
+                }
+            }
+            Compare_O = lst1.ToArray();
+            Compare_X = lst2.ToArray();
+        }
+        int num1 = Compare_O.Min();
+        int num2 = Compare_X.Min();
+        if (num1 > num2)
+        {
+            print("X比較小");
+            return "X";
+        }
+        else if (num1 < num2)
+        {
+            print("O比較小");
+            return "O";
+        }
+        else
+        {
+            print("依樣小");
+            return "X";
+        }
     }
     private void DrawLine(int a, int b, int c)
     {

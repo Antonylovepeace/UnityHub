@@ -58,10 +58,7 @@ public class Measure : MonoBehaviour
             this.Director.GetComponent<Director>().checkWinning();
         }
         
-        foreach(int x in Round.InteractableFalseCells_num)
-        {
-            print("InteractableFalseCells_num = "+x);
-        }
+       
         
     }
 

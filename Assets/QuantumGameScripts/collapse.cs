@@ -61,8 +61,7 @@ public class collapse : MonoBehaviour
         {
             foreach(string ch in OddElements())
             {
-                print("OddElements = " + ch);
-                print("once");
+            
                 for (int a = 0; a < 9; a++)
                 {
                     Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[a];
@@ -118,16 +117,13 @@ public class collapse : MonoBehaviour
                 { 
                     var temp = stringsRepeat.ToList();
                     string c = strings[m];
-                    print("repeat = " + c);
+                
                     temp.Add(c);
                     stringsRepeat = temp.ToArray();
                 }
             }
         }
-        foreach (string x in stringsRepeat)
-        {
-            print("stringsRepeat = " + x);
-        }
+
         foreach (string x in stringsRepeat)
         {
             var temp = strings.ToList();
@@ -178,7 +174,7 @@ public class collapse : MonoBehaviour
                 string content = text.text;
                 if (c == content)
                 {
-                    print("cells = " + num);
+                    
                     TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                     text1.text = c;
                     return num;
@@ -220,7 +216,6 @@ public class collapse : MonoBehaviour
         Round.InteractableFalseCells_num = lst1.ToArray();
         foreach (int i in list)
         {
-            print("i = "+i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             cell.GetComponent<Button>().interactable = false;
         }
