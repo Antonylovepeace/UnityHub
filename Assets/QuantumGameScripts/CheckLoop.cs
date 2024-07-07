@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,11 @@ using UnityEngine.UI;
 public class CheckLoop : MonoBehaviour
 {
     GameObject Cells;
+    GameObject InteractiveUI;
     private string[] temp = new string[] { };
     void Start()
     {
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
         this.Cells = GameObject.Find("CellGenerator");
     }
 
@@ -40,7 +42,7 @@ public class CheckLoop : MonoBehaviour
                 }
             }
         }
-
+        InteractiveUI.GetComponent<InteractiveUI>().Quantum_superposition();
         while (jagLength() == true)
         {
             for (int i = 0; i < 9; i++)
@@ -62,6 +64,9 @@ public class CheckLoop : MonoBehaviour
             }
         }
     }
+    
+   
+
     private bool jagLength()
     {
         for (int i = 0;i < 9; i++)
@@ -124,7 +129,7 @@ public class CheckLoop : MonoBehaviour
     {     
         
         //arrayBackUp();
-        for (int i = 0; i < 9; i++)                  // ¨úBase
+        for (int i = 0; i < 9; i++)                  // å–Base
         {
             putIntoList();
             GetBase(i);
@@ -132,7 +137,7 @@ public class CheckLoop : MonoBehaviour
             {
                 continue;
             }       
-            for (int j = 0; j < 9; j++)               // ¨úCompare
+            for (int j = 0; j < 9; j++)               // å–Compare
             {
                 if (i != j )
                 {
@@ -159,7 +164,12 @@ public class CheckLoop : MonoBehaviour
                                 lst4.Add(x);
                                 Round.InteractableFalseCells_num = lst4.ToArray();
                             }
-                            //print("°j°é§Î¦¨");
+
+                            InteractiveUI.GetComponent<InteractiveUI>().Loop();   
+                            foreach (string x in Round.collapseTexts)
+                            {
+                                print("collapseTexts = " + x);
+                            }
                             return true;             
                         }
                         else
@@ -194,7 +204,12 @@ public class CheckLoop : MonoBehaviour
                         Round.collapseTexts = lst4.ToArray();
                         removeRepeatNum(i, j, a);
                         removeRepeatNum(i, j, b);
-                        
+
+                        InteractiveUI.GetComponent<InteractiveUI>().Loop();
+                        foreach (string x in Round.collapseTexts)
+                        {
+                            print("collapseTexts = " + x);
+                        }
                         return true;
                     }
                 }
@@ -222,7 +237,7 @@ public class CheckLoop : MonoBehaviour
         while (z < 9)
         {
             z++;
-            foreach (int j in n)               // ¨úCompare
+            foreach (int j in n)               // å–Compare
             {
                 foreach (string x in Round.Base)
                 {
@@ -235,10 +250,7 @@ public class CheckLoop : MonoBehaviour
                     {
                         continue;
                     }
-                    foreach (string x in Round.Compare)
-                    {
-                        print("Compare = " + x);
-                    }
+
                     if (FindRepeat(CopyAndAddArray(Round.Base, Round.Compare)).Length == 1)
                     {
                         string r = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[0];

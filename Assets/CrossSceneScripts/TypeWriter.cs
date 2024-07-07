@@ -10,8 +10,8 @@ public class TypeWriter : MonoBehaviour
 {
     public Text TextComponent;
 
-    private static TypeWriter instance;
-    private List<TypeWriterMessage> messages = new List<TypeWriterMessage>();
+    public static TypeWriter instance;
+    public List<TypeWriterMessage> messages = new List<TypeWriterMessage>();
 
     private TypeWriterMessage currentMsg = null;
     private int msgIndex = 0;

@@ -29,6 +29,7 @@ public class StartButton : MonoBehaviour
     }
     public void onClick()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
     }
 }

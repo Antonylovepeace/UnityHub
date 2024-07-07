@@ -13,7 +13,7 @@ public class Cell : MonoBehaviour
     GameObject CheckLoop;
     GameObject collapse;
     GameObject CellGenerator;
-
+    GameObject Measure;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.collapse = GameObject.Find("collapse");
-
+        this.Measure = GameObject.Find("measure");
     }
 
     // Update is called once per frame
@@ -40,6 +40,7 @@ public class Cell : MonoBehaviour
         }
         else
         {
+
             //GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
             TextMeshProUGUI text = Grid.transform.GetChild(CheckFilled()).GetComponent<TextMeshProUGUI>();
             text.text = Director.GetComponent<Director>().GetCharacter();
@@ -57,15 +58,11 @@ public class Cell : MonoBehaviour
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
+
             }
-            
         }
-        foreach (string x in Round.LoopCheck)
-        {
-            print("LoopCheck = "+x);
-        }
-        
     }
+    
     public void RemoveDouble(int[] list)
     {
         var lst = Round.collapseCells.ToList();
@@ -110,7 +107,7 @@ public class Cell : MonoBehaviour
             cb.normalColor = Color.white;
             this.collapse.GetComponent<collapse>().Buttons[j].GetComponent<Button>().colors = cb;
         }
-
+        
     }
     int x = 0;
     public void MeasureButtonOnSelected()
@@ -124,6 +121,7 @@ public class Cell : MonoBehaviour
         {
             x = 0;
         }
+        print("n = " + n);
         ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors;
         cb.normalColor = cb.selectedColor;
         this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors = cb;
@@ -131,6 +129,7 @@ public class Cell : MonoBehaviour
         cb2.normalColor = Color.white;
         this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors = cb2;
     }
+
     private int CheckFilled()
     {
         int i;

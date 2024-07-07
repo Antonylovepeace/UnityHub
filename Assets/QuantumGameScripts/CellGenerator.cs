@@ -29,5 +29,6 @@ public class CellGenerator : MonoBehaviour
             cells[i].GetComponent<Button>().onClick.AddListener(cells[i].GetComponent<Cell>().Fill);
             cells[i].GetComponent<EventTrigger>().enabled = false;
         }
+        
     }
 }

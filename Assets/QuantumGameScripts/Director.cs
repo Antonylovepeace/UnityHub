@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -16,11 +19,16 @@ public class Director : MonoBehaviour
     public GameObject Round_Board;
     GameObject Cells;
     GameObject CheckLoop;
+    GameObject InteractiveUI;
 
     void Start()
     {
+        TypeWriter.Add("歡迎來到量子物理的世界!!!\r\n請選擇兩格不同格子落子。\r\n");
+        TypeWriter.Active();
+
         this.Cells = GameObject.Find("CellGenerator");
         this.CheckLoop = GameObject.Find("CheckLoop");
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "X Turn";
     }
@@ -68,8 +76,10 @@ public class Director : MonoBehaviour
         }
         return Data;
     }
-    public void checkWinning()
+    int x;
+    public bool checkWinning()
     {
+        x = 0;
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         string[] Data = GetBoardData();
 
@@ -82,6 +92,7 @@ public class Director : MonoBehaviour
                 DisableAllButtons();
                 DrawLine(i, i + 3, i + 6);
                 Round.Winner = Data[i] + " is winner !";
+                x = 1;
             }
         }
         //horizon
@@ -93,6 +104,7 @@ public class Director : MonoBehaviour
                 DisableAllButtons();
                 DrawLine(i, i + 1, i + 2);
                 Round.Winner = Data[i] + " is winner !";
+                x = 1;
             }
         }
         //Diagonal
@@ -102,6 +114,7 @@ public class Director : MonoBehaviour
             DisableAllButtons();
             DrawLine(0, 4, 8);
             Round.Winner = Data[0] + " is winner !";
+            x = 1;
         }
         else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[2] != "")
         {
@@ -109,6 +122,15 @@ public class Director : MonoBehaviour
             DisableAllButtons();
             DrawLine(2, 4, 6);
             Round.Winner = Data[2] + " is winner !";
+            x = 1;
+        }
+        if(x == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     private string checkDoubleLine(int a, int b, int c, string[] Data)
@@ -121,6 +143,7 @@ public class Director : MonoBehaviour
         if (Round.Cells.Length == 3)
         {
             print("長度為三");
+            InteractiveUI.GetComponent<InteractiveUI>().NormalWiningText(Data[a]);
             return Data[a];
         }
         else
@@ -194,16 +217,19 @@ public class Director : MonoBehaviour
         if (num1 > num2)
         {
             print("X比較小");
+            InteractiveUI.GetComponent<InteractiveUI>().UnNormalWiningText("Case1");
             return "X";
         }
         else if (num1 < num2)
         {
             print("O比較小");
+            InteractiveUI.GetComponent<InteractiveUI>().UnNormalWiningText("Case2");
             return "O";
         }
         else
         {
-            print("依樣小");
+            print("一樣小");
+            InteractiveUI.GetComponent<InteractiveUI>().UnNormalWiningText("Case3");
             return "X";
         }
     }
@@ -220,7 +246,7 @@ public class Director : MonoBehaviour
         {
             Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
             ColorBlock cb = cell.GetComponent<Button>().colors;
-            cb.disabledColor = Color.blue;
+            cb.disabledColor = UnityEngine.Color.blue;
             cell.GetComponent<Button>().colors = cb;
         }
     }
@@ -254,6 +280,10 @@ public class Director : MonoBehaviour
             {
                 text.text = "O Turn";
                 Round.charX_num++;
+                if (Round.typeWriter_quantumEntanglement < 1)
+                {
+                    InteractiveUI.GetComponent<InteractiveUI>().quantumEntanglement();
+                }
             }
             else
             {
@@ -263,7 +293,9 @@ public class Director : MonoBehaviour
             Xturn = ! Xturn;
             TurnCount = 0;
         }
+        
     }
+    
     public void ButtonReset()
     {
         for(int i = 0;i<=8; i++)
@@ -304,7 +336,7 @@ public class Director : MonoBehaviour
         }
         return false;
     }
-
+    
     
 
 

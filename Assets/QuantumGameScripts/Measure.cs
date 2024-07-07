@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +10,17 @@ public class Measure : MonoBehaviour
     public Text Winner;
     public GameObject measureButton;
     GameObject collapse;
-    GameObject newButton;
+    public GameObject newButton;
     GameObject Director;
     GameObject Canvas;
+    GameObject InteractiveUI;
     string c;
     // Start is called before the first frame update
     void Start()
     {
         this.collapse = GameObject.Find("collapse");
         this.Director = GameObject.Find("Director");
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
         //this.Canvas = GameObject.Find("Canvas");
     }
 
@@ -36,7 +39,7 @@ public class Measure : MonoBehaviour
     {
         for (int j = 0; j < 2; j++)
         {
-            GameObject newBt = this.collapse.GetComponent<collapse>().Buttons[j];
+            Cell newBt = this.collapse.GetComponent<collapse>().Buttons[j];
             ColorBlock cb = newBt.GetComponent<Button>().colors;
 
             if(cb.normalColor == cb.selectedColor)
@@ -55,10 +58,11 @@ public class Measure : MonoBehaviour
             }
             Destroy(GameObject.Find("measureButton(Clone)"));
             this.Director.GetComponent<Director>().ButtonReset();
-            this.Director.GetComponent<Director>().checkWinning();
+            if(this.Director.GetComponent<Director>().checkWinning() == false)
+            {
+                InteractiveUI.GetComponent<InteractiveUI>().Quantum_collapse(c);
+            }
         }
-        
-       
         
     }
 

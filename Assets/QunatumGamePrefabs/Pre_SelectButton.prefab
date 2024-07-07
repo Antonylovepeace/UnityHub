@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7579220419699161225}
   - component: {fileID: 822329450692914131}
   - component: {fileID: -4615216869476593548}
+  - component: {fileID: -1283802287697915692}
+  - component: {fileID: -2033510139187081533}
   m_Layer: 5
   m_Name: Pre_SelectButton
   m_TagString: Untagged
@@ -164,6 +166,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884f91dfe2563fb4e8d1f74bd5f1a0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1283802287697915692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2781547820195198256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8292464ac29290f4b866847a3eb8bd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabButton: {fileID: 2781547820195198256}
+  Buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!210 &-2033510139187081533
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2781547820195198256}
+  m_Enabled: 1
+  m_SortingLayerID: -691954849
+  m_SortingLayer: 2
+  m_SortingOrder: 2
+  m_SortAtRoot: 0
 --- !u!1 &8290437339783122169
 GameObject:
   m_ObjectHideFlags: 0

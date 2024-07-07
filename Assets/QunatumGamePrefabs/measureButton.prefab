@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c898cd0c04813ad40a9ca65817587422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Winner: {fileID: 0}
   measureButton: {fileID: 0}
 --- !u!1 &1833162584815101552
 GameObject:

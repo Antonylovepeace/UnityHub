@@ -13,13 +13,13 @@ public class collapse : MonoBehaviour
     GameObject CellGenerator;
     GameObject Measure;
     public GameObject PrefabButton;
-    public GameObject[] Buttons = new GameObject[2];
-    string refer;
+    public Cell[] Buttons = new Cell[2];
+
     
     // Start is called before the first frame update
     void Start()
     {
-
+        
         this.CellGenerator = GameObject.Find("CellGenerator");
         this.Measure = GameObject.Find("measure");
     }
@@ -38,12 +38,13 @@ public class collapse : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             GameObject newButton = Instantiate(PrefabButton, transform);
-            Buttons[i] = newButton;
+            Buttons[i] = newButton.GetComponent<Cell>();
         }
         this.Measure.GetComponent<Measure>().BuildButton();
         print("Measure");
+       
     }
-    
+
     public void Collapse(string c)
     {
         int n = Round.selectedCell;
@@ -235,14 +236,12 @@ public class collapse : MonoBehaviour
             {
                 if(content == c)
                 {
-                    text.color = Color.red;
+                    text.color = Color.yellow;
                     //Color color = text.GetComponent<Text>().color;
                     //color = Color.red;
                     //text.GetComponent<Text>().color = color;
                 }
             }
         }
-
     }
-    
 }
