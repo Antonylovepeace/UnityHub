@@ -26,6 +26,6 @@ public static class Round
     public static string[] char_ = new string[] { };
     public static int[] subscriptNum = new int[] { };
     public static int[] InteractableFalseCells_num = new int[] { };
-
+    public static float timeDelay = 0f;
 
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -46,6 +48,7 @@ public class collapse : MonoBehaviour
     
     public void Collapse(string c)
     {
+        Round.timeDelay = 0f;
         int n = Round.selectedCell;
         string refer = FindReferText(c, n);
         int m = FindReferNum(refer);
@@ -77,8 +80,11 @@ public class collapse : MonoBehaviour
                             lst.Add(a);
                             Round.InteractableFalseCells_num = lst.ToArray();
                             CleanCellText(a);
+                            
+                           
                             TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                             text1.text = ch;
+                            print("collapse = " + ch);
                             continue;
                         }
                     }
@@ -86,6 +92,7 @@ public class collapse : MonoBehaviour
             }
         }
     }
+    
 
 
     public string[] OddElements()
@@ -154,17 +161,24 @@ public class collapse : MonoBehaviour
                     CleanCellText(n);
                     lst.Remove(n);
                     Round.collapseCells = lst.ToArray();
-                    foreach (int Data in Round.collapseCells)
-                    {
-                        //print("collapseCells = " + Data);
-                    }
-                    TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-                    text1.text = c;
+
+                    StartCoroutine(DelayFunc(n, c));
+                    //TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                    //text1.text = c;
+                    print("FindReferText = " + c);
                     return content;
                 }
             }  
         }
         return null;
+    }
+    IEnumerator DelayFunc(int n, string c)
+    {
+        Round.timeDelay += 0.5f;
+        yield return new WaitForSecondsRealtime(Round.timeDelay);
+        Cell SelectedCell = this.CellGenerator.GetComponent<CellGenerator>().cells[n];
+        TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        text1.text = c;
     }
     private int FindReferNum(string c)
     {
@@ -178,9 +192,11 @@ public class collapse : MonoBehaviour
                 string content = text.text;
                 if (c == content)
                 {
-                    print("cells = " + num);
+                    //print("cells = " + num);
+                    //StartCoroutine(DelayFunc(num, c));
                     TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-                    text1.text = c;
+                    //text1.text = c;
+                    print("FindReferNum = " + c);
                     return num;
                 }
             }
@@ -220,7 +236,7 @@ public class collapse : MonoBehaviour
         Round.InteractableFalseCells_num = lst1.ToArray();
         foreach (int i in list)
         {
-            print("i = "+i);
+            //print("i = "+i);
             Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[i];
             cell.GetComponent<Button>().interactable = false;
         }

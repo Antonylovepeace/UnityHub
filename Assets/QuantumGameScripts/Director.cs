@@ -23,8 +23,7 @@ public class Director : MonoBehaviour
 
     void Start()
     {
-        TypeWriter.Add("歡迎來到量子物理的世界!!!\r\n請選擇兩格不同格子落子。\r\n");
-        TypeWriter.Active();
+        
 
         this.Cells = GameObject.Find("CellGenerator");
         this.CheckLoop = GameObject.Find("CheckLoop");
@@ -72,7 +71,7 @@ public class Director : MonoBehaviour
         Data = lst.ToArray();
         foreach (string s in Data)
         {
-            print("Data = " + s);
+            //print("Data = " + s);
         }
         return Data;
     }
@@ -283,6 +282,7 @@ public class Director : MonoBehaviour
                 if (Round.typeWriter_quantumEntanglement < 1)
                 {
                     InteractiveUI.GetComponent<InteractiveUI>().quantumEntanglement();
+                    Round.typeWriter_quantumEntanglement++;
                 }
             }
             else

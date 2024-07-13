@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Cell : MonoBehaviour
 {
@@ -58,13 +59,14 @@ public class Cell : MonoBehaviour
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
             }
-            
         }
-        foreach (string x in Round.LoopCheck)
+        if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
-            print("LoopCheck = "+x);
+            Button cell = transform.GetComponent<Button>();
+            ColorBlock colors = cell.colors;
+            colors.normalColor = new Color32(255, 255, 255, 0);
+            cell.colors = colors;
         }
-        
     }
     public void RemoveDouble(int[] list)
     {

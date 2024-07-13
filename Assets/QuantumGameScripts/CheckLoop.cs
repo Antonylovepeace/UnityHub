@@ -42,7 +42,11 @@ public class CheckLoop : MonoBehaviour
                 }
             }
         }
+      
         this.InteractiveUI.GetComponent<InteractiveUI>().Quantum_superposition();
+
+
+        
         while (jagLength() == true)
         {
             for (int i = 0; i < 9; i++)
@@ -67,7 +71,7 @@ public class CheckLoop : MonoBehaviour
         {
             foreach(string c in Round.jag[i])
             {
-                print("jag = "+c);
+                //print("jag = "+c);
             }
         }
     }
@@ -152,11 +156,11 @@ public class CheckLoop : MonoBehaviour
                     }
                     foreach (string x in Round.Base)
                     {
-                        print("Base = " + x);
+                        //print("Base = " + x);
                     }
                     foreach (string x in Round.Compare)
                     {
-                        Debug.Log("Compare = " + x);
+                        //Debug.Log("Compare = " + x);
                     }
                     int t = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare)).Length;
                     
@@ -215,7 +219,7 @@ public class CheckLoop : MonoBehaviour
             }
 
         }
-        print("迴圈未形成");
+        //print("迴圈未形成");
         return false;
     }
 

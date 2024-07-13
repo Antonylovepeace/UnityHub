@@ -6,16 +6,32 @@ using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InteractiveUI : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject interactiveUI;
     GameObject Cells;
+    GameObject BoardControl;
     void Start()
     {
+        this.BoardControl = GameObject.Find("BoardControl");
         this.Cells = GameObject.Find("CellGenerator");
         this.interactiveUI = GameObject.Find("InteractiveUI");
+        if (SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            TypeWriter.Add("玩家每回合必須選擇兩個空格\r\n接下來請點擊兩格白色格子\r\n");
+            TypeWriter.Active();
+        }
+        else if(SceneManager.GetActiveScene().name == "GameScene")
+        {
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            TypeWriter.Add("歡迎來到量子物理的世界!!!\r\n請選擇兩格不同格子落子。\r\n");
+            TypeWriter.Active();
+        }
     }
 
     // Update is called once per frame
@@ -41,72 +57,102 @@ public class InteractiveUI : MonoBehaviour
         }
         num = lst.ToArray();
         LoopTosubscript();
-        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-        if (num.Length == 2)
+        if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + "成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            //TypeWriter.Add("");
         }
-        else if (num.Length == 3)
+        else if (SceneManager.GetActiveScene().name == "GameScene")
         {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            if (num.Length == 2)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + "成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 3)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 4)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 5)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 6)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 7)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 8)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 、" + num[7] + " 格子\n格子中的黃色字母\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " 、" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
+            else if (num.Length == 9)
+            {
+                TypeWriter.Add("<觀測中>產生封閉迴圈\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 、" + num[7] + " 、" + num[8] + " 格子\n格子中的黃色字母\n" +
+                     Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " 、" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + " 、" + Round.char_[8] + Round.subscript[Round.subscriptNum[8]] + "形成了迴圈\n" +
+                    "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
+                TypeWriter.Active();
+            }
         }
-        else if (num.Length == 4)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
-        else if (num.Length == 5)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
-        else if (num.Length == 6)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
-        else if (num.Length == 7)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
-        else if (num.Length == 8)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\r\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 、" + num[7] + " 格子\n格子中的黃色字母\n" +
-                Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " 、" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
-        else if (num.Length == 9)
-        {
-            TypeWriter.Add("<觀測中>產生封閉迴圈\n注意到第 " + num[0] + " 、" + num[1] + " 、" + num[2] + " 、" + num[3] + " 、" + num[4] + " 、" + num[5] + " 、" + num[6] + " 、" + num[7] + " 、" + num[8] + " 格子\n格子中的黃色字母\n" +
-                 Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " 、" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " 、" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " 、" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " 、" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " 、" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " 、" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " 、" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + " 、" + Round.char_[8] + Round.subscript[Round.subscriptNum[8]] + "形成了迴圈\n" +
-                "接下來請選擇你想觀測的元素\n並在右方按鈕按下measure\r\n");
-            TypeWriter.Active();
-        }
+        
     }
 
     public void quantumEntanglement()
     {
-        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-        int[] list = FindFirstTwoCell();
-        TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前 ”X” 有50%機率出現在第 " + list[0] + " 格\n有50%機率出現在第 " + list[1] + " 格\n此狀態的 ”X” 代表了量子物理中的 ”糾纏態”");
-        TypeWriter.Active();
-        Round.typeWriter_quantumEntanglement++;
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            int[] list = FindFirstTwoCell();
+            TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前 ”X” 有50%機率出現在第 " + list[0] + " 格\n有50%機率出現在第 " + list[1] + " 格\n此狀態的 ”X” 代表了量子物理中的 ”糾纏態”");
+            TypeWriter.Active();
+            
+        }
+        else if(SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+            print("SecondStep");
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            TypeWriter.Add("接下來我們稱個子內的東西為 '元素'\n與往常不同\n同個格子內可以同時存在多個元素\n接下來請點擊另兩格白色格子");
+            TypeWriter.Active();
+            Invoke("CellsIneractable", 0);
+            BoardControl.GetComponent<BoardControl>().AcallSecondStep();
+        }
+    }
+
+    public void CellsIneractable()
+    {
+        Cell[] cells = this.Cells.GetComponent<CellGenerator>().cells;
+        for (int i = 0; i < 9; i++)
+        {
+            cells[i].GetComponent<Button>().interactable = false;
+        }
     }
     public int[] FindFirstTwoCell()
     {
@@ -136,16 +182,33 @@ public class InteractiveUI : MonoBehaviour
         {
             if (Round.jag[i].Length == 2)
             {
-                if (Round.typeWriter_quantumSuperposition < 1)
+                if (SceneManager.GetActiveScene().name == "GameScene")
                 {
-                    print("進來");
-                    int[] num = Quantum_superpositionToSubScript(i);
-                    interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-                    TypeWriter.Add("此時再觀察量子系統\n發現第 " + (i + 1) + " 格個格子內同時有 " + sub[0] + Round.subscript[num[0]] + " 和 " + sub[1] + Round.subscript[num[1]] +
-                        " 元素\n表示這格子內可能為 " + sub[0] + Round.subscript[num[0]] + " 亦可能為 " + sub[1] + Round.subscript[num[1]] + " 同時存在不同的狀態\n此現象稱為”疊加態");
-                    TypeWriter.Active();
-                    Round.typeWriter_quantumSuperposition++;
+                    if (Round.typeWriter_quantumSuperposition < 1)
+                    {
+                        //print("進來");
+                        int[] num = Quantum_superpositionToSubScript(i);
+                        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+                        TypeWriter.Add("此時再觀察量子系統\n發現第 " + (i + 1) + " 格個格子內同時有 " + sub[0] + Round.subscript[num[0]] + " 和 " + sub[1] + Round.subscript[num[1]] +
+                            " 元素\n表示這格子內可能為 " + sub[0] + Round.subscript[num[0]] + " 亦可能為 " + sub[1] + Round.subscript[num[1]] + " 同時存在不同的狀態\n此現象稱為”疊加態");
+                        TypeWriter.Active();
+                        Round.typeWriter_quantumSuperposition++;
+                    }
                 }
+                else if (SceneManager.GetActiveScene().name == "ExampleScene")
+                {
+                    if (Round.typeWriter_quantumSuperposition < 1)
+                    {
+                        print("ThirdStep");
+                        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+                        TypeWriter.Add("回合越多，場內的元素也越來越多\n然而一但 形成封閉迴圈後\n場內的情勢就會因此改變\n接下來也請點擊另兩格白色格子");
+                        TypeWriter.Active();
+                        Invoke("CellsIneractable", 0);
+                        BoardControl.GetComponent<BoardControl>().AcallThirdStep();
+                        Round.typeWriter_quantumSuperposition++;
+                    }                                        
+                }
+
             }
         }
     }
@@ -232,16 +295,19 @@ public class InteractiveUI : MonoBehaviour
                 b = "O";
             }
         }
-        print(a);
-        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-        TypeWriter.Add("<觀測完畢，進行塌縮>\n你選擇得觀測對象為 " + b + Round.subscript[a] +
-            " \n因為你的觀測使得" + b + Round.subscript[a] + " 在那格內出現機率為 100% 同個格子內原有的其他可能性因此變為0%\n" +
-            "\n又因為每個相同元素都會同時出現在兩個格子內" +
-            "\n某元素原本出現在此格子內的機率為50%，" +
-            "\n現在變為0%" +
-            "\n則此元素在另一個格子的出現機率變為100%" +
-            "\n藉由不斷連鎖反應，棋盤最後會趨於穩定\n這種透過觀測使量子行為趨向古典結果的現象，我們稱作塌縮。\r\n");
-        TypeWriter.Active();
+        //print(a);
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            TypeWriter.Add("<觀測完畢，進行塌縮>\n你選擇得觀測對象為 " + b + Round.subscript[a] +
+                " \n因為你的觀測使得" + b + Round.subscript[a] + " 在那格內出現機率為 100% 同個格子內原有的其他可能性因此變為0%\n" +
+                "\n又因為每個相同元素都會同時出現在兩個格子內" +
+                "\n某元素原本出現在此格子內的機率為50%，" +
+                "\n現在變為0%" +
+                "\n則此元素在另一個格子的出現機率變為100%" +
+                "\n藉由不斷連鎖反應，棋盤最後會趨於穩定\n這種透過觀測使量子行為趨向古典結果的現象，我們稱作塌縮。\r\n");
+            TypeWriter.Active();
+        }
     }
     public void NormalWiningText(string winner)
     {

@@ -66,7 +66,7 @@ public class Measure : MonoBehaviour
         
         foreach(int x in Round.InteractableFalseCells_num)
         {
-            print("InteractableFalseCells_num = "+x);
+            //print("InteractableFalseCells_num = "+x);
         }
         
     }
