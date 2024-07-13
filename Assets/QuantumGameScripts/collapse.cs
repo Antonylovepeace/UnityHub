@@ -240,7 +240,7 @@ public class collapse : MonoBehaviour
             {
                 if(content == c)
                 {
-                    text.color = Color.red;
+                    text.color = Color.yellow;
                     //Color color = text.GetComponent<Text>().color;
                     //color = Color.red;
                     //text.GetComponent<Text>().color = color;

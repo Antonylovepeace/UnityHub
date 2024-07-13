@@ -10,10 +10,12 @@ using UnityEngine.UI;
 public class CheckLoop : MonoBehaviour
 {
     GameObject Cells;
+    GameObject InteractiveUI;
     private string[] temp = new string[] { };
     void Start()
     {
         this.Cells = GameObject.Find("CellGenerator");
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
     }
 
 
@@ -40,7 +42,7 @@ public class CheckLoop : MonoBehaviour
                 }
             }
         }
-
+        this.InteractiveUI.GetComponent<InteractiveUI>().Quantum_superposition();
         while (jagLength() == true)
         {
             for (int i = 0; i < 9; i++)
@@ -169,7 +171,7 @@ public class CheckLoop : MonoBehaviour
                                 lst4.Add(x);
                                 Round.InteractableFalseCells_num = lst4.ToArray();
                             }
-                            print("迴圈形成");
+                            this.InteractiveUI.GetComponent<InteractiveUI>().Loop();
                             return true;             
                         }
                         else
@@ -204,8 +206,8 @@ public class CheckLoop : MonoBehaviour
                         Round.collapseTexts = lst4.ToArray();
                         removeRepeatNum(i, j, a);
                         removeRepeatNum(i, j, b);
-                        print("迴圈形成,兩格");
-                        
+                        this.InteractiveUI.GetComponent<InteractiveUI>().Loop();
+
                         return true;
                     }
                 }

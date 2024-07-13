@@ -12,12 +12,14 @@ public class Measure : MonoBehaviour
     GameObject newButton;
     GameObject Director;
     GameObject Canvas;
+    GameObject InteractiveUI;
     string c;
     // Start is called before the first frame update
     void Start()
     {
         this.collapse = GameObject.Find("collapse");
         this.Director = GameObject.Find("Director");
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
         //this.Canvas = GameObject.Find("Canvas");
     }
 
@@ -55,7 +57,11 @@ public class Measure : MonoBehaviour
             }
             Destroy(GameObject.Find("measureButton(Clone)"));
             this.Director.GetComponent<Director>().ButtonReset();
-            this.Director.GetComponent<Director>().checkWinning();
+            if (this.Director.GetComponent<Director>().checkWinning() == false)
+            {
+                InteractiveUI.GetComponent<InteractiveUI>().Quantum_collapse(c);
+            }
+            
         }
         
         foreach(int x in Round.InteractableFalseCells_num)
