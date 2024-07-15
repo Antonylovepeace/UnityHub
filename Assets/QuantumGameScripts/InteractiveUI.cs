@@ -29,7 +29,7 @@ public class InteractiveUI : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "GameScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("歡迎來到量子物理的世界!!!\r\n請選擇兩格不同格子落子。\r\n");
+            TypeWriter.Add("Welcome to Quantum Tic Tac Toe!!!\r\n請選擇兩格不同格子落子。\r\n");
             TypeWriter.Active();
         }
     }
