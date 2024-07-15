@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 public class Measure : MonoBehaviour
 {
@@ -57,18 +59,23 @@ public class Measure : MonoBehaviour
             }
             Destroy(GameObject.Find("measureButton(Clone)"));
             this.Director.GetComponent<Director>().ButtonReset();
-            if (this.Director.GetComponent<Director>().checkWinning() == false)
+            this.Director.GetComponent<Director>().AcallFuncCheckWin(c);
+            //StartCoroutine(DelayFunc(c));
+
+            //if (this.Director.GetComponent<Director>().checkWinning() == false)
             {
-                InteractiveUI.GetComponent<InteractiveUI>().Quantum_collapse(c);
+ 
+                //InteractiveUI.GetComponent<InteractiveUI>().Quantum_collapse(c);
             }
             
-        }
-        
-        foreach(int x in Round.InteractableFalseCells_num)
-        {
-            //print("InteractableFalseCells_num = "+x);
-        }
-        
+        }       
+    }
+    IEnumerator DelayFunc(string c)
+    {
+        Round.timeDelay += 0.2f;
+        print("timeDelay =" + Round.timeDelay);
+        yield return new WaitForSecondsRealtime(5);
+       
     }
 
 }

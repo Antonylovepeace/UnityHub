@@ -31,6 +31,7 @@ public class BoardControl : MonoBehaviour
         }
         CellsInteractable(4, 5, 5);
     }
+
     public void AcallSecondStep()
     {
         Invoke("SecondStep", 2);
@@ -48,6 +49,8 @@ public class BoardControl : MonoBehaviour
         }
         CellsInteractable(1, 4, 4);
     }
+
+
     public void AcallThirdStep()
     {
         Invoke("ThirdStep", 2);
@@ -65,6 +68,8 @@ public class BoardControl : MonoBehaviour
         }
         CellsInteractable(1, 5, 5);
     }
+
+
     public void AcallForthStep()
     {
         Invoke("ForthStep", 2);
@@ -76,6 +81,7 @@ public class BoardControl : MonoBehaviour
             
         }
     }
+
     public void CellsInteractable(int a,int b,int c)
     {
         for( int i = 0; i < 9; i++)

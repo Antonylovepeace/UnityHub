@@ -188,8 +188,8 @@ public class CheckLoop : MonoBehaviour
                     {
                         string a = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[0];
                         string b = FindRepeat(CopyAndAddArray(Round.Base, Round.Compare))[1];
-                        print("x = "+a);
-                        print("y = " + b);
+                        //print("x = "+a);
+                        //print("y = " + b);
                         var lst1 = Round.LoopCheck.ToList();
                         var lst2 = Round.collapseCells.ToList();
                         var lst3 = Round.InteractableFalseCells_num.ToList();

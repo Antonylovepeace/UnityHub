@@ -10,6 +10,7 @@ public static class Round
     public static int charO_num = 0;
     public static int charX_num = 0;
     public static int selectedCell;
+    public static bool checkWinning;
     public static string Winner;
     public static int[] Cells = new int[] { };
     public static string[] Base = new string[] { };

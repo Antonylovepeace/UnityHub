@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +23,13 @@ public class InteractiveUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("ª±®a¨C¦^¦X¥²¶·¿ï¾Ü¨â­ÓªÅ®æ\r\n±µ¤U¨Ó½ĞÂIÀ»¨â®æ¥Õ¦â®æ¤l\r\n");
+            TypeWriter.Add("ç©å®¶æ¯å›åˆå¿…é ˆé¸æ“‡å…©å€‹ç©ºæ ¼\r\næ¥ä¸‹ä¾†è«‹é»æ“Šå…©æ ¼ç™½è‰²æ ¼å­\r\n");
             TypeWriter.Active();
         }
         else if(SceneManager.GetActiveScene().name == "GameScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("Åwªï¨Ó¨ì¶q¤lª«²zªº¥@¬É!!!\r\n½Ğ¿ï¾Ü¨â®æ¤£¦P®æ¤l¸¨¤l¡C\r\n");
+            TypeWriter.Add("æ­¡è¿ä¾†åˆ°é‡å­ç‰©ç†çš„ä¸–ç•Œ!!!\r\nè«‹é¸æ“‡å…©æ ¼ä¸åŒæ ¼å­è½å­ã€‚\r\n");
             TypeWriter.Active();
         }
     }
@@ -60,65 +60,68 @@ public class InteractiveUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            //TypeWriter.Add("");
+            TypeWriter.Add("æ­¤æ™‚ç¬¬ â‘¡ã€â‘¤ã€â‘¥ æ ¼å­å½¢æˆå°é–‰è¿´åœˆ\n" +
+                "è§€å¯ŸXâ‚åœ¨â‘¤æ ¼å­â†’å¦ä¸€å€‹Xâ‚åœ¨â‘¥æ ¼å­\nâ†’â‘¥æ ¼å­å…§æœ‰Xâ‚‚â†’å¦ä¸€å€‹Xâ‚‚åœ¨â‘¡æ ¼å­\nâ†’â‘¡æ ¼å­å…§æœ‰Oâ‚â†’å¦ä¸€å€‹Oâ‚åœ¨â‘¤æ ¼å­ï¼Œåˆå›åˆ°ä¸€é–‹å§‹è§€å¯ŸXâ‚æ‰€åœ¨çš„â‘¤æ ¼å­\n" +
+                "\nä¸ç®¡ä»¥å“ªå€‹å­—æ¯ç‚ºèµ·é»ï¼Œå»è§€å¯Ÿå¦ä¸€å€‹é‡å­ç³¾çºçš„å­—æ¯(å¦ä¸€åŠ)åœ¨çš„æ ¼å­ä¸­ï¼Œåªè¦è§€å¯Ÿåˆ°æœ€å¾Œæœ‰å…¶ä»–å­—æ¯çš„å¦ä¸€åŠèƒ½é‡æ–°å›åˆ°èµ·é»çš„æ ¼å­\nå‰‡æœ‰ã€Œå°é–‰è¿´åœˆã€");
+            TypeWriter.Active();
         }
         else if (SceneManager.GetActiveScene().name == "GameScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             if (num.Length == 2)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + "¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + "æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 3)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 4)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 5)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ¡B" + num[4] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ¡B" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " ã€" + num[4] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ã€" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 6)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ¡B" + num[4] + " ¡B" + num[5] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ¡B" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ¡B" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " ã€" + num[4] + " ã€" + num[5] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ã€" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ã€" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 7)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ¡B" + num[4] + " ¡B" + num[5] + " ¡B" + num[6] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ¡B" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ¡B" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ¡B" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " ã€" + num[4] + " ã€" + num[5] + " ã€" + num[6] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ã€" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ã€" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ã€" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 8)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\r\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ¡B" + num[4] + " ¡B" + num[5] + " ¡B" + num[6] + " ¡B" + num[7] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ¡B" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ¡B" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ¡B" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " ¡B" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\r\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " ã€" + num[4] + " ã€" + num[5] + " ã€" + num[6] + " ã€" + num[7] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                    Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ã€" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ã€" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ã€" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " ã€" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
             else if (num.Length == 9)
             {
-                TypeWriter.Add("<Æ[´ú¤¤>²£¥Í«Ê³¬°j°é\nª`·N¨ì²Ä " + num[0] + " ¡B" + num[1] + " ¡B" + num[2] + " ¡B" + num[3] + " ¡B" + num[4] + " ¡B" + num[5] + " ¡B" + num[6] + " ¡B" + num[7] + " ¡B" + num[8] + " ®æ¤l\n®æ¤l¤¤ªº¶À¦â¦r¥À\n" +
-                     Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ¡B" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ¡B" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ¡B" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ¡B" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ¡B" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ¡B" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " ¡B" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + " ¡B" + Round.char_[8] + Round.subscript[Round.subscriptNum[8]] + "§Î¦¨¤F°j°é\n" +
-                    "±µ¤U¨Ó½Ğ¿ï¾Ü§A·QÆ[´úªº¤¸¯À\n¨Ã¦b¥k¤è«ö¶s«ö¤Umeasure\r\n");
+                TypeWriter.Add("<è§€æ¸¬ä¸­>ç”¢ç”Ÿå°é–‰è¿´åœˆ\næ³¨æ„åˆ°ç¬¬ " + num[0] + " ã€" + num[1] + " ã€" + num[2] + " ã€" + num[3] + " ã€" + num[4] + " ã€" + num[5] + " ã€" + num[6] + " ã€" + num[7] + " ã€" + num[8] + " æ ¼å­\næ ¼å­ä¸­çš„é»ƒè‰²å­—æ¯\n" +
+                     Round.char_[0] + Round.subscript[Round.subscriptNum[0]] + " ã€" + Round.char_[1] + Round.subscript[Round.subscriptNum[1]] + " ã€" + Round.char_[2] + Round.subscript[Round.subscriptNum[2]] + " ã€" + Round.char_[3] + Round.subscript[Round.subscriptNum[3]] + " ã€" + Round.char_[4] + Round.subscript[Round.subscriptNum[4]] + " ã€" + Round.char_[5] + Round.subscript[Round.subscriptNum[5]] + " ã€" + Round.char_[6] + Round.subscript[Round.subscriptNum[6]] + " ã€" + Round.char_[7] + Round.subscript[Round.subscriptNum[7]] + " ã€" + Round.char_[8] + Round.subscript[Round.subscriptNum[8]] + "å½¢æˆäº†è¿´åœˆ\n" +
+                    "æ¥ä¸‹ä¾†è«‹é¸æ“‡ä½ æƒ³è§€æ¸¬çš„å…ƒç´ \nä¸¦åœ¨å³æ–¹æŒ‰éˆ•æŒ‰ä¸‹measure\r\n");
                 TypeWriter.Active();
             }
         }
@@ -131,7 +134,7 @@ public class InteractiveUI : MonoBehaviour
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             int[] list = FindFirstTwoCell();
-            TypeWriter.Add("ª±®a'X'¦^¦Xµ²§ô\n¦¹®ÉÆ[¹î¶q¤l¨t²Î\n¥iµo²{X¦P®É¦s¦b©ó " + list[0] + " ®æ¤l»P " + list[1] + " ®æ¤l¤¤\n¤]´N¬O»¡¥Ø«e ¡¨X¡¨ ¦³50%¾÷²v¥X²{¦b²Ä " + list[0] + " ®æ\n¦³50%¾÷²v¥X²{¦b²Ä " + list[1] + " ®æ\n¦¹ª¬ºAªº ¡¨X¡¨ ¥Nªí¤F¶q¤lª«²z¤¤ªº ¡¨ªÈÄñºA¡¨");
+            TypeWriter.Add("ç©å®¶'X'å›åˆçµæŸ\næ­¤æ™‚è§€å¯Ÿé‡å­ç³»çµ±\nå¯ç™¼ç¾XåŒæ™‚å­˜åœ¨æ–¼ " + list[0] + " æ ¼å­èˆ‡ " + list[1] + " æ ¼å­ä¸­\nä¹Ÿå°±æ˜¯èªªç›®å‰ â€Xâ€ æœ‰50%æ©Ÿç‡å‡ºç¾åœ¨ç¬¬ " + list[0] + " æ ¼\næœ‰50%æ©Ÿç‡å‡ºç¾åœ¨ç¬¬ " + list[1] + " æ ¼\næ­¤ç‹€æ…‹çš„ â€Xâ€ ä»£è¡¨äº†é‡å­ç‰©ç†ä¸­çš„ â€ç³¾çºæ…‹â€");
             TypeWriter.Active();
             
         }
@@ -139,7 +142,7 @@ public class InteractiveUI : MonoBehaviour
         {
             print("SecondStep");
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("±µ¤U¨Ó§Ú­ÌºÙ­Ó¤l¤ºªºªF¦è¬° '¤¸¯À'\n»P©¹±`¤£¦P\n¦P­Ó®æ¤l¤º¥i¥H¦P®É¦s¦b¦h­Ó¤¸¯À\n±µ¤U¨Ó½ĞÂIÀ»¥t¨â®æ¥Õ¦â®æ¤l");
+            TypeWriter.Add("æ¥ä¸‹ä¾†æˆ‘å€‘ç¨±å€‹å­å…§çš„æ±è¥¿ç‚º 'å…ƒç´ '\nèˆ‡å¾€å¸¸ä¸åŒ\nåŒå€‹æ ¼å­å…§å¯ä»¥åŒæ™‚å­˜åœ¨å¤šå€‹å…ƒç´ \næ¥ä¸‹ä¾†è«‹é»æ“Šå¦å…©æ ¼ç™½è‰²æ ¼å­");
             TypeWriter.Active();
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallSecondStep();
@@ -186,11 +189,11 @@ public class InteractiveUI : MonoBehaviour
                 {
                     if (Round.typeWriter_quantumSuperposition < 1)
                     {
-                        //print("¶i¨Ó");
+                        //print("é€²ä¾†");
                         int[] num = Quantum_superpositionToSubScript(i);
                         interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-                        TypeWriter.Add("¦¹®É¦AÆ[¹î¶q¤l¨t²Î\nµo²{²Ä " + (i + 1) + " ®æ­Ó®æ¤l¤º¦P®É¦³ " + sub[0] + Round.subscript[num[0]] + " ©M " + sub[1] + Round.subscript[num[1]] +
-                            " ¤¸¯À\nªí¥Ü³o®æ¤l¤º¥i¯à¬° " + sub[0] + Round.subscript[num[0]] + " ¥ç¥i¯à¬° " + sub[1] + Round.subscript[num[1]] + " ¦P®É¦s¦b¤£¦Pªºª¬ºA\n¦¹²{¶HºÙ¬°¡¨Å|¥[ºA");
+                        TypeWriter.Add("æ­¤æ™‚å†è§€å¯Ÿé‡å­ç³»çµ±\nç™¼ç¾ç¬¬ " + (i + 1) + " æ ¼å€‹æ ¼å­å…§åŒæ™‚æœ‰ " + sub[0] + Round.subscript[num[0]] + " å’Œ " + sub[1] + Round.subscript[num[1]] +
+                            " å…ƒç´ \nè¡¨ç¤ºé€™æ ¼å­å…§å¯èƒ½ç‚º " + sub[0] + Round.subscript[num[0]] + " äº¦å¯èƒ½ç‚º " + sub[1] + Round.subscript[num[1]] + " åŒæ™‚å­˜åœ¨ä¸åŒçš„ç‹€æ…‹\næ­¤ç¾è±¡ç¨±ç‚ºâ€ç–ŠåŠ æ…‹");
                         TypeWriter.Active();
                         Round.typeWriter_quantumSuperposition++;
                     }
@@ -201,7 +204,7 @@ public class InteractiveUI : MonoBehaviour
                     {
                         print("ThirdStep");
                         interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-                        TypeWriter.Add("¦^¦X¶V¦h¡A³õ¤ºªº¤¸¯À¤]¶V¨Ó¶V¦h\nµM¦Ó¤@¦ı §Î¦¨«Ê³¬°j°é«á\n³õ¤ºªº±¡¶Õ´N·|¦]¦¹§ïÅÜ\n±µ¤U¨Ó¤]½ĞÂIÀ»¥t¨â®æ¥Õ¦â®æ¤l");
+                        TypeWriter.Add("å›åˆè¶Šå¤šï¼Œå ´å…§çš„å…ƒç´ ä¹Ÿè¶Šä¾†è¶Šå¤š\nç„¶è€Œä¸€ä½† å½¢æˆå°é–‰è¿´åœˆå¾Œ\nå ´å…§çš„æƒ…å‹¢å°±æœƒå› æ­¤æ”¹è®Š\næ¥ä¸‹ä¾†ä¹Ÿè«‹é»æ“Šå¦å…©æ ¼ç™½è‰²æ ¼å­");
                         TypeWriter.Active();
                         Invoke("CellsIneractable", 0);
                         BoardControl.GetComponent<BoardControl>().AcallThirdStep();
@@ -299,20 +302,20 @@ public class InteractiveUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("<Æ[´ú§¹²¦¡A¶i¦æ¶òÁY>\n§A¿ï¾Ü±oÆ[´ú¹ï¶H¬° " + b + Round.subscript[a] +
-                " \n¦]¬°§AªºÆ[´ú¨Ï±o" + b + Round.subscript[a] + " ¦b¨º®æ¤º¥X²{¾÷²v¬° 100% ¦P­Ó®æ¤l¤º­ì¦³ªº¨ä¥L¥i¯à©Ê¦]¦¹ÅÜ¬°0%\n" +
-                "\n¤S¦]¬°¨C­Ó¬Û¦P¤¸¯À³£·|¦P®É¥X²{¦b¨â­Ó®æ¤l¤º" +
-                "\n¬Y¤¸¯À­ì¥»¥X²{¦b¦¹®æ¤l¤ºªº¾÷²v¬°50%¡A" +
-                "\n²{¦bÅÜ¬°0%" +
-                "\n«h¦¹¤¸¯À¦b¥t¤@­Ó®æ¤lªº¥X²{¾÷²vÅÜ¬°100%" +
-                "\nÂÇ¥Ñ¤£Â_³sÂê¤ÏÀ³¡A´Ñ½L³Ì«á·|ÁÍ©óÃ­©w\n³oºØ³z¹LÆ[´ú¨Ï¶q¤l¦æ¬°ÁÍ¦V¥j¨åµ²ªGªº²{¶H¡A§Ú­ÌºÙ§@¶òÁY¡C\r\n");
+            TypeWriter.Add("<è§€æ¸¬å®Œç•¢ï¼Œé€²è¡Œå¡Œç¸®>\nä½ é¸æ“‡å¾—è§€æ¸¬å°è±¡ç‚º " + b + Round.subscript[a] +
+                " \nå› ç‚ºä½ çš„è§€æ¸¬ä½¿å¾—" + b + Round.subscript[a] + " åœ¨é‚£æ ¼å…§å‡ºç¾æ©Ÿç‡ç‚º 100% åŒå€‹æ ¼å­å…§åŸæœ‰çš„å…¶ä»–å¯èƒ½æ€§å› æ­¤è®Šç‚º 0%\n" +
+                "\nåˆå› ç‚ºæ¯å€‹ç›¸åŒå…ƒç´ éƒ½æœƒåŒæ™‚å‡ºç¾åœ¨å…©å€‹æ ¼å­å…§" +
+                "\næŸå…ƒç´ åŸæœ¬å‡ºç¾åœ¨æ­¤æ ¼å­å…§çš„æ©Ÿç‡ç‚º 50%ï¼Œ" +
+                "\nç¾åœ¨è®Šç‚º 0%" +
+                "\nå‰‡æ­¤å…ƒç´ åœ¨å¦ä¸€å€‹æ ¼å­çš„å‡ºç¾æ©Ÿç‡è®Šç‚º 100%" +
+                "\nè—‰ç”±ä¸æ–·é€£é–åæ‡‰ï¼Œæ£‹ç›¤æœ€å¾Œæœƒè¶¨æ–¼ç©©å®š\né€™ç¨®é€éè§€æ¸¬ä½¿é‡å­è¡Œç‚ºè¶¨å‘å¤å…¸çµæœçš„ç¾è±¡\næˆ‘å€‘ç¨±ä½œ  â€å¡Œç¸® â€\r\n");
             TypeWriter.Active();
         }
     }
     public void NormalWiningText(string winner)
     {
         interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-        TypeWriter.Add("®¥³ßª±®a " + winner + " Àò³Ó");
+        TypeWriter.Add("æ­å–œç©å®¶ " + winner + " ç²å‹");
         TypeWriter.Active();
     }
     public void UnNormalWiningText(string Case)
@@ -320,15 +323,15 @@ public class InteractiveUI : MonoBehaviour
         interactiveUI.GetComponent<TypeWriter>().messages.Clear();
         if (Case == "Case1")
         {
-            TypeWriter.Add("ª±®a ¡¨X ¡¨Àò³Ó½u±ø¤¤¾Ö¦³³Ì¤p¤U¼Ğ\n¦]¦¹ª±®a ¡¨X¡¨ Àò³Ó");
+            TypeWriter.Add("ç©å®¶ â€X â€ç²å‹ç·šæ¢ä¸­æ“æœ‰æœ€å°ä¸‹æ¨™\nå› æ­¤ç©å®¶ â€Xâ€ ç²å‹");
         }
         else if (Case == "Case2")
         {
-            TypeWriter.Add("ª±®a ¡¨O ¡¨Àò³Ó½u±ø¤¤¾Ö¦³³Ì¤p¤U¼Ğ\n¦]¦¹ª±®a ¡¨O¡¨ Àò³Ó");
+            TypeWriter.Add("ç©å®¶ â€O â€ç²å‹ç·šæ¢ä¸­æ“æœ‰æœ€å°ä¸‹æ¨™\nå› æ­¤ç©å®¶ â€Oâ€ ç²å‹");
         }
         else if (Case == "Case3")
         {
-            TypeWriter.Add("ª±®a ¡¨X ¡¨»Pª±®a ¡¨O¡¨¾Ö¦³¬Û¦Pªº³Ì¤p¤U¼Ğ \n¥Ñ©óª±®a ¡¨X ¡¨¬°¥ı¤â\n¦]¦¹ª±®a ¡¨X ¡¨Àò³Ó");
+            TypeWriter.Add("ç©å®¶ â€X â€èˆ‡ç©å®¶ â€Oâ€æ“æœ‰ç›¸åŒçš„æœ€å°ä¸‹æ¨™ \nç”±æ–¼ç©å®¶ â€X â€ç‚ºå…ˆæ‰‹\nå› æ­¤ç©å®¶ â€X â€ç²å‹");
         }
         TypeWriter.Active();
     }

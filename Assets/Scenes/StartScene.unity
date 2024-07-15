@@ -626,8 +626,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 625410035}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
-        m_MethodName: onClick
+        m_TargetAssemblyTypeName: WorkFlow, Assembly-CSharp
+        m_MethodName: StartButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

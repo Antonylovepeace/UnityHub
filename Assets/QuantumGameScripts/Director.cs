@@ -75,8 +75,20 @@ public class Director : MonoBehaviour
         }
         return Data;
     }
+    public void AcallFuncCheckWin(string c)
+    {
+        StartCoroutine(DelayFunc(c));
+    }
+    IEnumerator DelayFunc(string c)
+    {
+        Round.timeDelay += 0.2f;
+        print("timeDelay =" + Round.timeDelay);
+        yield return new WaitForSecondsRealtime(Round.timeDelay);
+        print("enter");
+        checkWinning(c);
+    }
     int x;
-    public bool checkWinning()
+    public bool checkWinning(string c)
     {
         x = 0;
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -123,12 +135,14 @@ public class Director : MonoBehaviour
             Round.Winner = Data[2] + " is winner !";
             x = 1;
         }
+        print("x = " + x);
         if (x == 1)
         {
             return true;
         }
         else
         {
+            InteractiveUI.GetComponent<InteractiveUI>().Quantum_collapse(c);
             return false;
         }
     }

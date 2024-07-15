@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartButton : MonoBehaviour
+public class WorkFlow : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,13 @@ public class StartButton : MonoBehaviour
         TextMeshProUGUI text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.color = Color.white;
     }
-    public void onClick()
+
+    public void StartButtonOnClick()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("ExampleScene");
+    }
+    public void SkipButtonOnClick()
     {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameScene");

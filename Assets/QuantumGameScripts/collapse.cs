@@ -80,10 +80,10 @@ public class collapse : MonoBehaviour
                             lst.Add(a);
                             Round.InteractableFalseCells_num = lst.ToArray();
                             CleanCellText(a);
-                            
-                           
-                            TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-                            text1.text = ch;
+
+                            StartCoroutine(DelayFunc2(a, ch));
+                            //TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                            //text1.text = ch;
                             print("collapse = " + ch);
                             continue;
                         }
@@ -92,7 +92,15 @@ public class collapse : MonoBehaviour
             }
         }
     }
-    
+    IEnumerator DelayFunc2(int a, string ch)
+    {
+        Round.timeDelay += 0.5f;
+        yield return new WaitForSecondsRealtime(Round.timeDelay);
+        //CleanCellText(a);
+        Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[a];
+        TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        text1.text = ch;
+    }
 
 
     public string[] OddElements()
@@ -133,7 +141,7 @@ public class collapse : MonoBehaviour
         }
         foreach (string x in stringsRepeat)
         {
-            print("stringsRepeat = " + x);
+            //print("stringsRepeat = " + x);
         }
         foreach (string x in stringsRepeat)
         {
@@ -176,6 +184,7 @@ public class collapse : MonoBehaviour
     {
         Round.timeDelay += 0.5f;
         yield return new WaitForSecondsRealtime(Round.timeDelay);
+        //CleanCellText(n);
         Cell SelectedCell = this.CellGenerator.GetComponent<CellGenerator>().cells[n];
         TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         text1.text = c;
@@ -196,7 +205,7 @@ public class collapse : MonoBehaviour
                     //StartCoroutine(DelayFunc(num, c));
                     TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                     //text1.text = c;
-                    print("FindReferNum = " + c);
+                    //print("FindReferNum = " + c);
                     return num;
                 }
             }
