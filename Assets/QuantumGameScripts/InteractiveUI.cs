@@ -134,7 +134,8 @@ public class InteractiveUI : MonoBehaviour
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             int[] list = FindFirstTwoCell();
-            TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前 ”X” 有50%機率出現在第 " + list[0] + " 格\n有50%機率出現在第 " + list[1] + " 格\n此狀態的 ”X” 代表了量子物理中的 ”糾纏態”");
+            TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前 ”X” 有50%機率出現在第 " + list[0] + 
+                " 格\n有50%機率出現在第 " + list[1] + " 格\n此狀態的 ”X” 代表了量子物理中的 ”糾纏態”");
             TypeWriter.Active();
             
         }
@@ -200,16 +201,22 @@ public class InteractiveUI : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "ExampleScene")
                 {
-                    if (Round.typeWriter_quantumSuperposition < 1)
+                    print("1.length = " + Round.jag[1].Length);
+                    print("4.length = " + Round.jag[4].Length);
+                    if (Round.jag[1].Length == 1 && Round.jag[4].Length == 2)
                     {
-                        print("ThirdStep");
-                        interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-                        TypeWriter.Add("回合越多，場內的元素也越來越多\n然而一但 形成封閉迴圈後\n場內的情勢就會因此改變\n接下來也請點擊另兩格白色格子");
-                        TypeWriter.Active();
-                        Invoke("CellsIneractable", 0);
-                        BoardControl.GetComponent<BoardControl>().AcallThirdStep();
-                        Round.typeWriter_quantumSuperposition++;
-                    }                                        
+                        if (Round.typeWriter_quantumSuperposition < 1)
+                        {
+                            print("ThirdStep");
+                            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+                            TypeWriter.Add("回合越多，場內的元素也越來越多\n然而一但 形成封閉迴圈後\n場內的情勢就會因此改變\n接下來也請點擊另兩格白色格子");
+                            TypeWriter.Active();
+                            Invoke("CellsIneractable", 0);
+                            BoardControl.GetComponent<BoardControl>().AcallThirdStep();
+                            Round.typeWriter_quantumSuperposition++;
+                        }
+                    }
+                                                          
                 }
 
             }

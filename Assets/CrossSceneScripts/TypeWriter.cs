@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public class TypeWriter : MonoBehaviour
 {
-    public Text TextComponent;
+    public TextMeshProUGUI TextComponent;
 
     private static TypeWriter instance;
     public List<TypeWriterMessage> messages = new List<TypeWriterMessage>();
