@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4108656144827779031}
   - component: {fileID: 7579220419699161225}
   - component: {fileID: 822329450692914131}
-  - component: {fileID: -4615216869476593548}
+  - component: {fileID: -2467884065380454182}
   m_Layer: 5
   m_Name: Pre_SelectButton
   m_TagString: Untagged
@@ -140,8 +140,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -4615216869476593548}
-          m_TargetAssemblyTypeName: Cell, Assembly-CSharp
+        - m_Target: {fileID: -2467884065380454182}
+          m_TargetAssemblyTypeName: Measure, Assembly-CSharp
           m_MethodName: MeasureButtonOnSelected
           m_Mode: 1
           m_Arguments:
@@ -152,7 +152,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &-4615216869476593548
+--- !u!114 &-2467884065380454182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,9 +161,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2781547820195198256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 884f91dfe2563fb4e8d1f74bd5f1a0a3, type: 3}
+  m_Script: {fileID: 11500000, guid: c898cd0c04813ad40a9ca65817587422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Winner: {fileID: 0}
+  measureButton: {fileID: 0}
 --- !u!1 &8290437339783122169
 GameObject:
   m_ObjectHideFlags: 0

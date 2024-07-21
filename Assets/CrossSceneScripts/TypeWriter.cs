@@ -64,7 +64,7 @@ public class TypeWriterMessage
 {
     private float timer = 0;
     private int charIndex = 0;
-    private float timerPerChar = 0.05f;
+    private float timerPerChar = 0.03f;
 
     [SerializeField]
     public string currentMsg = null;

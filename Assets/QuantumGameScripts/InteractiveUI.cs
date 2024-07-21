@@ -17,6 +17,7 @@ public class InteractiveUI : MonoBehaviour
     GameObject BoardControl;
     void Start()
     {
+
         this.BoardControl = GameObject.Find("BoardControl");
         this.Cells = GameObject.Find("CellGenerator");
         this.interactiveUI = GameObject.Find("InteractiveUI");
@@ -37,8 +38,9 @@ public class InteractiveUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
+    
     public void Loop()
     {
         int[] num = new int[] { };
@@ -59,6 +61,8 @@ public class InteractiveUI : MonoBehaviour
         LoopTosubscript();
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
+            Invoke("CellsIneractable", 0);
+            BoardControl.GetComponent<BoardControl>().AcallForthStep();
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈\n" +
                 "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +

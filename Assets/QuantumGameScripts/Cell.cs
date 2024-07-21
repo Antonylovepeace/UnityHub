@@ -7,6 +7,8 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Xml.Xsl;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Cell : MonoBehaviour
 {
@@ -14,7 +16,6 @@ public class Cell : MonoBehaviour
     GameObject CheckLoop;
     GameObject collapse;
     GameObject CellGenerator;
-
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,48 @@ public class Cell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Transion();
+    }
+    void Transion()
+    {
+
+        for (int i = 0; i < 9; i++)
+        {
+            GameObject Grid = transform.GetChild(0).gameObject;
+            TextMeshProUGUI text = Grid.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            //Debug.Log("i = "+Grid.transform.GetChild(i));
+            string content = text.text;
+            
+            if (content!= "" && compare(content))
+            {
+                print("enter");
+                //print("content = " + content);
+                //Color color = new Color(0f, 0f, 0f, 0f);
+                text.color = Color.Lerp(Color.white, Color.blue, Mathf.PingPong(Time.time / 2.5f, 1));
+            }
+            
+            
+        }
         
+    }
+    bool compare(string content)
+    {
+        int x = 0;
+        foreach (string c in Round.collapseTexts)
+        {
+            if (content != c)
+            {
+                x++;
+            }
+        }
+        if(x == Round.collapseTexts.Length)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void Fill()
@@ -114,25 +156,8 @@ public class Cell : MonoBehaviour
         }
 
     }
-    int x = 0;
-    public void MeasureButtonOnSelected()
-    {
-        int n = transform.GetSiblingIndex();
-        if (n == 0)
-        {
-            x = 1;
-        }
-        else
-        {
-            x = 0;
-        }
-        ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors;
-        cb.normalColor = cb.selectedColor;
-        this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors = cb;
-        ColorBlock cb2 = this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors;
-        cb2.normalColor = Color.white;
-        this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors = cb2;
-    }
+
+    
     private int CheckFilled()
     {
         int i;

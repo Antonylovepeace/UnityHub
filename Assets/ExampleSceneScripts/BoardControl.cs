@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class BoardControl : MonoBehaviour
 {
+    public GameObject NextButtonPrefab;
+    GameObject nextButton;
     public float showForSeconds = 1.0f;
     GameObject Cells;
+
+    public bool forthStep = false;
+
+
     void Start()
     {
         this.Cells = GameObject.Find("CellGenerator");
@@ -16,6 +23,10 @@ public class BoardControl : MonoBehaviour
     }
     void Update()
     {
+        if(forthStep == true)
+        {
+            Transion();
+        }
 
     }
 
@@ -72,16 +83,16 @@ public class BoardControl : MonoBehaviour
 
     public void AcallForthStep()
     {
-        Invoke("ForthStep", 2);
+        Invoke("ForthStep", 5);
     }
     public void ForthStep()
     {
-        for (int i = 1; i < 6; i += 4)                      //請選擇2、6格子
-        {
-            
-        }
+        print("ForthStep");
+        nextButton = Instantiate(NextButtonPrefab, transform);
+        forthStep = true;
     }
 
+    
     public void CellsInteractable(int a,int b,int c)
     {
         for( int i = 0; i < 9; i++)
@@ -101,34 +112,29 @@ public class BoardControl : MonoBehaviour
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    IEnumerator DoTimer()
+    void Transion()
     {
-        Cell cells =  this.Cells.GetComponent<CellGenerator>().cells[0];
-        Button cell = cells.GetComponent<Button>();
-        ColorBlock colors = cell.colors;
-        colors.normalColor = new Color32(255, 0, 0, 255);
-        cell.colors = colors;
-        yield return new WaitForSeconds(showForSeconds);
-        colors.normalColor = new Color32(255, 128, 128, 255);
-        cell.colors = colors;
+        UnityEngine.UI.Text text = nextButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>();
+        print("Time.time = " + Time.time / 2);
+        text.color = Color.Lerp(Color.blue, Color.yellow, Mathf.PingPong(Time.time/2, 1));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     // Start is called before the first frame update
 
 

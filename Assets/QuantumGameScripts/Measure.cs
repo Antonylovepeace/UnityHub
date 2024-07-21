@@ -77,5 +77,23 @@ public class Measure : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
        
     }
-
+    int x = 0;
+    public void MeasureButtonOnSelected()
+    {
+        int n = transform.GetSiblingIndex();
+        if (n == 0)
+        {
+            x = 1;
+        }
+        else
+        {
+            x = 0;
+        }
+        ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors;
+        cb.normalColor = cb.selectedColor;
+        this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors = cb;
+        ColorBlock cb2 = this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors;
+        cb2.normalColor = Color.white;
+        this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors = cb2;
+    }
 }
