@@ -12,6 +12,7 @@ public class WorkFlow : MonoBehaviour
     GameObject InteractiveUI;
     GameObject CellGenerator;
     GameObject BoardControl;
+    public TextMeshProUGUI Opening;
     public int[] cells = {1,4,5};
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class WorkFlow : MonoBehaviour
         this.CellGenerator = GameObject.Find("CellGenerator");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
         this.BoardControl = GameObject.Find("BoardControl");
+        
     }
 
     // Update is called once per frame

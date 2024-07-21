@@ -15,9 +15,12 @@ public class InteractiveUI : MonoBehaviour
     GameObject interactiveUI;
     GameObject Cells;
     GameObject BoardControl;
+    public TextMeshProUGUI UI;
+    public TextMeshProUGUI Opening;
+
     void Start()
     {
-
+        
         this.BoardControl = GameObject.Find("BoardControl");
         this.Cells = GameObject.Find("CellGenerator");
         this.interactiveUI = GameObject.Find("InteractiveUI");
