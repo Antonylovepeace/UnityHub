@@ -61,12 +61,15 @@ public class InteractiveUI : MonoBehaviour
         LoopTosubscript();
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
+            
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallForthStep();
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈\n" +
-                "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +
-                "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
+            TypeWriter.Add("我們已得知，兔子原本處於”公、母“的疊加態" +
+                "\n能夠藉由觀測，使他落入確定的狀態。" +
+                "\n我們又知道”觀測”會使多種狀態疊加的量子狀態轉變為確定的古典狀態，此過程稱為“塌縮”" +
+                "\n\n因此我們希望藉由”觀測”棋盤上的空格" +
+                "\n來實現“塌縮”。\r\n");
             TypeWriter.Active();
         }
         else if (SceneManager.GetActiveScene().name == "GameScene")
@@ -147,7 +150,15 @@ public class InteractiveUI : MonoBehaviour
         {
             print("SecondStep");
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("接下來我們稱個子內的東西為 '元素'\n與往常不同\n同個格子內可以同時存在多個元素\n接下來請點擊另兩格白色格子");
+            TypeWriter.Add("在方才的內容中我們知道，存在糾纏的元素之間" +
+                "\n只要知道一個元素的狀態" +
+                "\n就會自動告訴你有關其他元素的一些訊息" +
+                "\r\n\n現在我們把糾纏的概念套用在棋盤上" +
+                "\n我們肉眼看到兩個X，但實際上他們是不穩定的" +
+                "\nX可能出現在第⑤格或第⑥格" +
+                "\n若X存在第⑥格，則不存在於第⑤格" +
+                "\n若X存在第⑤格，則不存在於第⑥格" +
+                "\n這兩個X的狀態稱為”糾纏態”\r\n");
             TypeWriter.Active();
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallSecondStep();
@@ -213,7 +224,14 @@ public class InteractiveUI : MonoBehaviour
                         {
                             print("ThirdStep");
                             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-                            TypeWriter.Add("回合越多，場內的元素也越來越多\n然而一但 形成封閉迴圈後\n場內的情勢就會因此改變\n接下來也請點擊另兩格白色格子");
+                            TypeWriter.Add("影片內容中我們知道，在一個具有不確定性的系統中" +
+                                "\n系統可以處於各種不同物理狀態" +
+                                "\n而且各種狀態可能性同時存在，稱為疊加" +
+                                "\r\n\n現在我們把疊加的概念套用在棋盤上" +
+                                "\r\n可以看到第⑤格同時存在X₁及O₁" +
+                                "\n此時我們可以說第⑤格可能是X₁，也可能是O₁" +
+                                "\n也就同時擁有X₁及O₁兩種可能的疊加狀態。 " +
+                                "\r\n當然，同個格子內可以有兩種以上可能性的疊加狀態。\r\n\r\n");
                             TypeWriter.Active();
                             Invoke("CellsIneractable", 0);
                             BoardControl.GetComponent<BoardControl>().AcallThirdStep();

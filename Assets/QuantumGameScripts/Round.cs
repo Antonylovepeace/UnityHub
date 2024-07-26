@@ -4,15 +4,16 @@ using UnityEngine;
 
 public static class Round
 {
-    public static float timeDelay = 0f;
+
     public static int typeWriter_quantumEntanglement = 0;
     public static int typeWriter_quantumSuperposition = 0;
+    public static string Winner;
+    public static bool AnimeLoop = false;
+
+    public static float timeDelay = 0f;
     public static int twoRound = 0;
     public static int selectedCell;
-    public static bool checkWinning;
-    public static string Winner; 
     public static string[] subscript = { "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉" };
-    public static int[] num = new int[] { };
     public static string[] char_ = new string[] { };
     public static int[] subscriptNum = new int[] { };
 

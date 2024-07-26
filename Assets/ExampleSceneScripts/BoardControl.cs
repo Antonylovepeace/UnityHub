@@ -83,7 +83,7 @@ public class BoardControl : MonoBehaviour
 
     public void AcallForthStep()
     {
-        Invoke("ForthStep", 5);
+        Invoke("ForthStep", 4);
     }
     public void ForthStep()
     {

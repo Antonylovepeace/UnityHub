@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,36 @@ public class PauseMenu : MonoBehaviour
     public void restartButton()
     {
         QuitButtonOnSelected();
-        SceneManager.LoadScene("GameScene");
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            resetBoard();
+            SceneManager.LoadScene("GameScene");
+        }
+        else if (SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+            resetBoard();
+            SceneManager.LoadScene("ExampleScene");
+        }
+    }
+    void resetBoard()
+    {
+        var lst = Round.InteractableFalseCells_num.ToList();
+        var lst1 = Round.collapseCells.ToList();
+        var lst2 = Round.collapseTexts.ToList();
+        var lst3 = Round.InteractableFalseCells_num.ToList();
+        lst.Clear();
+        lst1.Clear();
+        lst2.Clear();
+        lst3.Clear();
+        Round.InteractableFalseCells_num = lst.ToArray();
+        Round.collapseCells = lst1.ToArray();
+        Round.collapseTexts = lst2.ToArray();
+        Round.InteractableFalseCells_num = lst3.ToArray();
+
+        Round.charO_num = 0;
+        Round.charX_num = 0;
+        Round.typeWriter_quantumEntanglement = 0;
+        Round.typeWriter_quantumSuperposition = 0;
+        Round.Winner = "";
     }
 }
