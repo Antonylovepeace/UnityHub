@@ -15,7 +15,9 @@ public class Animetion : MonoBehaviour
     public GameObject circle4;
     public GameObject circle5;
     public GameObject circle6;
-    
+    public GameObject Page1;
+    public GameObject Page2;
+
     void Start()
     {
         //StartCoroutine(loop1());
@@ -26,7 +28,8 @@ public class Animetion : MonoBehaviour
     {
     
     }
-    public void AcallFunc()
+    
+    public void AcallFuncAnimeLoop()
     {
         StartCoroutine(loop1());
     }
@@ -69,5 +72,10 @@ public class Animetion : MonoBehaviour
         arrow3.SetActive(false);
         circle5.SetActive(false);
         circle6.SetActive(false);
+    }
+    public void NextPageButtonOnClicked()
+    {
+        Page1.SetActive(false);
+        Page2.SetActive(true);
     }
 }

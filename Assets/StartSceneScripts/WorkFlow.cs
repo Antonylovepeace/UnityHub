@@ -9,11 +9,13 @@ using UnityEngine.UI;
 
 public class WorkFlow : MonoBehaviour
 {
+
     GameObject InteractiveUI;
     GameObject CellGenerator;
     GameObject BoardControl;
     GameObject Anime;
-    public int[] cells = {1,4,5};
+    public GameObject AnimationScene;
+    public int[] cells = { 1, 4, 5 };
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,7 @@ public class WorkFlow : MonoBehaviour
         TextMeshProUGUI text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.color = Color.white;
     }
-    
+
     public void StartButtonOnClick()
     {
         Time.timeScale = 1.0f;
@@ -52,7 +54,7 @@ public class WorkFlow : MonoBehaviour
         resetBoard();
         SceneManager.LoadScene("GameScene");
     }
-    public void NextButtonOnClicked()
+    public void NextButton_1OnClicked()
     {
         InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
         TypeWriter.Add("但玩家想觀測，需要達成一項條件，那就是“封閉迴圈”" +
@@ -61,11 +63,20 @@ public class WorkFlow : MonoBehaviour
                 "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
         TypeWriter.Active();
         Round.AnimeLoop = true;
-        this.Anime.GetComponent<Animetion>().AcallFunc();
-        Destroy(GameObject.Find("NextButton(Clone)"));
+        this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
+        Destroy(GameObject.Find("NextButton1(Clone)"));
         this.BoardControl.GetComponent<BoardControl>().forthStep = false;
+        this.BoardControl.GetComponent<BoardControl>().AcallFifthStep();
         ButtonsInteractive();
+
     }
+    public void NextButton_2OnClicked()
+    {
+        this.BoardControl.GetComponent<BoardControl>().AcallFuncAnimeScene();
+        Destroy(GameObject.Find("NextButton2(Clone)"));
+    }
+
+
     void ButtonsInteractive()
     {
         foreach (int i in cells)

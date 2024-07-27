@@ -7,13 +7,15 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class BoardControl : MonoBehaviour
 {
+    public GameObject NextButtonPrefab2;
+    GameObject nextButton2;
     public GameObject NextButtonPrefab;
     GameObject nextButton;
     public float showForSeconds = 1.0f;
     GameObject Cells;
 
     public bool forthStep = false;
-
+    public GameObject Animation;
 
     void Start()
     {
@@ -85,14 +87,27 @@ public class BoardControl : MonoBehaviour
     {
         Invoke("ForthStep", 4);
     }
-    public void ForthStep()
+    void ForthStep()
     {
         print("ForthStep");
         nextButton = Instantiate(NextButtonPrefab, transform);
         forthStep = true;
+
+    }
+    public void AcallFifthStep()
+    {
+        Invoke("FifthStep", 3);
+    }
+    void FifthStep()
+    {
+        print("FifthStep");
+        nextButton = Instantiate(NextButtonPrefab2, transform);
+    }
+    public void AcallFuncAnimeScene()
+    {
+        Animation.SetActive(true);
     }
 
-    
     public void CellsInteractable(int a,int b,int c)
     {
         for( int i = 0; i < 9; i++)
@@ -115,7 +130,6 @@ public class BoardControl : MonoBehaviour
     void Transion()
     {
         UnityEngine.UI.Text text = nextButton.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>();
-        print("Time.time = " + Time.time / 2);
         text.color = Color.Lerp(Color.blue, Color.yellow, Mathf.PingPong(Time.time/2, 1));
     }
 

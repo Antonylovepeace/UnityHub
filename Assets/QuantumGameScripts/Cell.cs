@@ -44,7 +44,7 @@ public class Cell : MonoBehaviour
             
             if (content!= "" && compare(content))
             {
-                print("enter");
+                //print("enter");
                 //print("content = " + content);
                 //Color color = new Color(0f, 0f, 0f, 0f);
                 text.color = Color.Lerp(Color.white, Color.blue, Mathf.PingPong(Time.time / 2.5f, 1));
