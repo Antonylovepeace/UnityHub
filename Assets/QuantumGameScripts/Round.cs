@@ -8,7 +8,9 @@ public static class Round
     public static int typeWriter_quantumEntanglement = 0;
     public static int typeWriter_quantumSuperposition = 0;
     public static string Winner;
-    public static bool AnimeLoop = false;
+    public static bool AnimeCircleLoop = false;
+    public static bool AnimeArrowLoop = false;
+
 
     public static float timeDelay = 0f;
     public static int twoRound = 0;

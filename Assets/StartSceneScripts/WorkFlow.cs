@@ -14,7 +14,7 @@ public class WorkFlow : MonoBehaviour
     GameObject CellGenerator;
     GameObject BoardControl;
     GameObject Anime;
-    public GameObject AnimationScene;
+    //public GameObject AnimationScene;
     public int[] cells = { 1, 4, 5 };
     // Start is called before the first frame update
     void Start()
@@ -62,18 +62,21 @@ public class WorkFlow : MonoBehaviour
                 "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +
                 "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
         TypeWriter.Active();
-        Round.AnimeLoop = true;
+        Round.AnimeCircleLoop = true;
         this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
         Destroy(GameObject.Find("NextButton1(Clone)"));
         this.BoardControl.GetComponent<BoardControl>().forthStep = false;
         this.BoardControl.GetComponent<BoardControl>().AcallFifthStep();
-        ButtonsInteractive();
+        
 
     }
     public void NextButton_2OnClicked()
     {
         this.BoardControl.GetComponent<BoardControl>().AcallFuncAnimeScene();
         Destroy(GameObject.Find("NextButton2(Clone)"));
+        ButtonsInteractive();
+        Round.AnimeArrowLoop = true;
+
     }
 
 

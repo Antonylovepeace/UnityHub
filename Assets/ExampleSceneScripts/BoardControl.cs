@@ -13,12 +13,13 @@ public class BoardControl : MonoBehaviour
     GameObject nextButton;
     public float showForSeconds = 1.0f;
     GameObject Cells;
-
+    public GameObject ClickedAnime;
     public bool forthStep = false;
     public GameObject Animation;
-
+   // GameObject animePage1;
     void Start()
     {
+        //this.animePage1 = GameObject.Find("animePage1");
         this.Cells = GameObject.Find("CellGenerator");
         Invoke("CellsDisable", 0);
         Invoke("FirstStep", 1);
@@ -101,11 +102,13 @@ public class BoardControl : MonoBehaviour
     void FifthStep()
     {
         print("FifthStep");
+        ClickedAnime.SetActive(true);
         nextButton = Instantiate(NextButtonPrefab2, transform);
     }
     public void AcallFuncAnimeScene()
     {
         Animation.SetActive(true);
+        
     }
 
     public void CellsInteractable(int a,int b,int c)

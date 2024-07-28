@@ -39,7 +39,7 @@ public class Animetion : MonoBehaviour
         circle1.SetActive(true);
         circle2.SetActive(true);
         yield return new WaitForSecondsRealtime(1.6f) ;
-        if(Round.AnimeLoop == true)
+        if(Round.AnimeCircleLoop == true)
         {
             StartCoroutine(loop2());
         }
@@ -76,6 +76,6 @@ public class Animetion : MonoBehaviour
     public void NextPageButtonOnClicked()
     {
         Page1.SetActive(false);
-        Page2.SetActive(true);
+        Round.AnimeArrowLoop = false;
     }
 }
