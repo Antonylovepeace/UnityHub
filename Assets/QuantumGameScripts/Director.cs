@@ -20,11 +20,14 @@ public class Director : MonoBehaviour
     GameObject Cells;
     GameObject CheckLoop;
     GameObject InteractiveUI;
+    GameObject AI;
+    public GameObject PreventMis;
+    public GameObject PreventMis2;
 
     void Start()
     {
-        
-
+        //Round.AI =true;
+        this.AI = GameObject.Find("AI_Controller");
         this.Cells = GameObject.Find("CellGenerator");
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
@@ -82,9 +85,9 @@ public class Director : MonoBehaviour
     IEnumerator DelayFunc(string c)
     {
         Round.timeDelay += 0.2f;
-        print("timeDelay =" + Round.timeDelay);
+        //print("timeDelay =" + Round.timeDelay);
         yield return new WaitForSecondsRealtime(Round.timeDelay);
-        print("enter");
+        //print("enter");
         checkWinning(c);
     }
     int x;
@@ -135,9 +138,10 @@ public class Director : MonoBehaviour
             Round.Winner = Data[2] + " is winner !";
             x = 1;
         }
-        print("x = " + x);
+        //print("x = " + x);
         if (x == 1)
         {
+            Round.AI = false;
             return true;
         }
         else
@@ -155,7 +159,7 @@ public class Director : MonoBehaviour
         Round.Cells = lst.ToArray();
         if (Round.Cells.Length == 3)
         {
-            print("長度為三");
+            //print("長度為三");
             InteractiveUI.GetComponent<InteractiveUI>().NormalWiningText(Data[a]);
             return Data[a];
         }
@@ -282,9 +286,10 @@ public class Director : MonoBehaviour
         }
 
     }
-
+    int times;
     public void SwitchPlayer()
     {
+        
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         TurnCount++;
         if (TurnCount == 2)
@@ -298,16 +303,30 @@ public class Director : MonoBehaviour
                     InteractiveUI.GetComponent<InteractiveUI>().quantumEntanglement();
                     Round.typeWriter_quantumEntanglement++;
                 }
+                PreventMis2.SetActive(false);
+                PreventMis.SetActive(false);
             }
             else
             {
                 text.text = "X Turn";
                 Round.charO_num++;
+                if (SceneManager.GetActiveScene().name == "GameScene")
+                {
+                    if (Round.AI)
+                    {
+                        PreventMis2.SetActive(true);
+                        PreventMis.SetActive(true);
+                        times++;
+                        print("move times = " + times);
+                        //print("AI plat!");
+                        AI.GetComponent<AI>().Start();
+                    }
+                        
+                }
             }
             Xturn = !Xturn;
             TurnCount = 0;
         }
-
     }
 
     public void ButtonReset()
@@ -352,7 +371,47 @@ public class Director : MonoBehaviour
     }
 
 
+    public bool PrecheckWinning()
+    {
+        x = 0;
+        TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        string[] Data = GetBoardData();
 
+        //vertical
+        for (int i = 0; i < 3; i++)
+        {
+            if (Data[i] == Data[i + 3] && Data[i] == Data[i + 6] && Data[i] != "")
+            {
+                x = 1;
+            }
+        }
+        //horizon
+        for (int i = 0; i < 7; i += 3)
+        {
+            if (Data[i] == Data[i + 1] && Data[i] == Data[i + 2] && Data[i] != "")
+            {
+                x = 1;
+            }
+        }
+        //Diagonal
+        if (Data[0] == Data[4] && Data[0] == Data[8] && Data[0] != "")
+        {
+            x = 1;
+        }
+        else if (Data[2] == Data[4] && Data[2] == Data[6] && Data[2] != "")
+        {
+            x = 1;
+        }
+        if (x == 1)
+        {
+            Round.AI = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
 

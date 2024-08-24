@@ -11,7 +11,7 @@ public class Measure : MonoBehaviour
     public Text Winner;
     public GameObject measureButton;
     GameObject collapse;
-    GameObject newButton;
+    public GameObject newButton;
     GameObject Director;
     GameObject Canvas;
     GameObject InteractiveUI;

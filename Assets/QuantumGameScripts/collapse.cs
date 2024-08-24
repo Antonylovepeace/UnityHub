@@ -43,7 +43,7 @@ public class collapse : MonoBehaviour
             Buttons[i] = newButton;
         }
         this.Measure.GetComponent<Measure>().BuildButton();
-        print("Measure");
+        //print("Measure");
     }
     
     public void Collapse(string c)
@@ -64,8 +64,8 @@ public class collapse : MonoBehaviour
         {
             foreach(string ch in OddElements())
             {
-                print("OddElements = " + ch);
-                print("once");
+                //print("OddElements = " + ch);
+                //print("once");
                 for (int a = 0; a < 9; a++)
                 {
                     Cell cell = this.CellGenerator.GetComponent<CellGenerator>().cells[a];
@@ -84,7 +84,7 @@ public class collapse : MonoBehaviour
                             StartCoroutine(DelayFunc2(a, ch));
                             //TextMeshProUGUI text1 = cell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                             //text1.text = ch;
-                            print("collapse = " + ch);
+                            //print("collapse = " + ch);
                             continue;
                         }
                     }
@@ -133,7 +133,7 @@ public class collapse : MonoBehaviour
                 { 
                     var temp = stringsRepeat.ToList();
                     string c = strings[m];
-                    print("repeat = " + c);
+                    //print("repeat = " + c);
                     temp.Add(c);
                     stringsRepeat = temp.ToArray();
                 }
@@ -173,7 +173,7 @@ public class collapse : MonoBehaviour
                     StartCoroutine(DelayFunc(n, c));
                     //TextMeshProUGUI text1 = SelectedCell.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
                     //text1.text = c;
-                    print("FindReferText = " + c);
+                    //print("FindReferText = " + c);
                     return content;
                 }
             }  

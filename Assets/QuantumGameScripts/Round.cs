@@ -10,7 +10,8 @@ public static class Round
     public static string Winner;
     public static bool AnimeCircleLoop = false;
     public static bool AnimeArrowLoop = false;
-
+    public static bool loopConfirm;
+    public static bool AI = true;
 
     public static float timeDelay = 0f;
     public static int twoRound = 0;

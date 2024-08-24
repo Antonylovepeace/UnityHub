@@ -16,6 +16,7 @@ public class Cell : MonoBehaviour
     GameObject CheckLoop;
     GameObject collapse;
     GameObject CellGenerator;
+    GameObject AI;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class Cell : MonoBehaviour
         this.Director = GameObject.Find("Director");
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.collapse = GameObject.Find("collapse");
-
+        this.AI = GameObject.Find("AI_Controller");
     }
 
     // Update is called once per frame
@@ -86,7 +87,10 @@ public class Cell : MonoBehaviour
             //GameObject text = Grid.transform.GetChild(CheckFilled()).gameObject;
             TextMeshProUGUI text = Grid.transform.GetChild(CheckFilled()).GetComponent<TextMeshProUGUI>();
             text.text = Director.GetComponent<Director>().GetCharacter();
-            Director.GetComponent<Director>().SwitchPlayer();
+            if (Director.GetComponent<Director>().PrecheckWinning() == false)
+            {
+                Director.GetComponent<Director>().SwitchPlayer();
+            }
             transform.GetComponent<Button>().interactable = false;
             Round.twoRound++;
             playerRound(Round.twoRound);
@@ -100,6 +104,16 @@ public class Cell : MonoBehaviour
                 var lst1 = Round.LoopCheck.ToList();
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
+
+                if (SceneManager.GetActiveScene().name == "GameScene")
+                {
+                    if (Round.AI)
+                    {
+                        AI.GetComponent<AI>().WhoseMeasure();
+                    }
+                        
+                }
+                
             }
         }
         if (SceneManager.GetActiveScene().name == "ExampleScene")
