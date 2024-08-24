@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -15,12 +16,15 @@ public class BoardControl : MonoBehaviour
     GameObject Cells;
     public GameObject ClickedAnime;
     public bool forthStep = false;
-    public GameObject Animation;
-   // GameObject animePage1;
+    public GameObject animePage1;
+    public GameObject nextScene;
+    GameObject InteractiveUI;
+    // GameObject animePage1;
     void Start()
     {
         //this.animePage1 = GameObject.Find("animePage1");
         this.Cells = GameObject.Find("CellGenerator");
+        this.InteractiveUI = GameObject.Find("InteractiveUI");
         Invoke("CellsDisable", 0);
         Invoke("FirstStep", 1);
     }
@@ -35,7 +39,7 @@ public class BoardControl : MonoBehaviour
 
     public void FirstStep()
     {
-        for(int i = 4; i < 6; i++)                      //�п��5�B6��l
+        for(int i = 4; i < 6; i++)                      //請選擇5、6格子
         {
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
@@ -52,7 +56,7 @@ public class BoardControl : MonoBehaviour
     }
     public void SecondStep()
     {
-        for (int i = 1; i < 6; i += 3)                      //�п��5�B6��l
+        for (int i = 1; i < 6; i += 3)                      //請選擇5、6格子
         {
             print("i = "+i);
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
@@ -71,7 +75,7 @@ public class BoardControl : MonoBehaviour
     }
     public void ThirdStep()
     {
-        for (int i = 1; i < 6; i += 4)                      //�п��2�B6��l
+        for (int i = 1; i < 6; i += 4)                      //請選擇2、6格子
         {
             print("i = " + i);
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
@@ -86,7 +90,7 @@ public class BoardControl : MonoBehaviour
 
     public void AcallForthStep()
     {
-        Invoke("ForthStep", 4);
+        Invoke("ForthStep", 3.5f);
     }
     void ForthStep()
     {
@@ -95,19 +99,76 @@ public class BoardControl : MonoBehaviour
         forthStep = true;
 
     }
+
+
+
+
     public void AcallFifthStep()
     {
-        Invoke("FifthStep", 3);
+        Invoke("FifthStep", 2);
     }
     void FifthStep()
     {
+        acallFunckeepTyping();
         print("FifthStep");
+
+    }
+    void acallFunckeepTyping()
+    {
+        StartCoroutine(keepTyping());
+    }
+    IEnumerator keepTyping()
+    {
+        yield return new WaitForSecondsRealtime(1.4f);
+        Invoke("InstantiateNextButton", 3.5f);
+        print("KeepTyping");
+        InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
+        TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈\n" +
+                "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +
+                "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
+        TypeWriter.Active();
+    }
+    void InstantiateNextButton()
+    {
         ClickedAnime.SetActive(true);
         nextButton = Instantiate(NextButtonPrefab2, transform);
     }
+
+
+
+
+
+
+    public void AcallSixthStep()
+    {
+        SixthStep();
+    }
+    void SixthStep()
+    {
+        print("SixthStep");
+        ClickedAnime.SetActive(false);
+        InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
+        TypeWriter.Add("接下來請選擇想觀測的元素後" +
+            "\n按下measure鍵，即完成對特定元素的觀測了!\r\n");
+        TypeWriter.Active();
+    }
+
+
+    public void AcallSevenhStep()
+    {
+        SevenhStep();
+    }
+    void SevenhStep()
+    {
+        print("SevenhStep");
+        nextScene.SetActive(true);
+    }
+
+
+
     public void AcallFuncAnimeScene()
     {
-        Animation.SetActive(true);
+        animePage1.SetActive(true);
         
     }
 

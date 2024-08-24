@@ -24,7 +24,10 @@ public class InteractiveUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("玩家每回合必須選擇兩個空格\r\n接下來請點擊兩格白色格子\r\n");
+            TypeWriter.Add("玩家每回合可選擇下在棋盤中兩個格子" +
+                "\n同個格子能下複數個元素" +
+                "\n但同回合不能重複，需要等到下一回合才行" +
+                "\n\n接下來請點擊兩格白色格子\r\n");
             TypeWriter.Active();
         }
         else if(SceneManager.GetActiveScene().name == "GameScene")
@@ -68,7 +71,7 @@ public class InteractiveUI : MonoBehaviour
             TypeWriter.Add("我們已得知，兔子原本處於”公、母“的疊加態" +
                 "\n能夠藉由觀測，使他落入確定的狀態。" +
                 "\n我們又知道”觀測”會使多種狀態疊加的量子狀態轉變為確定的古典狀態，此過程稱為“塌縮”" +
-                "\n\n因此我們希望藉由”觀測”棋盤上的空格" +
+                "\n\n因此我們將藉由”觀測”棋盤上的空格" +
                 "\n來實現“塌縮”。\r\n");
             TypeWriter.Active();
         }
@@ -153,12 +156,12 @@ public class InteractiveUI : MonoBehaviour
             TypeWriter.Add("在方才的內容中我們知道，存在糾纏的元素之間" +
                 "\n只要知道一個元素的狀態" +
                 "\n就會自動告訴你有關其他元素的一些訊息" +
-                "\r\n\n現在我們把糾纏的概念套用在棋盤上" +
-                "\n我們肉眼看到兩個X，但實際上他們是不穩定的" +
-                "\nX可能出現在第⑤格或第⑥格" +
-                "\n若X存在第⑥格，則不存在於第⑤格" +
-                "\n若X存在第⑤格，則不存在於第⑥格" +
-                "\n這兩個X的狀態稱為”糾纏態”\r\n");
+                "\r\n現在我們把糾纏的概念套用在棋盤上" +
+                "\n\n我們肉眼看到兩個X₁，但實際上他們是不穩定的" +
+                "\nX₁能不能真實出現在第五格或第六格? 還不一定" +
+                "\n\n若X₁存在第⑥格，則不存在於第⑤格" +
+                "\n若X₁存在第⑤格，則不存在於第⑥格" +
+                "\n這兩個X₁的狀態稱為”糾纏態”\r\n");
             TypeWriter.Active();
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallSecondStep();
@@ -228,10 +231,10 @@ public class InteractiveUI : MonoBehaviour
                                 "\n系統可以處於各種不同物理狀態" +
                                 "\n而且各種狀態可能性同時存在，稱為疊加" +
                                 "\r\n\n現在我們把疊加的概念套用在棋盤上" +
-                                "\r\n可以看到第⑤格同時存在X₁及O₁" +
-                                "\n此時我們可以說第⑤格可能是X₁，也可能是O₁" +
-                                "\n也就同時擁有X₁及O₁兩種可能的疊加狀態。 " +
-                                "\r\n當然，同個格子內可以有兩種以上可能性的疊加狀態。\r\n\r\n");
+                                "\r\n可以看到第⑤格同時有X₁及O₁" +
+                                "\n此時我們可以說第⑤格可以是X₁，也可以是O₁" +
+                                "\n也就同時擁有X₁及O₁兩種可能的疊加狀態 " +
+                                "\r\n\n當然，同個格子內可以有兩種以上可能性的疊加狀態。\r\n");
                             TypeWriter.Active();
                             Invoke("CellsIneractable", 0);
                             BoardControl.GetComponent<BoardControl>().AcallThirdStep();
@@ -339,6 +342,21 @@ public class InteractiveUI : MonoBehaviour
                 "\n則此元素在另一個格子的出現機率變為 100%" +
                 "\n藉由不斷連鎖反應，棋盤最後會趨於穩定\n這種透過觀測使量子行為趨向古典結果的現象\n我們稱作  ”塌縮 ”\r\n");
             TypeWriter.Active();
+        }
+        else if(SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            TypeWriter.Add("在方才的影片內容中我們知道" +
+                "\n多種狀態疊加的 量子狀態轉 變為確定的 古典狀態 " +
+                "\n的過程稱為“塌縮”" +
+                "\n現在可以看到，第②、⑤、⑥格" +
+                "\n已經變成不可變動的最後結果" +
+                "\n\n這是由於剛剛的觀測動作" +
+                "\n使原本處於量子疊加狀態的格子們轉變為確定的結果" +
+                "\n此過程稱為“塌縮”");
+            TypeWriter.Active();
+            CellsIneractable();
+
         }
     }
     public void NormalWiningText(string winner)

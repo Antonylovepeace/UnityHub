@@ -17,10 +17,10 @@ public class Animetion : MonoBehaviour
     public GameObject circle6;
     public GameObject Page1;
     public GameObject Page2;
-
+    GameObject BoardControl;
     void Start()
     {
-        //StartCoroutine(loop1());
+        this.BoardControl = GameObject.Find("BoardControl");
     }
 
     // Update is called once per frame
@@ -77,5 +77,6 @@ public class Animetion : MonoBehaviour
     {
         Page1.SetActive(false);
         Round.AnimeArrowLoop = false;
+        BoardControl.GetComponent<BoardControl>().AcallSixthStep();
     }
 }
