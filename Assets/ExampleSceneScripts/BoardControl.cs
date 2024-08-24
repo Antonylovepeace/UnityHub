@@ -8,12 +8,13 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class BoardControl : MonoBehaviour
 {
-    public GameObject NextButtonPrefab2;
-    GameObject nextButton2;
-    public GameObject NextButtonPrefab;
     GameObject nextButton;
-    public float showForSeconds = 1.0f;
     GameObject Cells;
+    GameObject nextButton2;
+    public GameObject NextStepButtonPrefab;
+    public float showForSeconds = 1.0f;
+    public GameObject NextButtonPrefab2;
+    public GameObject NextButtonPrefab;
     public GameObject ClickedAnime;
     public bool forthStep = false;
     public GameObject animePage1;
@@ -26,20 +27,22 @@ public class BoardControl : MonoBehaviour
         this.Cells = GameObject.Find("CellGenerator");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
         Invoke("CellsDisable", 0);
-        Invoke("FirstStep", 1);
+        Invoke("FirstStep", 2);
     }
     void Update()
     {
-        if(forthStep == true)
-        {
-            Transion();
-        }
+        //if(forthStep == true)
+        //{
+        //    Transion();
+        //}
 
     }
 
     public void FirstStep()
     {
-        for(int i = 4; i < 6; i++)                      //請選擇5、6格子
+    
+        print("FirstStep");
+        for (int i = 4; i < 6; i++)                      //請選擇5、6格子
         {
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
@@ -52,13 +55,15 @@ public class BoardControl : MonoBehaviour
 
     public void AcallSecondStep()
     {
-        Invoke("SecondStep", 2);
+        Invoke("SecondStep", 1.5f);
     }
     public void SecondStep()
     {
+        print("SecondStep");
+        Instantiate(NextStepButtonPrefab, transform);
         for (int i = 1; i < 6; i += 3)                      //請選擇5、6格子
         {
-            print("i = "+i);
+            //print("i = "+i);
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
@@ -75,9 +80,10 @@ public class BoardControl : MonoBehaviour
     }
     public void ThirdStep()
     {
+        print("ThirdStep");
         for (int i = 1; i < 6; i += 4)                      //請選擇2、6格子
         {
-            print("i = " + i);
+            //print("i = " + i);
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
@@ -90,12 +96,13 @@ public class BoardControl : MonoBehaviour
 
     public void AcallForthStep()
     {
-        Invoke("ForthStep", 3.5f);
+        Invoke("ForthStep", 1.5f);
     }
     void ForthStep()
     {
         print("ForthStep");
-        nextButton = Instantiate(NextButtonPrefab, transform);
+        Instantiate(NextStepButtonPrefab, transform);
+        //nextButton = Instantiate(NextButtonPrefab, transform);
         forthStep = true;
 
     }
@@ -105,29 +112,35 @@ public class BoardControl : MonoBehaviour
 
     public void AcallFifthStep()
     {
-        Invoke("FifthStep", 2);
+        Invoke("FifthStep", 0.5f);
     }
     void FifthStep()
     {
-        acallFunckeepTyping();
+        //acallFunckeepTyping();
         print("FifthStep");
-
-    }
-    void acallFunckeepTyping()
-    {
-        StartCoroutine(keepTyping());
-    }
-    IEnumerator keepTyping()
-    {
-        yield return new WaitForSecondsRealtime(1.4f);
-        Invoke("InstantiateNextButton", 3.5f);
-        print("KeepTyping");
+        Invoke("InstantiateNextButton", 2f);
         InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
-        TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈\n" +
-                "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +
-                "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
+        TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈當迴圈形成後" +
+            "\n我們就要開始進行觀測" +
+            "\n若觀測格子②，則會發生影片內所提到的，一系列「塌縮」" +
+            "\n\n接下來依指示點擊格子②");
         TypeWriter.Active();
     }
+    //void acallFunckeepTyping()
+    //{
+    //    StartCoroutine(keepTyping());
+    //}
+    //IEnumerator keepTyping()
+    //{
+    //    yield return new WaitForSecondsRealtime(1.4f);
+    //    Invoke("InstantiateNextButton", 3.5f);
+    //    print("KeepTyping");
+    //    InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
+    //    TypeWriter.Add("此時第 ②、⑤、⑥ 格子形成封閉迴圈\n" +
+    //            "觀察X₁在⑤格子→另一個X₁在⑥格子\n→⑥格子內有X₂→另一個X₂在②格子\n→②格子內有O₁→另一個O₁在⑤格子，又回到一開始觀察X₁所在的⑤格子\n" +
+    //            "\n不管以哪個字母為起點，去觀察另一個量子糾纏的字母(另一半)在的格子中，只要觀察到最後有其他字母的另一半能重新回到起點的格子\n則有「封閉迴圈」");
+    //    TypeWriter.Active();
+    //}
     void InstantiateNextButton()
     {
         ClickedAnime.SetActive(true);

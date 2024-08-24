@@ -15,11 +15,15 @@ public class WorkFlow : MonoBehaviour
     GameObject BoardControl;
     GameObject Anime;
     GameObject IntroductionScene;
+    GameObject ThreeVideo;
+    public GameObject VideoScene;
+    public GameObject MainScene;
     //public GameObject AnimationScene;
     public int[] cells = { 1, 4, 5 };
     // Start is called before the first frame update
     void Start()
     {
+        this.ThreeVideo = GameObject.Find("ThreeVideo");
         this.IntroductionScene = GameObject.Find("IntroductionScene");
         this.CellGenerator = GameObject.Find("CellGenerator");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
@@ -118,5 +122,24 @@ public class WorkFlow : MonoBehaviour
     public void PLAYButtonOnClicked()
     {
         this.IntroductionScene.GetComponent<IntroductionScene>().setSceneFalse();
+    }
+    public void nextButtonOnClicked()
+    {
+        if (Round.afterVideo_Anime == 1)
+        {
+            Round.AnimeCircleLoop = true;
+            this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
+            this.BoardControl.GetComponent<BoardControl>().forthStep = false;
+            this.BoardControl.GetComponent<BoardControl>().AcallFifthStep();
+        }
+        Round.afterVideo_Anime++;
+        VideoScene.SetActive(false);
+        Destroy(GameObject.Find("NextStepButton(Clone)"));
+        
+    }
+    public void VideoStepButtonOnClicked()
+    {
+        ThreeVideo.GetComponent<VideoStep>().NextButtonOnClicked();
+        //Destroy(GameObject.Find("NextStepButton(Clone)"));
     }
 }

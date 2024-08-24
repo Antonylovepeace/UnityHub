@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: c6a3c01c3ed39f64e98ee928f8031965
+  - enabled: 0
+    path: Assets/Scenes/Video Scene.unity
+    guid: ff37f7b0a63ffff4990dd88f3166e38d
   - enabled: 1
     path: Assets/Scenes/ExampleScene.unity
     guid: d3c151fb80d0ee840a3cf4bd2d230e09

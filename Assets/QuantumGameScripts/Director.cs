@@ -303,8 +303,12 @@ public class Director : MonoBehaviour
                     InteractiveUI.GetComponent<InteractiveUI>().quantumEntanglement();
                     Round.typeWriter_quantumEntanglement++;
                 }
-                PreventMis2.SetActive(false);
-                PreventMis.SetActive(false);
+                if (SceneManager.GetActiveScene().name == "GameScene")
+                {
+                    PreventMis2.SetActive(false);
+                    PreventMis.SetActive(false);
+                }
+                    
             }
             else
             {

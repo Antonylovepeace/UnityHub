@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class IntroductionScene : MonoBehaviour
 {
-    public GameObject IntroScenen;
+    public GameObject IntroScene;
     public GameObject MainScene;
+    public GameObject VideoScene;
     public GameObject PLAYButtonPrefab;
 
-    GameObject IntroScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +23,18 @@ public class IntroductionScene : MonoBehaviour
 
     public void setSceneFalse()
     {
-        IntroScenen.SetActive(false);
-        MainScene.SetActive(true);
+        
+        IntroScene.SetActive(false);
+        VideoScene.SetActive(true);
     }
     public void Introduction()
     {
-        transform.GetComponent<TypeWriter>().messages.Clear();
-        TypeWriter.Add("Welcome to Quantum Tic Tac Toe!!!\r\n");
-        TypeWriter.Active();
+        transform.GetComponent<TypeWriter2>().messages.Clear();
+        TypeWriter2.Add("welcome to quantum tic tac toe！" +
+            "\n\n這不是普通的井字遊戲，而是結合了簡單的量子概念" +
+            "\n\n讓你在遊戲中體驗量子的奇妙。" +
+            "\n\n每一步都有其獨特的量子意義，帶你快速了解量子的基本概念。" +
+            "\n\n準備好迎接挑戰，探索量子的奧秘吧！");
+        TypeWriter2.Active();
     }
 }
