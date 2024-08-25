@@ -18,6 +18,7 @@ public class WorkFlow : MonoBehaviour
     GameObject ThreeVideo;
     public GameObject VideoScene;
     public GameObject MainScene;
+    public GameObject Mask;
     //public GameObject AnimationScene;
     public int[] cells = { 1, 4, 5 };
     // Start is called before the first frame update
@@ -61,23 +62,7 @@ public class WorkFlow : MonoBehaviour
         this.BoardControl.GetComponent<BoardControl>().AcallSevenhStep();
         //SceneManager.LoadScene("GameScene");
     }
-    public void NextButton_1OnClicked()
-    {
-        InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
-        TypeWriter.Add("但玩家想觀測，需要達成一項條件" +
-            "\n那就是需要形成“封閉迴圈”" +
-            "\n\n“封閉迴圈”只是此遊戲的特殊規則" +
-            "\n並非實際量子物理的概念。\r\n");
-        TypeWriter.Active();
-        
-        Round.AnimeCircleLoop = true;
-        this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
-        Destroy(GameObject.Find("NextButton1(Clone)"));
-        this.BoardControl.GetComponent<BoardControl>().forthStep = false;
-        this.BoardControl.GetComponent<BoardControl>().AcallFifthStep();
 
-
-    }
 
     
     public void NextButton_2OnClicked()
@@ -125,7 +110,15 @@ public class WorkFlow : MonoBehaviour
     }
     public void nextButtonOnClicked()
     {
+        if (Round.afterVideo_Anime == 0)
+        {
+            this.BoardControl.GetComponent<BoardControl>().AcallFirstStep();
+        }
         if (Round.afterVideo_Anime == 1)
+        {
+            this.BoardControl.GetComponent<BoardControl>().AcallSecondPoint5Step();
+        }
+        if (Round.afterVideo_Anime == 2)
         {
             Round.AnimeCircleLoop = true;
             this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
@@ -135,7 +128,7 @@ public class WorkFlow : MonoBehaviour
         Round.afterVideo_Anime++;
         VideoScene.SetActive(false);
         Destroy(GameObject.Find("NextStepButton(Clone)"));
-        
+        Mask.SetActive(false);
     }
     public void VideoStepButtonOnClicked()
     {

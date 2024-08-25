@@ -33,6 +33,16 @@ public class Director : MonoBehaviour
         this.InteractiveUI = GameObject.Find("InteractiveUI");
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "X Turn";
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            if (Round.FirstMove == false)           //Player second , AI First
+            {
+                PreventMis2.SetActive(true);
+                PreventMis.SetActive(true);
+            }
+
+
+        }
     }
 
     // Update is called once per frame
@@ -305,8 +315,20 @@ public class Director : MonoBehaviour
                 }
                 if (SceneManager.GetActiveScene().name == "GameScene")
                 {
-                    PreventMis2.SetActive(false);
-                    PreventMis.SetActive(false);
+                    if (Round.FirstMove == false)           //Player second , AI First
+                    {
+                        PreventMis2.SetActive(false);
+                        PreventMis.SetActive(false);
+                    }
+                    else if (Round.FirstMove == true)           //Player First , AI second
+                    {
+                        print("Oturn¡APlayer First , AI second");
+                        PreventMis2.SetActive(true);
+                        PreventMis.SetActive(true);
+                        times++;
+                        AI.GetComponent<AI>().Main();
+                    }
+
                 }
                     
             }
@@ -318,12 +340,20 @@ public class Director : MonoBehaviour
                 {
                     if (Round.AI)
                     {
-                        PreventMis2.SetActive(true);
-                        PreventMis.SetActive(true);
-                        times++;
-                        print("move times = " + times);
-                        //print("AI plat!");
-                        AI.GetComponent<AI>().Start();
+                        if (Round.FirstMove == false)  // Player second, AI First
+                        {
+                            PreventMis2.SetActive(true);
+                            PreventMis.SetActive(true);
+                            times++;
+                            AI.GetComponent<AI>().Main();
+                        }
+                        else if (Round.FirstMove == true)   //Player First , AI second
+                        {
+                            print("Xturn¡APlayer First , AI second");
+                            PreventMis2.SetActive(false);
+                            PreventMis.SetActive(false);
+                        }
+                        
                     }
                         
                 }

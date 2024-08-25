@@ -28,7 +28,10 @@ public class AI : MonoBehaviour
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.Director = GameObject.Find("Director");
 
-        Main();
+        if (Round.FirstMove == false)           //Player second , AI First
+        {
+            Main();
+        }
     }
 
     public void Main()
@@ -42,12 +45,23 @@ public class AI : MonoBehaviour
     
     public void WhoseMeasure()
     {
-
-        bool AIturn = Director.GetComponent<Director>().Xturn;
-        if (AIturn == true)
+        if (Round.FirstMove == false)  // Player second, AI First
         {
-            AImeasure();
+            bool AIturn = Director.GetComponent<Director>().Xturn;
+            if (AIturn == true)
+            {
+                AImeasure();
+            }
         }
+        else if (Round.FirstMove == true)   //Player First , AI second
+        {
+            bool AIturn = Director.GetComponent<Director>().Xturn;
+            if (AIturn == false)
+            {
+                AImeasure();
+            }
+        }
+        
     }
 
     public void AImeasure()

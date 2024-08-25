@@ -23,9 +23,9 @@ public class InteractiveUI : MonoBehaviour
         this.interactiveUI = GameObject.Find("InteractiveUI");
         if (SceneManager.GetActiveScene().name == "ExampleScene")
         {
-            interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("接下來請點擊兩格白底格子");
-            TypeWriter.Active();
+            //interactiveUI.GetComponent<TypeWriter>().messages.Clear();
+            //TypeWriter.Add("接下來請點擊兩格白底格子");
+            //TypeWriter.Active();
         }
         else if(SceneManager.GetActiveScene().name == "GameScene")
         {
@@ -146,13 +146,14 @@ public class InteractiveUI : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "ExampleScene")
         {
-            print("SecondStep");
+            //print("SecondStep");
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
-            TypeWriter.Add("如影片內容所說，" +
-                "\n此時這兩個X1的狀態稱為”糾纏態”" +
-                "\r\n了解完”量子糾纏”的基本概念後" +
-                "\r\n\n下一個重要的基本概念是”量子疊加”" +
-                "\r\n請點擊按鈕繼續\r\n");
+            TypeWriter.Add("如影片內容所說" +
+                "\n此時這兩個X₁的狀態稱為「糾纏態」" +
+                "\r\n了解完「量子糾纏」的基本概念後" +
+                "\r\n下一個重要的基本概念是" +
+                "\n「量子疊加」" +
+                "\r\n\n請點擊按鈕繼續\r\n");
             TypeWriter.Active();
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallSecondStep();

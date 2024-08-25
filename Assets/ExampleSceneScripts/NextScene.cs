@@ -10,7 +10,7 @@ public class NextScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("Text_ReadyToPlayWithPC", 0.3f);
     }
 
     // Update is called once per frame
@@ -18,14 +18,24 @@ public class NextScene : MonoBehaviour
     {
         
     }
-    public void playerVSplayerButtonOnClicked()
+    private void Text_ReadyToPlayWithPC()
     {
+        TypeWriter2.Add("正式開始遊戲"  );
+        TypeWriter2.Active();
+    }
+
+    public void FirstMoverButtonOnClicked()
+    {
+        print("FirstMoverButtonOnClicked");
         SceneManager.LoadScene("GameScene");
         nextScene.SetActive(false);
+        Round.FirstMove = true;
     }
-    public void pcVSplayerButtonOnClicked()
+    public void SecondMoveButtonOnClicked()
     {
-        print("pcVSplayerButtonOnClicked");
+        print("SecondMoveButtonOnClicked");
+        SceneManager.LoadScene("GameScene");
         nextScene.SetActive(false);
+        Round.FirstMove = false;
     }
 }

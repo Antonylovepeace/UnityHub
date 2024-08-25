@@ -19,6 +19,7 @@ public class BoardControl : MonoBehaviour
     public bool forthStep = false;
     public GameObject animePage1;
     public GameObject nextScene;
+    public GameObject Mask;
     GameObject InteractiveUI;
     // GameObject animePage1;
     void Start()
@@ -26,8 +27,8 @@ public class BoardControl : MonoBehaviour
         //this.animePage1 = GameObject.Find("animePage1");
         this.Cells = GameObject.Find("CellGenerator");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
-        Invoke("CellsDisable", 0);
-        Invoke("FirstStep", 2);
+        //Invoke("CellsDisable", 0);
+        
     }
     void Update()
     {
@@ -37,11 +38,18 @@ public class BoardControl : MonoBehaviour
         //}
 
     }
-
+    public void AcallFirstStep()
+    {
+        CellsDisable();
+        Invoke("FirstStep", 0.35f);
+    }
     public void FirstStep()
     {
     
         print("FirstStep");
+        InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
+        TypeWriter.Add("接下來請點擊兩格白底格子");
+        TypeWriter.Active();
         for (int i = 4; i < 6; i++)                      //請選擇5、6格子
         {
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
@@ -55,12 +63,25 @@ public class BoardControl : MonoBehaviour
 
     public void AcallSecondStep()
     {
+        Mask.SetActive(true);
         Invoke("SecondStep", 1.5f);
     }
     public void SecondStep()
     {
         print("SecondStep");
         Instantiate(NextStepButtonPrefab, transform);
+        
+    }
+    public void AcallSecondPoint5Step()
+    {
+        Invoke("SecondPoint5Step", 0.4f);
+    }
+    public void SecondPoint5Step()
+    {
+        print("SecondPoint5Step");
+        InteractiveUI.GetComponent<TypeWriter>().messages.Clear();
+        TypeWriter.Add("接下來請點擊兩格白底格子");
+        TypeWriter.Active();
         for (int i = 1; i < 6; i += 3)                      //請選擇5、6格子
         {
             //print("i = "+i);
@@ -68,11 +89,10 @@ public class BoardControl : MonoBehaviour
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
             colors.normalColor = new Color32(255, 255, 255, 90);
-            cell.colors = colors; 
+            cell.colors = colors;
         }
         CellsInteractable(1, 4, 4);
     }
-
 
     public void AcallThirdStep()
     {

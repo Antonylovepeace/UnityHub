@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8465049017197701226}
   - component: {fileID: 1476035297936624336}
   - component: {fileID: 1839616861475951264}
+  - component: {fileID: 8716550660557284}
   m_Layer: 5
   m_Name: NextStepButton
   m_TagString: Untagged
@@ -37,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18, y: -248}
-  m_SizeDelta: {x: 347.56, y: 167.3258}
+  m_AnchoredPosition: {x: 342, y: -252}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4116893608462476244
 CanvasRenderer:
@@ -68,8 +69,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 1124699, guid: e7905d3be60a2b24381b5fe5126b8cbf, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -147,7 +148,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VideoScene: {fileID: 0}
+  MainScene: {fileID: 0}
+  Mask: {fileID: 0}
   cells: 010000000400000005000000
+--- !u!95 &8716550660557284
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383547885210486410}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e03211135bbb9da41892ce0b768a2e02, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4834940723973704969
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,4 +250,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
