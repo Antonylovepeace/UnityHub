@@ -33,18 +33,18 @@ public class VidPlayer : MonoBehaviour
     {
         if (Round.videoCounter == 1)
         {
-            videoName = "Video2-1_4K.mp4";
-            rawImage.name = "Video2-1_4K";
+            videoName = "Video2-1_1080P.mp4";
+            rawImage.name = "Video2-1_1080P";
         }
         if (Round.videoCounter == 2)
         {
-            videoName = "Video2-2_4K.mp4";
-            rawImage.name = "Video2-2_4K";
+            videoName = "Video2-2_1080P.mp4";
+            rawImage.name = "Video2-2_1080P";
         }
         if (Round.videoCounter == 3)
         {
-            videoName = "Video2-3_4K.mp4";
-            rawImage.name = "Video2-3_4K";
+            videoName = "Video2-3_1080P.mp4";
+            rawImage.name = "Video2-3_1080P";
         }
 
         //videoCounter++;

@@ -4131,7 +4131,7 @@ GameObject:
   - component: {fileID: 666487862}
   - component: {fileID: 666487861}
   m_Layer: 5
-  m_Name: Video2-2_4K
+  m_Name: Video2-2_1080P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7890,7 +7890,7 @@ GameObject:
   - component: {fileID: 1399911786}
   - component: {fileID: 1399911785}
   m_Layer: 5
-  m_Name: Video2-1_4K
+  m_Name: Video2-1_1080P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9153,7 +9153,7 @@ GameObject:
   - component: {fileID: 1778176162}
   - component: {fileID: 1778176161}
   m_Layer: 0
-  m_Name: VidPlayer
+  m_Name: BGVidPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9758,7 +9758,7 @@ GameObject:
   - component: {fileID: 1932967051}
   - component: {fileID: 1932967050}
   m_Layer: 5
-  m_Name: Video2-3_4K
+  m_Name: Video2-3_1080P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

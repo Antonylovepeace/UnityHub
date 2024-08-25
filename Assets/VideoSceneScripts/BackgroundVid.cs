@@ -20,7 +20,7 @@ public class BackgroundVid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.video = GameObject.Find("BackgroundVid");
+        this.video = GameObject.Find("BGVidPlayer");
 
         renderTexture = new RenderTexture(1920, 1080, 0); // 設置寬度、高度和深度
         rawImage.texture = renderTexture; // 將Render Texture設置為Raw Image的紋理
