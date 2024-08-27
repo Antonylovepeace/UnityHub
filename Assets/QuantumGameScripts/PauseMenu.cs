@@ -58,5 +58,12 @@ public class PauseMenu : MonoBehaviour
         Round.typeWriter_quantumEntanglement = 0;
         Round.typeWriter_quantumSuperposition = 0;
         Round.Winner = "";
+        Round.videoCounter = 1;
+        Round.afterVideo_Anime = 0;
+        Round.FirstMove = false;
+        Round.Winner = "";
+        Round.AnimeCircleLoop = false;
+        Round.AnimeArrowLoop = false;
+        Round.AI = true;
     }
 }
