@@ -17,6 +17,7 @@ public class Cell : MonoBehaviour
     GameObject collapse;
     GameObject CellGenerator;
     GameObject AI;
+    GameObject BoardControl;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class Cell : MonoBehaviour
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.collapse = GameObject.Find("collapse");
         this.AI = GameObject.Find("AI_Controller");
+        this.BoardControl = GameObject.Find("BoardControl");
     }
 
     // Update is called once per frame
@@ -167,6 +169,20 @@ public class Cell : MonoBehaviour
             ColorBlock cb = this.collapse.GetComponent<collapse>().Buttons[j].GetComponent<Button>().colors;
             cb.normalColor = Color.white;
             this.collapse.GetComponent<collapse>().Buttons[j].GetComponent<Button>().colors = cb;
+        }
+        if (SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+            print("index = " + transform.GetSiblingIndex());
+            Button cell = transform.GetComponent<Button>();
+            ColorBlock colors = cell.colors;
+            colors.normalColor = new Color32(255, 255, 255, 0);
+            cell.colors = colors;
+            if (transform.GetSiblingIndex() == 1 && Round.MeasureButton_PlayAnime)
+            {
+                this.BoardControl.GetComponent<BoardControl>().AcallFifthPointOneStep();
+                //transform.GetComponent<Button>().interactable = false;
+            }
+
         }
 
     }

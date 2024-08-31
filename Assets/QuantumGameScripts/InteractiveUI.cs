@@ -153,7 +153,7 @@ public class InteractiveUI : MonoBehaviour
                 "\r\n了解完「量子糾纏」的基本概念後" +
                 "\r\n下一個重要的基本概念是" +
                 "\n「量子疊加」" +
-                "\r\n\n請點擊按鈕繼續\r\n");
+                "\r\n\n➤ 請點擊右側播放鍵\r\n");
             TypeWriter.Active();
             Invoke("CellsIneractable", 0);
             BoardControl.GetComponent<BoardControl>().AcallSecondStep();
@@ -220,9 +220,10 @@ public class InteractiveUI : MonoBehaviour
                             print("ThirdStep");
                             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
                             TypeWriter.Add("可以看到第⑤格同時有X₁及O₁" +
-                                "\n此時我們可以說第⑤格是X₁，也可以說是O₁" +
-                                "\n也就是第五格同時擁有X₁及O₁兩種可能的疊加狀態 " +
-                                "\n\n接下來請點擊兩格白底格子");
+                                "\n此時我們可以說" +
+                                "\n第⑤格是X₁，也可以說是O₁" +
+                                "\n也就是第五格同時擁有X₁及O₁兩種可能的「疊加狀態」 " +
+                                "\n\n➤ 請點擊兩格白色格子");
                             TypeWriter.Active();
                             Invoke("CellsIneractable", 0);
                             BoardControl.GetComponent<BoardControl>().AcallThirdStep();
@@ -335,11 +336,11 @@ public class InteractiveUI : MonoBehaviour
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             TypeWriter.Add(
-                "\n最後可以看到，第②、⑤、⑥格" +
-                "\n已經變成不可變動的最後結果" +
-                "\n\n這是由於剛剛的觀測動作" +
-                "\n使處於量子疊加狀態的格子們轉變為確定的結果" +
-                "\n此過程稱為「塌縮」");
+                "\n最後可以看到，第②、⑤、⑥格已經變成不可變動的最後結果" +
+                "\n這是由於剛剛的觀測動作 " +
+                "\n使處於量子疊加狀態的格子們轉變為確定的結果 " +
+                "\n此過程稱為「塌縮」" +
+                "\n\n➤ 按下skip，與電腦對戰");
             TypeWriter.Active();
             CellsIneractable();
 

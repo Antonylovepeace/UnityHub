@@ -23,9 +23,19 @@ public class IntroductionScene : MonoBehaviour
 
     public void setSceneFalse()
     {
-        
-        IntroScene.SetActive(false);
-        VideoScene.SetActive(true);
+        if(Round.IntroductionPlayButton == 0)
+        {
+            transform.GetComponent<TypeWriter2>().messages.Clear();
+            TypeWriter2.Add("接下是簡單的遊戲教學\r\n" +
+                "\n右側按鈕開始播放影片\r\n");
+            TypeWriter2.Active();
+        }
+        else if (Round.IntroductionPlayButton == 1)
+        {
+            IntroScene.SetActive(false);
+            VideoScene.SetActive(true);
+        }
+        Round.IntroductionPlayButton++;
     }
     public void Introduction()
     {

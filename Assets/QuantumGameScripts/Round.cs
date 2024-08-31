@@ -6,8 +6,9 @@ public static class Round
 {
     public static int videoCounter = 1;
     public static int afterVideo_Anime = 0;
-    public static bool FirstMove = false; 
-
+    public static bool FirstMove = false;
+    public static int IntroductionPlayButton = 0;
+    public static bool MeasureButton_PlayAnime = true;
 
     public static int typeWriter_quantumEntanglement = 0;
     public static int typeWriter_quantumSuperposition = 0;

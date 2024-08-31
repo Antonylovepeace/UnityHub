@@ -67,11 +67,12 @@ public class WorkFlow : MonoBehaviour
     
     public void NextButton_2OnClicked()
     {
-        this.BoardControl.GetComponent<BoardControl>().AcallFuncAnimeScene();
-        Destroy(GameObject.Find("NextButton2(Clone)"));
-        ButtonsInteractive();
-        Round.AnimeArrowLoop = true;
-        Round.AnimeCircleLoop = false;
+        //this.BoardControl.GetComponent<BoardControl>().AcallFuncAnimeScene();
+        //this.BoardControl.GetComponent<BoardControl>().AcallFifthPointOneStep();
+        //Destroy(GameObject.Find("NextButton2(Clone)"));
+        //ButtonsInteractive();
+        //Round.AnimeArrowLoop = true;
+        //Round.AnimeCircleLoop = false;
 
     }
 
@@ -110,6 +111,8 @@ public class WorkFlow : MonoBehaviour
         Round.AnimeCircleLoop = false;
         Round.AnimeArrowLoop = false;
         Round.AI = true;
+        Round.IntroductionPlayButton = 0;
+        Round.MeasureButton_PlayAnime = true;
     }
     public void PLAYButtonOnClicked()
     {
@@ -141,5 +144,9 @@ public class WorkFlow : MonoBehaviour
     {
         ThreeVideo.GetComponent<VideoStep>().NextButtonOnClicked();
         //Destroy(GameObject.Find("NextStepButton(Clone)"));
+    }
+    public void ExitButtonOnClicked()
+    {
+        Application.Quit();
     }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 public class Measure : MonoBehaviour
@@ -15,10 +16,14 @@ public class Measure : MonoBehaviour
     GameObject Director;
     GameObject Canvas;
     GameObject InteractiveUI;
+    GameObject BoardControl;
+    public Sprite mesureBut;
+    
     string c;
     // Start is called before the first frame update
     void Start()
     {
+        this.BoardControl = GameObject.Find("BoardControl");
         this.collapse = GameObject.Find("collapse");
         this.Director = GameObject.Find("Director");
         this.InteractiveUI = GameObject.Find("InteractiveUI");
@@ -52,14 +57,37 @@ public class Measure : MonoBehaviour
         }
         if(c != null && c != "")
         {
-            this.collapse.GetComponent<collapse>().Collapse(c);
-            for (int i = 0; i < 2; i++)
+            
+            if (SceneManager.GetActiveScene().name == "ExampleScene" && Round.MeasureButton_PlayAnime == false)
             {
-                Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
+                this.collapse.GetComponent<collapse>().Collapse(c);
+                for (int i = 0; i < 2; i++)
+                {
+                    Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
+                }
+                Destroy(GameObject.Find("measureButton(Clone)"));
+                this.Director.GetComponent<Director>().ButtonReset();
+                this.Director.GetComponent<Director>().AcallFuncCheckWin(c);
             }
-            Destroy(GameObject.Find("measureButton(Clone)"));
-            this.Director.GetComponent<Director>().ButtonReset();
-            this.Director.GetComponent<Director>().AcallFuncCheckWin(c);
+            if (SceneManager.GetActiveScene().name == "ExampleScene" && Round.MeasureButton_PlayAnime)
+            {
+                BoardControl.GetComponent<BoardControl>().AcallFifthPointThreeStep();
+                Round.MeasureButton_PlayAnime = false;
+
+            }
+            else if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                this.collapse.GetComponent<collapse>().Collapse(c);
+                for (int i = 0; i < 2; i++)
+                {
+                    Destroy(this.collapse.GetComponent<collapse>().Buttons[i]);
+                }
+                Destroy(GameObject.Find("measureButton(Clone)"));
+                this.Director.GetComponent<Director>().ButtonReset();
+                this.Director.GetComponent<Director>().AcallFuncCheckWin(c);
+            }
+
+            
             //StartCoroutine(DelayFunc(c));
 
             //if (this.Director.GetComponent<Director>().checkWinning() == false)
@@ -81,6 +109,31 @@ public class Measure : MonoBehaviour
     public void MeasureButtonOnSelected()
     {
         int n = transform.GetSiblingIndex();
+        if (SceneManager.GetActiveScene().name == "ExampleScene")
+        {
+
+            //this.collapse.GetComponent<collapse>().Buttons[0].GetComponent<Image>().sprite = mesureBut;
+            // transform.GetComponent<Image>().sprite = mesureBut;
+            if (Round.MeasureButton_PlayAnime)
+            {
+                BoardControl.GetComponent<BoardControl>().AcallFifthPointTwoStep();
+            }
+            if (n == 0)
+            {
+                x = 1;
+            }
+            else
+            {
+                x = 0;
+            }
+            ColorBlock cb3 = this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors;
+            cb3.normalColor = cb3.selectedColor;
+            this.collapse.GetComponent<collapse>().Buttons[n].GetComponent<Button>().colors = cb3;
+            ColorBlock cb4 = this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors;
+            cb4.normalColor = Color.white;
+            this.collapse.GetComponent<collapse>().Buttons[x].GetComponent<Button>().colors = cb4;
+        }
+
         if (n == 0)
         {
             x = 1;

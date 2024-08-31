@@ -65,5 +65,7 @@ public class PauseMenu : MonoBehaviour
         Round.AnimeCircleLoop = false;
         Round.AnimeArrowLoop = false;
         Round.AI = true;
+        Round.IntroductionPlayButton = 0;
+        Round.MeasureButton_PlayAnime = true;
     }
 }
