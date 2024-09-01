@@ -63,7 +63,7 @@ public class BoardControl : MonoBehaviour
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
-            colors.normalColor = new Color32(255, 255, 255, 90);
+            colors.normalColor = new Color32(255, 255, 255, 255);
             cell.colors = colors;
         }
         CellsInteractable(4, 5, 5);
@@ -71,7 +71,7 @@ public class BoardControl : MonoBehaviour
 
     public void AcallSecondStep()
     {
-        Mask.SetActive(true);
+        //Mask.SetActive(true);
         Invoke("SecondStep", 1.5f);
     }
     public void SecondStep()
@@ -82,6 +82,7 @@ public class BoardControl : MonoBehaviour
     }
     public void AcallSecondPoint5Step()
     {
+        Mask.SetActive(true);
         Invoke("SecondPoint5Step", 0.4f);
     }
     public void SecondPoint5Step()
@@ -99,7 +100,7 @@ public class BoardControl : MonoBehaviour
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
-            colors.normalColor = new Color32(255, 255, 255, 90);
+            colors.normalColor = new Color32(255, 255, 255, 255);
             cell.colors = colors;
         }
         CellsInteractable(1, 4, 4);
@@ -118,7 +119,7 @@ public class BoardControl : MonoBehaviour
             Cell cells = this.Cells.GetComponent<CellGenerator>().cells[i];
             Button cell = cells.GetComponent<Button>();
             ColorBlock colors = cell.colors;
-            colors.normalColor = new Color32(255, 255, 255, 90);
+            colors.normalColor = new Color32(255, 255, 255, 255);
             cell.colors = colors;
         }
         CellsInteractable(1, 5, 5);
@@ -165,7 +166,7 @@ public class BoardControl : MonoBehaviour
         Cell cells = this.Cells.GetComponent<CellGenerator>().cells[1];
         Button cell = cells.GetComponent<Button>();
         ColorBlock colors = cell.colors;
-        colors.normalColor = new Color32(255, 255, 255, 90);
+        colors.normalColor = new Color32(255, 255, 255, 255);
         cell.colors = colors;
         Mask2.SetActive(true);
         CellsInteractable(1, 1, 1);
@@ -173,6 +174,7 @@ public class BoardControl : MonoBehaviour
     }
     public void AcallFifthPointOneStep()
     {
+
         Invoke("FifthPointOneStep", 0.5f);
     }
     void FifthPointOneStep()
@@ -229,7 +231,7 @@ public class BoardControl : MonoBehaviour
             "\n選擇你想觀測的元素(綠色框框)並按下 measure" +
             "\n這樣就完成觀測了" +
             "\n\n注意到，觀測不同的元素可能造成的結果會不同，" +
-            "\n可試著想像，如何觀測，才可使你獲得最大的優勢喔！r\n");
+            "\n可試著想像，如何觀測，才可使你獲得最大的優勢喔！\n");
         TypeWriter.Active();
     }
 

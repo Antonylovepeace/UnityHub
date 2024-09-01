@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Round
 {
+    public static int GO_times = 1;
     public static int videoCounter = 1;
     public static int afterVideo_Anime = 0;
     public static bool FirstMove = false;

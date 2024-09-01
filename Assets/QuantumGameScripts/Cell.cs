@@ -18,6 +18,7 @@ public class Cell : MonoBehaviour
     GameObject CellGenerator;
     GameObject AI;
     GameObject BoardControl;
+    GameObject AudioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class Cell : MonoBehaviour
         this.collapse = GameObject.Find("collapse");
         this.AI = GameObject.Find("AI_Controller");
         this.BoardControl = GameObject.Find("BoardControl");
+        this.AudioManager = GameObject.Find("AudioManager");
     }
 
     // Update is called once per frame
@@ -79,6 +81,8 @@ public class Cell : MonoBehaviour
 
     public void Fill()
     {
+        AudioManager.GetComponent<AudioManager>().OorXSFX();
+
         GameObject Grid = transform.GetChild(0).gameObject;
         if (CheckFilled() == 9)
         {
@@ -122,7 +126,7 @@ public class Cell : MonoBehaviour
         {
             Button cell = transform.GetComponent<Button>();
             ColorBlock colors = cell.colors;
-            colors.normalColor = new Color32(255, 255, 255, 0);
+            colors.normalColor = new Color32(255, 200, 240, 200);
             cell.colors = colors;
         }
     }
@@ -175,11 +179,12 @@ public class Cell : MonoBehaviour
             print("index = " + transform.GetSiblingIndex());
             Button cell = transform.GetComponent<Button>();
             ColorBlock colors = cell.colors;
-            colors.normalColor = new Color32(255, 255, 255, 0);
+            colors.normalColor = new Color32(255, 200, 240, 200);
             cell.colors = colors;
             if (transform.GetSiblingIndex() == 1 && Round.MeasureButton_PlayAnime)
             {
                 this.BoardControl.GetComponent<BoardControl>().AcallFifthPointOneStep();
+                transform.GetComponent<Button>().interactable = false;
                 //transform.GetComponent<Button>().interactable = false;
             }
 

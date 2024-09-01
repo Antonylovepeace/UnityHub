@@ -29,6 +29,16 @@ public class VidPlayer : MonoBehaviour
         VideoGo();
     }
 
+    public void PlayButtonOnClicked()
+    {
+        videoPlayer.Play();
+    }
+
+    public void PauseButtonOnClicked()
+    {
+        videoPlayer.Pause();
+    }
+
     public string VideoChoose()
     {
         if (Round.videoCounter == 1)

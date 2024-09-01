@@ -151,6 +151,7 @@ public class Director : MonoBehaviour
         //print("x = " + x);
         if (x == 1)
         {
+            GmaeOver();
             Round.AI = false;
             return true;
         }
@@ -256,6 +257,7 @@ public class Director : MonoBehaviour
         else
         {
             print("¤@¼Ë¤p");
+            GmaeOver();
             InteractiveUI.GetComponent<InteractiveUI>().UnNormalWiningText("Case3");
             return "X";
         }
@@ -447,6 +449,15 @@ public class Director : MonoBehaviour
         }
     }
 
+    void GmaeOver()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            Cell cell = this.Cells.GetComponent<CellGenerator>().cells[i];
+            cell.GetComponent<Button>().onClick.RemoveAllListeners();
+        }
+    }      
+    
 }
 
 

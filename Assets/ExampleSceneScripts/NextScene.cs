@@ -20,22 +20,24 @@ public class NextScene : MonoBehaviour
     }
     private void Text_ReadyToPlayWithPC()
     {
-        TypeWriter2.Add("正式開始遊戲"  );
-        TypeWriter2.Active();
+       // TypeWriter2.Add("正式開始遊戲"  );
+       // TypeWriter2.Active();
     }
 
     public void FirstMoverButtonOnClicked()
     {
         print("FirstMoverButtonOnClicked");
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameScene");
-        nextScene.SetActive(false);
+        //nextScene.SetActive(false);
         Round.FirstMove = true;
     }
     public void SecondMoveButtonOnClicked()
     {
         print("SecondMoveButtonOnClicked");
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameScene");
-        nextScene.SetActive(false);
+        //nextScene.SetActive(false);
         Round.FirstMove = false;
     }
 }

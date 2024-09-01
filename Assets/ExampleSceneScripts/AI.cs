@@ -37,11 +37,21 @@ public class AI : MonoBehaviour
     public void Main()
     {
         //print("Main Sucessed!");
+        Invoke(nameof(delayFunc), 3.5f);
 
         //模?AI??按? 
-        Invoke(nameof(MakeMove), 3.0f); // 在3秒后?用MakeMove方法
-    }
+        if (Round.AI == true)
+        {
+            //print("Round.AI = " + Round.AI);
+            Invoke(nameof(MakeMove), 4.0f); // 在3秒后?用MakeMove方法
+            //print("Round.AI，after MakeMove= " + Round.AI);
+        }
 
+    }
+    void delayFunc()
+    {
+        Director.GetComponent<Director>().PrecheckWinning();
+    }
     
     public void WhoseMeasure()
     {
@@ -89,7 +99,7 @@ public class AI : MonoBehaviour
 
     public void AISelectSmallCell()
     {
-        randnum = UnityEngine.Random.Range(0, 1);
+        randnum = UnityEngine.Random.Range(0, 2);
         GameObject smallCell = this.Collapse.GetComponent<collapse>().Buttons[randnum];
         smallCell.GetComponent<Button>().Select();
         //print("Buttons was selected!");
@@ -109,25 +119,42 @@ public class AI : MonoBehaviour
     public void MakeMove()
     {
         int count = 0;
+        int max = 0;
         if (player == 1)
         {
-            while (count < 2)
+            
+            while (count <= 1 && max <= 1000)
             {
-                var bestMove = FindBestMove();
+                var validCells = GetValidMoves();
+                int[] lst = validCells.ToArray();
+                //foreach (int i in lst)
+                //{
+                //    print("list = " + i);
+                //}
+                //var bestMove = FindBestMove();
 
                 //讓AI下不重複的格子
-                bestMove = UnityEngine.Random.Range(1, 9);
-                Cell cell = this.Cells.GetComponent<CellGenerator>().cells[bestMove];
-
+                if(lst.Length == 0)
+                {
+                    break;
+                }
+                int bestMove = UnityEngine.Random.Range(0, lst.Length);
+                int move_num = lst[bestMove];
+                Cell cell = this.Cells.GetComponent<CellGenerator>().cells[move_num];
+                //print("AI下第" + bestMove + "格");
+                cell.GetComponent<Button>().onClick.Invoke();
+                count++;
                 //print(lastMove);
                 // 使用Invoke方法模???
-                if (this.Cells.GetComponent<CellGenerator>().cells[bestMove].GetComponent<Button>().interactable)
+                //if (this.Cells.GetComponent<CellGenerator>().cells[bestMove].GetComponent<Button>().interactable)
+                //{
+                //    
+                //}
+                max++;
+                if (max == 1000)
                 {
-                    //print("AI下第" + bestMove + "格");
-                    cell.GetComponent<Button>().onClick.Invoke();
-                    count++;
+                    print("max = 1000");
                 }
-                continue;
             }
             //print("count over");
         }

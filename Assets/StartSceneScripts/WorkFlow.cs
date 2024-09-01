@@ -16,6 +16,8 @@ public class WorkFlow : MonoBehaviour
     GameObject Anime;
     GameObject IntroductionScene;
     GameObject ThreeVideo;
+    GameObject AudioManager;
+
     public GameObject VideoScene;
     public GameObject MainScene;
     public GameObject Mask;
@@ -30,6 +32,7 @@ public class WorkFlow : MonoBehaviour
         this.InteractiveUI = GameObject.Find("InteractiveUI");
         this.BoardControl = GameObject.Find("BoardControl");
         this.Anime = GameObject.Find("Animation");
+        this.AudioManager = GameObject.Find("AudioManager");
     }
 
     // Update is called once per frame
@@ -51,6 +54,7 @@ public class WorkFlow : MonoBehaviour
 
     public void StartButtonOnClick()
     {
+        AudioManager.GetComponent<AudioManager>().StartSFX();
         Time.timeScale = 1.0f;
         resetBoard();
         SceneManager.LoadScene("ExampleScene");
@@ -114,6 +118,7 @@ public class WorkFlow : MonoBehaviour
         Round.IntroductionPlayButton = 0;
         Round.MeasureButton_PlayAnime = true;
     }
+
     public void PLAYButtonOnClicked()
     {
         this.IntroductionScene.GetComponent<IntroductionScene>().setSceneFalse();
@@ -123,13 +128,19 @@ public class WorkFlow : MonoBehaviour
         if (Round.afterVideo_Anime == 0)
         {
             this.BoardControl.GetComponent<BoardControl>().AcallFirstStep();
+
+            AudioManager.GetComponent<AudioManager>().Start();
         }
         if (Round.afterVideo_Anime == 1)
         {
             this.BoardControl.GetComponent<BoardControl>().AcallSecondPoint5Step();
+
+            AudioManager.GetComponent<AudioManager>().Start();
         }
         if (Round.afterVideo_Anime == 2)
         {
+            AudioManager.GetComponent<AudioManager>().Start();
+
             Round.AnimeCircleLoop = true;
             this.Anime.GetComponent<Animetion>().AcallFuncAnimeLoop();
             this.BoardControl.GetComponent<BoardControl>().forthStep = false;

@@ -8,11 +8,14 @@ public class VideoStep : MonoBehaviour
     GameObject Anime;
     GameObject BoardControl;
     public GameObject VidPlayer;
+    GameObject AudioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         this.Anime = GameObject.Find("Animation");
         this.BoardControl = GameObject.Find("BoardControl");
+        this.AudioManager = GameObject.Find("AudioManager");
     }
 
     // Update is called once per frame
@@ -26,5 +29,6 @@ public class VideoStep : MonoBehaviour
         VideoScene.SetActive(true);
         VidPlayer.GetComponent<VidPlayer>().VideoGo();
 
+        AudioManager.GetComponent<AudioManager>().MusicStop();
     }
 }

@@ -8,10 +8,13 @@ public class IntroductionScene : MonoBehaviour
     public GameObject MainScene;
     public GameObject VideoScene;
     public GameObject PLAYButtonPrefab;
+    public GameObject AudioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.AudioManager = GameObject.Find("AudioManager");
+
         StartCoroutine(InstantiateButton());
         Introduction();
     }
@@ -34,6 +37,7 @@ public class IntroductionScene : MonoBehaviour
         {
             IntroScene.SetActive(false);
             VideoScene.SetActive(true);
+            AudioManager.GetComponent<AudioManager>().MusicStop();
         }
         Round.IntroductionPlayButton++;
     }
