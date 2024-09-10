@@ -23,7 +23,7 @@ public class Director : MonoBehaviour
     GameObject AI;
     public GameObject PreventMis;
     public GameObject PreventMis2;
-
+    public GameObject AiController;
     void Start()
     {
         //Round.AI =true;
@@ -33,7 +33,7 @@ public class Director : MonoBehaviour
         this.InteractiveUI = GameObject.Find("InteractiveUI");
         TextMeshProUGUI text = Round_Board.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         text.text = "X Turn";
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" && Round.PVP == false)
         {
             if (Round.FirstMove == false)           //Player second , AI First
             {
@@ -42,6 +42,10 @@ public class Director : MonoBehaviour
             }
 
 
+        }
+        else if(SceneManager.GetActiveScene().name == "GameScene" && Round.PVP == true)
+        {
+            AiController.SetActive(false);
         }
     }
 
@@ -199,6 +203,11 @@ public class Director : MonoBehaviour
             var temp = Line1.ToList();
             temp.Add(Text);
             Line1 = temp.ToArray();
+            //print("once");
+            //foreach (string a in Line1)
+            //{
+            //    print("Line1 = " + a);
+            //}
         }
         for (int i = 3; i < 6; i++)
         {
@@ -208,6 +217,7 @@ public class Director : MonoBehaviour
             var temp = Line2.ToList();
             temp.Add(Text);
             Line2 = temp.ToArray();
+            
         }
         for (int x = 0; x < 9; x++)
         {
@@ -215,33 +225,43 @@ public class Director : MonoBehaviour
             string X = charX[x];
             var lst1 = Compare_O.ToList();
             var lst2 = Compare_X.ToList();
+
             foreach (string L1 in Line1)
             {
                 if (L1 == O)
                 {
-                    lst1.Add(x);
+                    lst1.Add(x + 1);
                 }
                 else if (L1 == X)
                 {
-                    lst2.Add(x);
+                    lst2.Add(x + 1);
                 }
             }
             foreach (string L2 in Line2)
             {
                 if (L2 == O)
                 {
-                    lst1.Add(x);
+                    lst1.Add(x + 1);
                 }
                 else if (L2 == X)
                 {
-                    lst2.Add(x);
+                    lst2.Add(x + 1);
                 }
             }
             Compare_O = lst1.ToArray();
             Compare_X = lst2.ToArray();
+            foreach (int a in Compare_O)
+            {
+                print("Compare_O = " + a);
+            }
+            print("once");
+            foreach (int b in Compare_X)
+            {
+                print("Compare_X = " + b);
+            }
         }
-        int num1 = Compare_O.Min();
-        int num2 = Compare_X.Min();
+        int num1 = Compare_O.Max();
+        int num2 = Compare_X.Max();
         if (num1 > num2)
         {
             print("X¤ñ¸û¤p");
@@ -315,8 +335,9 @@ public class Director : MonoBehaviour
                     InteractiveUI.GetComponent<InteractiveUI>().quantumEntanglement();
                     Round.typeWriter_quantumEntanglement++;
                 }
-                if (SceneManager.GetActiveScene().name == "GameScene")
+                if (SceneManager.GetActiveScene().name == "GameScene" && Round.PVP == false)
                 {
+                    print("PVP1 =" + Round.PVP);
                     if (Round.FirstMove == false)           //Player second , AI First
                     {
                         PreventMis2.SetActive(false);
@@ -332,14 +353,15 @@ public class Director : MonoBehaviour
                     }
 
                 }
-                    
+
             }
             else
             {
                 text.text = "X Turn";
                 Round.charO_num++;
-                if (SceneManager.GetActiveScene().name == "GameScene")
+                if (SceneManager.GetActiveScene().name == "GameScene" && Round.PVP == false)
                 {
+                    print("PVP2 =" + Round.PVP);
                     if (Round.AI)
                     {
                         if (Round.FirstMove == false)  // Player second, AI First
@@ -355,9 +377,9 @@ public class Director : MonoBehaviour
                             PreventMis2.SetActive(false);
                             PreventMis.SetActive(false);
                         }
-                        
+
                     }
-                        
+
                 }
             }
             Xturn = !Xturn;

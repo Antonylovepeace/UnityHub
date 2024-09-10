@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class NextScene : MonoBehaviour
 {
 
-    public GameObject nextScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +25,7 @@ public class NextScene : MonoBehaviour
 
     public void FirstMoverButtonOnClicked()
     {
+        
         print("FirstMoverButtonOnClicked");
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("GameScene");

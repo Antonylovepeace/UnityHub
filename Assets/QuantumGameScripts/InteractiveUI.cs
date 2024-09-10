@@ -15,6 +15,7 @@ public class InteractiveUI : MonoBehaviour
     GameObject interactiveUI;
     GameObject Cells;
     GameObject BoardControl;
+    public GameObject QuantumMove;
     void Start()
     {
 
@@ -29,6 +30,8 @@ public class InteractiveUI : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "GameScene")
         {
+            TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            text.text = " Quantum Tic Tac Toe! ";
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             TypeWriter.Add("Welcome to Quantum Tic Tac Toe!!!\r\n請選擇兩格不同格子落子。\r\n");
             TypeWriter.Active();
@@ -72,6 +75,8 @@ public class InteractiveUI : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "GameScene")
         {
+            TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            text.text = "  Measure ";
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             if (num.Length == 2)
             {
@@ -139,10 +144,12 @@ public class InteractiveUI : MonoBehaviour
         {
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             int[] list = FindFirstTwoCell();
-            TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前 ”X” 有50%機率出現在第 " + list[0] + 
-                " 格\n有50%機率出現在第 " + list[1] + " 格\n此狀態的 ”X” 代表了量子物理中的 ”糾纏態”");
+            TypeWriter.Add("玩家'X'回合結束\n此時觀察量子系統\n可發現X同時存在於 " + list[0] + " 格子與 " + list[1] + " 格子中\n也就是說目前" +
+                "\n 「X」 有50%機率出現在第 " + list[0] + 
+                " 格\n有50%機率出現在第 " + list[1] + " 格\n\n此狀態的「X」  代表了量子物理中的 「糾纏態」");
             TypeWriter.Active();
-            
+            TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            text.text = " Quantum Entanglement ";
         }
         else if(SceneManager.GetActiveScene().name == "ExampleScene")
         {
@@ -207,6 +214,8 @@ public class InteractiveUI : MonoBehaviour
                             " 元素\n表示這格子內可能為 " + sub[0] + Round.subscript[num[0]] + " 亦可能為 " + sub[1] + Round.subscript[num[1]] + " 同時存在不同的狀態\n此現象稱為”疊加態");
                         TypeWriter.Active();
                         Round.typeWriter_quantumSuperposition++;
+                        TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                        text.text = " Quantum Superposition ";
                     }
                 }
                 else if (SceneManager.GetActiveScene().name == "ExampleScene")
@@ -322,6 +331,8 @@ public class InteractiveUI : MonoBehaviour
         //print(a);
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
+            TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            text.text = " Quantum Collapse ";
             interactiveUI.GetComponent<TypeWriter>().messages.Clear();
             TypeWriter.Add("<觀測完畢，進行塌縮>\n你選擇得觀測對象為 " + b + Round.subscript[a] +
                 " \n因為你的觀測使得" + b + Round.subscript[a] + " 在那格內出現機率為 100% 同個格子內原有的其他可能性因此變為 0%\n" +
@@ -357,15 +368,24 @@ public class InteractiveUI : MonoBehaviour
         interactiveUI.GetComponent<TypeWriter>().messages.Clear();
         if (Case == "Case1")
         {
-            TypeWriter.Add("玩家 ”X ”獲勝線條中擁有最小下標\n因此玩家 ”X” 獲勝");
+            TypeWriter.Add("玩家 ”X ”獲勝線條中的最大下標" +
+                "\n小於" +
+                "\n玩家 ”O ”獲勝線條中的最大下標" +
+                "\n\n因此玩家 ”X” 獲勝");
         }
         else if (Case == "Case2")
         {
-            TypeWriter.Add("玩家 ”O ”獲勝線條中擁有最小下標\n因此玩家 ”O” 獲勝");
+            TypeWriter.Add("玩家 ”O ”獲勝線條中的最大下標" +
+                "\n小於" +
+                "\n玩家 ”X ”獲勝線條中的最大下標" +
+                "\n\n因此玩家 ”O” 獲勝");
         }
         else if (Case == "Case3")
         {
-            TypeWriter.Add("玩家 ”X ”與玩家 ”O”擁有相同的最小下標 \n由於玩家 ”X ”為先手\n因此玩家 ”X ”獲勝");
+            TypeWriter.Add("找到玩家 ”X ”線條中的最大下標" +
+                "\n與玩家 ”O” 線條中的最大下標" +
+                "\n相互比較後發現他們大小相同 " +
+                "\n\n由於玩家 ”X ”為先手\\n因此玩家 ”X ”獲勝\"");
         }
         TypeWriter.Active();
     }

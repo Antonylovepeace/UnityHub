@@ -111,7 +111,7 @@ public class Cell : MonoBehaviour
                 lst1.Clear();
                 Round.LoopCheck = lst1.ToArray();
 
-                if (SceneManager.GetActiveScene().name == "GameScene")
+                if (SceneManager.GetActiveScene().name == "GameScene" && Round.PVP == false)
                 {
                     if (Round.AI)
                     {

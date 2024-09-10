@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
             resetBoard();
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("CutScene");
         }
         else if (SceneManager.GetActiveScene().name == "ExampleScene")
         {

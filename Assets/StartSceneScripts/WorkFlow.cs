@@ -63,8 +63,8 @@ public class WorkFlow : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         resetBoard();
-        this.BoardControl.GetComponent<BoardControl>().AcallSevenhStep();
-        //SceneManager.LoadScene("GameScene");
+        //this.BoardControl.GetComponent<BoardControl>().AcallSevenhStep();
+        SceneManager.LoadScene("CutScene");
     }
 
 
@@ -149,7 +149,7 @@ public class WorkFlow : MonoBehaviour
         Round.afterVideo_Anime++;
         VideoScene.SetActive(false);
         Destroy(GameObject.Find("NextStepButton(Clone)"));
-        Mask.SetActive(false);
+        //Mask.SetActive(false);
     }
     public void VideoStepButtonOnClicked()
     {

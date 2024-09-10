@@ -28,7 +28,7 @@ public class AI : MonoBehaviour
         this.CheckLoop = GameObject.Find("CheckLoop");
         this.Director = GameObject.Find("Director");
 
-        if (Round.FirstMove == false)           //Player second , AI First
+        if (Round.FirstMove == false && Round.PVP == false)           //Player second , AI First
         {
             Main();
         }

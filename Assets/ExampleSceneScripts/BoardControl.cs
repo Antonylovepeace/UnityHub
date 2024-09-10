@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -24,7 +25,8 @@ public class BoardControl : MonoBehaviour
     public bool forthStep = false;
     public GameObject animePage1;
     public GameObject nextScene;
-    public GameObject Mask;
+    //public GameObject Mask;
+    public GameObject QuantumMove;
     GameObject InteractiveUI;
     // GameObject animePage1;
     void Start()
@@ -72,6 +74,8 @@ public class BoardControl : MonoBehaviour
     public void AcallSecondStep()
     {
         //Mask.SetActive(true);
+        TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = "Quantum Entanglement";
         Invoke("SecondStep", 1.5f);
     }
     public void SecondStep()
@@ -82,7 +86,7 @@ public class BoardControl : MonoBehaviour
     }
     public void AcallSecondPoint5Step()
     {
-        Mask.SetActive(true);
+        //Mask.SetActive(true);
         Invoke("SecondPoint5Step", 0.4f);
     }
     public void SecondPoint5Step()
@@ -108,6 +112,8 @@ public class BoardControl : MonoBehaviour
 
     public void AcallThirdStep()
     {
+        TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = "Quantum Superposition";
         Invoke("ThirdStep", 2);
     }
     public void ThirdStep()
@@ -128,6 +134,9 @@ public class BoardControl : MonoBehaviour
 
     public void AcallForthStep()
     {
+
+        TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = "Cyclic  Entanglement ";
         Invoke("ForthStep", 1.5f);
         Mask4.SetActive(true);
     }
@@ -218,6 +227,8 @@ public class BoardControl : MonoBehaviour
 
     public void AcallSixthStep()
     {
+        TextMeshProUGUI text = QuantumMove.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        text.text = "Measure ";
         SixthStep();
     }
     void SixthStep()
