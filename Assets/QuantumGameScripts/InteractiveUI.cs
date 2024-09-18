@@ -369,14 +369,14 @@ public class InteractiveUI : MonoBehaviour
         if (Case == "Case1")
         {
             TypeWriter.Add("玩家 ”X ”獲勝線條中的最大下標" +
-                "\n小於" +
+                "小於" +
                 "\n玩家 ”O ”獲勝線條中的最大下標" +
                 "\n\n因此玩家 ”X” 獲勝");
         }
         else if (Case == "Case2")
         {
             TypeWriter.Add("玩家 ”O ”獲勝線條中的最大下標" +
-                "\n小於" +
+                "小於" +
                 "\n玩家 ”X ”獲勝線條中的最大下標" +
                 "\n\n因此玩家 ”O” 獲勝");
         }
@@ -385,7 +385,8 @@ public class InteractiveUI : MonoBehaviour
             TypeWriter.Add("找到玩家 ”X ”線條中的最大下標" +
                 "\n與玩家 ”O” 線條中的最大下標" +
                 "\n相互比較後發現他們大小相同 " +
-                "\n\n由於玩家 ”X ”為先手\\n因此玩家 ”X ”獲勝\"");
+                "\n\n由於玩家 ”X ”為先手" +
+                "\n因此玩家 ”X ”獲勝");
         }
         TypeWriter.Active();
     }

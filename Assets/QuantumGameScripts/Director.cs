@@ -262,6 +262,8 @@ public class Director : MonoBehaviour
         }
         int num1 = Compare_O.Max();
         int num2 = Compare_X.Max();
+        print("num1 = " + num1);
+        print("num2 = " + num2);
         if (num1 > num2)
         {
             print("X¤ñ¸û¤p");

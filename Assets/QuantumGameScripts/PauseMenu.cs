@@ -67,5 +67,6 @@ public class PauseMenu : MonoBehaviour
         Round.AI = true;
         Round.IntroductionPlayButton = 0;
         Round.MeasureButton_PlayAnime = true;
+        Round.twoRound = 0;
     }
 }
